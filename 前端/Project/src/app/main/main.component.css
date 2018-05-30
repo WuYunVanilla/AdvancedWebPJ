@@ -1,0 +1,16 @@
+.detail {
+  margin: 0;
+  float: left;
+}
+
+#all {
+  position: absolute;
+  height: 100%;
+  overflow: hidden;
+}
+
+#menu {
+  float: left;
+  width: 200px;
+  height: 100%;
+}
