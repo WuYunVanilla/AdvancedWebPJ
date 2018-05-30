@@ -4,10 +4,10 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { IndexComponent } from './index/index.component';
 import { CoursesComponent } from './courses/courses.component';
-import { AppRoutingModule } from './/app-routing.module';
 import { MainComponent } from './main/main.component';
 import { MenuComponent } from './menu/menu.component';
 import { MindmapComponent } from './mindmap/mindmap.component';
+import { AppRoutingModule } from './/app-routing.module';
 
 @NgModule({
   declarations: [
