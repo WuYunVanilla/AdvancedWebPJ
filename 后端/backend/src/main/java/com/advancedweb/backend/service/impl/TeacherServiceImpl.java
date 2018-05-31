@@ -1,6 +1,6 @@
 package com.advancedweb.backend.service.impl;
 
-import com.advancedweb.backend.model.node.Teacher;
+import com.advancedweb.backend.model.Teacher;
 import com.advancedweb.backend.repository.TeacherRepository;
 import com.advancedweb.backend.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +19,10 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public void save(Teacher teacher) {
         teacherRepository.save(teacher);
+    }
+
+    @Override
+    public void saveTeachIn(String name, String course_id){
+        teacherRepository.saveTeachIn(name, course_id);
     }
 }

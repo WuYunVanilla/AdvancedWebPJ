@@ -1,9 +1,9 @@
-package com.advancedweb.backend.model.node;
+package com.advancedweb.backend.model;
 
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Property;
+import org.neo4j.ogm.annotation.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @NodeEntity(label = "Teacher")
 public class Teacher {
@@ -14,6 +14,19 @@ public class Teacher {
     private String name;
     @Property(name = "password")
     private String password;
+    @Relationship(type = "TEACH_IN")
+    private Set<Course> courses;
+
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void teachIn(Course course) {
+        if (courses == null) {
+            courses = new HashSet<>();
+        }
+        courses.add(course);
+    }
 
     public String getName() {
         return name;
