@@ -11,7 +11,6 @@ import { MenuComponent } from './menu/menu.component';
 import { MindmapComponent } from './mindmap/mindmap.component';
 import { DetailsComponent } from './details/details.component';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
