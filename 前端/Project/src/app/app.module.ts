@@ -11,22 +11,35 @@ import { MenuComponent } from './menu/menu.component';
 import { MindmapComponent } from './mindmap/mindmap.component';
 import { DetailsComponent } from './details/details.component';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
-    declarations: [
-        AppComponent,
-        IndexComponent,
-        CoursesComponent,
-        MainComponent,
-        MenuComponent,
-        MindmapComponent,
-        DetailsComponent
-    ],
-    imports: [
-        NgbModule.forRoot(),
-        BrowserModule,
-        AppRoutingModule
-    ],
-    providers: [],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    IndexComponent,
+    CoursesComponent,
+    MainComponent,
+    MenuComponent,
+    MindmapComponent,
+    LoginComponent,
+    RegisterComponent,
+    DetailsComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NgbModule.forRoot(),
+    FormsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent],
+  entryComponents: [
+    LoginComponent,
+    RegisterComponent
+  ]
 })
 export class AppModule { }

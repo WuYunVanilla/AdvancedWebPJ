@@ -1,0 +1,29 @@
+<!--<ng-template #register let-c="close" let-d="dismiss">-->
+  <div class="modal-header">
+    <h4 class="modal-title">注册</h4>
+    <!--<button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">-->
+      <!--<span aria-hidden="true">&times;</span>-->
+    <!--</button>-->
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="name, formItem">
+        <label>用户名：<input type="text" name="userName"></label>
+      </div>
+      <div class="password, formItem">
+        <label>密码：<input type="password" name="userPassword"></label>
+      </div>
+      <div class="confirmPsw, formItem">
+        <label>密码确认：<input type="password"></label>
+      </div>
+      <div class="identity, formItem">
+        <input type="radio" name="identity" value="teacher"> 教师
+        <input type="radio" name="identity" value="student"> 学生
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark">确认</button>
+    <button type="button" class="btn btn-outline-dark" (click)="closeWindow()">取消</button>
+  </div>
+<!--</ng-template>-->
