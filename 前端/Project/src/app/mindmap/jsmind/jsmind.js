@@ -100,9 +100,6 @@
         this.event_handles = [];
         this.init();
     };
-    //---------
-    jm.info = null;
-    //---------
 
     // ============= static object =============================================
     jm.direction = {left:-1,center:0,right:1};
@@ -187,7 +184,7 @@
         this.author = null;
         this.version = null;
         this.root = null;
-        this.selected = null;this.info.selected = false;
+        this.selected = null;
         this.nodes = {};
     };
 
@@ -412,7 +409,7 @@
                 return false;
             }
             if(this.selected!=null && this.selected.id == node.id){
-                this.selected = null; this.info.selected = false;
+                this.selected = null;
             }
             // clean all subordinate nodes
             var children = node.children;
@@ -1468,7 +1465,7 @@
             if(!this.layout.is_visible(node)){
                 return;
             }
-            this.mind.selected = node; this.info.selected = true;
+            this.mind.selected = node;
             this.view.select_node(node);
         },
 
@@ -1482,7 +1479,7 @@
 
         select_clear:function(){
             if(!!this.mind){
-                this.mind.selected = null;this.info.selected = false;
+                this.mind.selected = null;
                 this.view.select_clear();
             }
         },
@@ -2909,9 +2906,8 @@
     };
 
     // quick way
-    jm.show = function(options, info, mind){
+    jm.show = function(options, mind){
         var _jm = new jm(options);
-        _jm.info = info;
         _jm.show(mind);
         return _jm;
     };
