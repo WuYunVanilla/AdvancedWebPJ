@@ -10,7 +10,15 @@ a:hover {
   color: #006699;
 }
 
-button {
+#login button {
+  width: 120px;
+  height: 50px;
+  border-color: lightgray;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+#register button {
   width: 120px;
   height: 50px;
   border-color: lightgray;
@@ -25,9 +33,9 @@ button {
 }
 
 #title {
-  background-color: #006699;
+  background-color: black;
   padding: 1%;
-  margin-top: 15%;
+  margin-top: 20%;
 }
 
 #title h1 {
@@ -36,7 +44,7 @@ button {
 }
 
 #introduction {
-  color: #0099CC;
+  color: lightslategrey;
   text-align: right;
 }
 
@@ -50,4 +58,3 @@ button {
 #footer p {
   color: lightgray;
 }
-

@@ -1,0 +1,24 @@
+<ngb-tabset>
+    <ngb-tab title="Simple">
+        <ng-template ngbTabContent>
+            <app-mindmap #jsmind></app-mindmap>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab>
+        <ng-template ngbTabTitle><b>Fancy</b> title</ng-template>
+        <ng-template ngbTabContent>
+
+            <p>
+                此处为作业组件
+            </p>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Disabled" [disabled]="true">
+        <ng-template ngbTabContent>
+            <p>
+                此处为课件组件
+            </p>
+
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>
