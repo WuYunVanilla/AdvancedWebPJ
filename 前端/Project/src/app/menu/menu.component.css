@@ -1,0 +1,59 @@
+#menu {
+  height: 100%;
+  background-color: whitesmoke;
+}
+
+#title {
+  height: 60px;
+  background-color: #006699;
+  text-align: center;
+  /* margin-top: -20px; */
+  padding-top: 15px;
+}
+
+#title p {
+  font-size: larger;
+  font-weight: bold;
+  color: white;
+}
+
+#action {
+  margin-left: 40px;
+  margin-top: 20px;
+}
+
+#choose p {
+  float: left;
+}
+
+#choose img {
+  float: left;
+  margin: 22px;
+}
+
+#choose img:hover {
+  cursor: pointer;
+  width: 18px;
+}
+
+#detail {
+  clear: both;
+  margin-bottom: -60px;
+}
+
+#create {
+  padding-top: 60px;
+}
+
+#create p {
+  clear: both;
+}
+
+li {
+  font-size: 2px;
+}
+
+li span {
+  font-size: 15px;
+}
+

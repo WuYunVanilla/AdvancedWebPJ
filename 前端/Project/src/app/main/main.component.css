@@ -1,0 +1,30 @@
+#all {
+    /* position: absolute; */
+    /*width: 100%;*/
+    /*height: 100%;*/
+    /*border: 1px solid rebeccapurple;*/
+    /*height: calc(100vh);*/
+    /* overflow: hidden; */
+}
+
+#menu {
+    /*float: left;*/
+    /*width: 200px;*/
+
+    visibility: hidden;
+
+}
+
+#details {
+    /*height: 100%;*/
+    /*float: left;*/
+    /*width: 100%;*/
+
+
+
+
+
+    /*margin-left: 100px;*/
+    /*width: calc(100vw - 200px);*/
+
+}
