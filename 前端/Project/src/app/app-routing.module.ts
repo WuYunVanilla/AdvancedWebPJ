@@ -3,8 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { IndexComponent } from './index/index.component';
 import { CoursesComponent } from './courses/courses.component';
 import { MainComponent } from './main/main.component';
-import {LoginComponent} from './login/login.component';
-import {TestComponent} from './test/test.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
