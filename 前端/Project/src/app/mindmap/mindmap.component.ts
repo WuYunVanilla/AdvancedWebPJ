@@ -81,13 +81,13 @@ export class MindmapComponent implements OnInit {
 
     public mindMap;
 
-    public info: number[] = [1];
+    // public info: number[] = [1];
 
 
     constructor() { }
 
     ngOnInit() {
-        this.mindMap = jsMind.show(options, this.info);
+        this.mindMap = jsMind.show(options);
     }
 
     remove(): void {
