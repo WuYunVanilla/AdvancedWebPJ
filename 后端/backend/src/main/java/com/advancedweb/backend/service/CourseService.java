@@ -7,4 +7,5 @@ import org.springframework.stereotype.Service;
 public interface CourseService {
     Course findByCourseId(String courseId);
     void save(Course course);
+//    void saveOwn(String courseId, String mindmapId);
 }

@@ -14,6 +14,7 @@ public class Teacher {
     private String name;
     @Property(name = "password")
     private String password;
+
     @Relationship(type = "TEACH_IN")
     private Set<Course> courses;
 

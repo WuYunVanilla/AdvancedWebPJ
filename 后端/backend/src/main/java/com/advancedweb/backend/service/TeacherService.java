@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service;
 public interface TeacherService {
     Teacher findByName(String name);
     void save(Teacher teacher);
-    void saveTeachIn(String name, String course_id);
+//    void saveTeachIn(String name, String course_id);
 }

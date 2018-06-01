@@ -8,6 +8,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface CourseRepository extends Neo4jRepository<Course, Long>{
-    @Query("MATCH (n:Course) where n.course_id = ({course_id}) RETURN n")
-    Course findByCourseId(@Param("course_id") String courseId);
+    @Query("MATCH (n:Course) WHERE n.course_id = ({course_id}) RETURN n")
+    Course findByCourseId(@Param("course_id") String course_id);
+
+//    @Query("MATCH (n:Course) WHERE n.course_id = ({course_id}) " +
+//            "MATCH (m:Mindmap) WHERE m.mindmap_id = ({mindmap_id})" +
+//            "CREATE (n)-[:OWN]->(m)")
+//    void saveOwn(@Param("course_id") String course_id, @Param("mindmap_id") String mindmap_id);
 }

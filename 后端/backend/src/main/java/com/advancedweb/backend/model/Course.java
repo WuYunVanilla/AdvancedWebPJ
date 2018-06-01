@@ -1,9 +1,9 @@
 package com.advancedweb.backend.model;
 
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Property;
+import org.neo4j.ogm.annotation.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @NodeEntity(label = "Course")
 public class Course {
@@ -16,6 +16,20 @@ public class Course {
     private String name;
     @Property(name = "course_number")
     private String number;
+
+    @Relationship(type = "OWN")
+    private Set<Mindmap> mindmaps;
+
+    public Set<Mindmap> getMindmaps() {
+        return mindmaps;
+    }
+
+    public void owns(Mindmap mindmap) {
+        if (mindmaps == null) {
+            mindmaps = new HashSet<>();
+        }
+        mindmaps.add(mindmap);
+    }
 
     public Long getId() {
         return id;
