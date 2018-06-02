@@ -21,8 +21,8 @@ public class TeacherServiceImpl implements TeacherService {
         teacherRepository.save(teacher);
     }
 
-    @Override
-    public void saveTeachIn(String name, String course_id){
-        teacherRepository.saveTeachIn(name, course_id);
-    }
+//    @Override
+//    public void saveTeachIn(String name, String course_id){
+//        teacherRepository.saveTeachIn(name, course_id);
+//    }
 }

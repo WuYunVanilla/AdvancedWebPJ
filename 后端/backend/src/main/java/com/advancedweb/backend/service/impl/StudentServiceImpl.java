@@ -20,4 +20,9 @@ public class StudentServiceImpl implements StudentService {
     public void save(Student student) {
         studentRepository.save(student);
     }
+
+//    @Override
+//    public void saveStudyIn(String name, String course_id) {
+//        studentRepository.saveStudyIn(name, course_id);
+//    }
 }
