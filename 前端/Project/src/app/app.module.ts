@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
 import { FormsModule } from '@angular/forms';
+import { HttpRequestService } from './http-request.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,9 @@ import { FormsModule } from '@angular/forms';
     NgbModule.forRoot(),
     FormsModule
   ],
-  providers: [],
+  providers: [
+    HttpRequestService
+  ],
   bootstrap: [AppComponent],
   entryComponents: [
     LoginComponent,

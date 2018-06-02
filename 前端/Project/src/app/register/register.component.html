@@ -5,25 +5,38 @@
       <!--<span aria-hidden="true">&times;</span>-->
     <!--</button>-->
   </div>
+
   <div class="modal-body">
-    <form>
-      <div class="name, formItem">
-        <label>用户名：<input type="text" name="userName"></label>
+    <form #registerForm="ngForm">
+
+      <div class="formItem">
+        <label>用户名：</label>
+        <input type="text" required name="userName" [(ngModel)]="userName" #username="ngModel">
+        <span [hidden]="username.valid || username.pristine" class="prompt">请您输入用户名</span>
       </div>
-      <div class="password, formItem">
-        <label>密码：<input type="password" name="userPassword"></label>
+
+      <div class="formItem" >
+        <label>密码：</label>
+        <input type="password" required name="userPsd" [(ngModel)]="userPsd" #userpsd="ngModel">
+        <span [hidden]="userpsd.valid || userpsd.pristine"  class="prompt">请您输入密码</span>
       </div>
-      <div class="confirmPsw, formItem">
-        <label>密码确认：<input type="password"></label>
+
+      <div class="formItem">
+        <label>密码确认：</label>
+        <input type="password" required name="confirmedPsd" [(ngModel)]="confirmedPsd" #confirmedpsd="ngModel">
+        <span [hidden]="userpsd.value == confirmedpsd.value || userpsd.untouched" class="prompt">密码不一致</span>
       </div>
-      <div class="identity, formItem">
-        <input type="radio" name="identity" value="teacher"> 教师
-        <input type="radio" name="identity" value="student"> 学生
+
+      <div class="formItem" id="character">
+        <input type="radio" required name="identity" value="teacher" [(ngModel)]="identity" #id="ngModel"> 教师
+        <input type="radio" required name="identity" value="student" [(ngModel)]="identity" #id="ngModel"> 学生
       </div>
     </form>
   </div>
+
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark">确认</button>
+    <button type="button" class="btn btn-outline-dark" (click)="onSubmit(registerForm.value)"
+      [disabled]="(!username.valid) || (!userpsd.valid) || (!id.valid) || (userpsd.value != confirmedpsd.value)">确认</button>
     <button type="button" class="btn btn-outline-dark" (click)="closeWindow()">取消</button>
   </div>
 <!--</ng-template>-->
