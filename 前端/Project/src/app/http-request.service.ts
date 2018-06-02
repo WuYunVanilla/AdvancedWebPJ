@@ -10,38 +10,38 @@ export class HttpRequestService {
 
   constructor(private httpClient: HttpClient) { }
 
-  httpPost(reqUrl: string, reqBody, comp, flag) {
+  httpPost(reqUrl: string, reqBody, comp) {
     this.httpClient.post(reqUrl, reqBody, this.httpOptions)
       .subscribe(
         value => {
           console.log('post请求成功', value);
           if (value['success']) {
-            comp.postOk(value, flag);
+            comp.postOk(value);
           } else {
-            comp.postErr(value, flag);
+            comp.postErr(value);
           }
         },
         error => {
           console.log('post请求失败', error);
-          comp.postErr(error, flag);
+          comp.postErr(error);
         }
       );
   }
 
-  httpGet(reqUrl, comp, flag) {
+  httpGet(reqUrl, comp) {
     this.httpClient.get(reqUrl, this.httpOptions)
       .subscribe(
         value => {
           console.log('get', value);
           if (value['success']) {
-            comp.getOk(value, flag);
+            comp.getOk(value);
           } else {
-            comp.getErr(value, flag);
+            comp.getErr(value);
           }
         },
         error => {
           console.log('get', error);
-          comp.getErr(error, flag);
+          comp.getErr(error);
         }
       );
   }

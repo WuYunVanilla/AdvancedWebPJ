@@ -22,12 +22,12 @@ export class RegisterComponent implements OnInit {
   }
   onSubmit(value) {
     // console.log(value);
-    this.httpRequestService.httpPost('http://54.201.190.180:8081/register', value, this, 'save');
+    this.httpRequestService.httpPost('http://54.201.190.180:8081/register', value, this);
   }
-  postOk(val, flag) {
-    alert('success');
+  postOk(value) {
+    alert(value);
   }
-  postErr(val, flag) {
-    alert('fail');
+  postErr(error) {
+    alert(error);
   }
 }
