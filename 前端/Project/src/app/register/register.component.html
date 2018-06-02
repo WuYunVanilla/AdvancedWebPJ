@@ -8,7 +8,6 @@
 
   <div class="modal-body">
     <form #registerForm="ngForm">
-
       <div class="formItem">
         <label>用户名：</label>
         <input type="text" required name="userName" [(ngModel)]="user_name" #username="ngModel">
@@ -35,7 +34,7 @@
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="onSubmit(registerForm.value)"
+    <button type="button" class="btn btn-outline-dark" (click)="onSubmit()"
       [disabled]="(!username.valid) || (!userpsd.valid) || (!id.valid) || (userpsd.value != confirmedpsd.value)">确认</button>
     <button type="button" class="btn btn-outline-dark" (click)="closeWindow()">取消</button>
   </div>

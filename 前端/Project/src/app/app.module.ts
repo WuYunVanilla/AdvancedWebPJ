@@ -19,6 +19,8 @@ import { HttpRequestService } from './http-request.service';
 
 import { HttpClientModule } from '@angular/common/http';
 import {UserService} from './user.service';
+import {CourseService} from './course.service';
+import { AddCourseComponent } from './add-course/add-course.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import {UserService} from './user.service';
     MindmapComponent,
     LoginComponent,
     RegisterComponent,
-    DetailsComponent
+    DetailsComponent,
+    AddCourseComponent
   ],
   imports: [
     BrowserModule,
@@ -41,12 +44,14 @@ import {UserService} from './user.service';
   ],
   providers: [
     HttpRequestService,
-    UserService
+    UserService,
+    CourseService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AddCourseComponent
   ]
 })
 export class AppModule { }
