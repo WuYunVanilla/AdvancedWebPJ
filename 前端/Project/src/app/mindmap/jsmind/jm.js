@@ -6,6 +6,82 @@
  *   https://github.com/hizzgdev/jsmind/
  */
 
+const DEFAULT_OPTIONS = {
+    container : '',   // id of the container
+    editable : false, // you can change it in your options
+    theme : null,
+    mode :'full',     // full or side
+    support_html : true,
+
+    view:{
+        hmargin:100,
+        vmargin:50,
+        line_width:2,
+        line_color:'#555'
+    },
+    layout:{
+        hspace:30,
+        vspace:20,
+        pspace:13
+    },
+    default_event_handle:{
+        enable_mousedown_handle:true,
+        enable_click_handle:true,
+        enable_dblclick_handle:true
+    },
+    shortcut:{
+        enable:true,
+        handles:{
+        },
+        mapping:{
+            addchild   : 45, // Insert
+            addbrother : 13, // Enter
+            editnode   : 113,// F2
+            delnode    : 46, // Delete
+            toggle     : 32, // Space
+            left       : 37, // Left
+            up         : 38, // Up
+            right      : 39, // Right
+            down       : 40, // Down
+        }
+    },
+};
+
+export class MindMap {
+
+    constructor() {
+        var opts = {};
+        jm.util.json.merge(opts, DEFAULT_OPTIONS);
+        jm.util.json.merge(opts, options);
+
+        if(!opts.container){
+            logger.error('the options.container should not be null or empty.');
+            return;
+        }
+        this.options = opts;
+        this.inited = false;
+        this.mind = null;
+        this.event_handles = [];
+        this.init();
+    }
+    
+}
+
+class Node {
+
+}
+
+class Util {
+    
+}
+
+class Json {
+
+
+    
+}
+
+
 
 
 ;(function($w){
@@ -21,8 +97,8 @@
     // an noop function define
     var _noop = function(){};
     var logger = (typeof console === 'undefined')?{
-            log:_noop, debug:_noop, error:_noop, warn:_noop, info:_noop
-        }:console;
+        log:_noop, debug:_noop, error:_noop, warn:_noop, info:_noop
+    }:console;
 
     // check global variables
     if(typeof module === 'undefined' || !module.exports){
@@ -571,7 +647,7 @@
                 },
                 "format":"node_array",
                 "data":[
-                    {"id":"root","topic":"课程名称", "isroot":true}
+                    {"id":"root","topic":"jsMind Example", "isroot":true}
                 ]
             },
 
@@ -2391,7 +2467,7 @@
         select_node:function(node){
             if(!!this.selected_node){
                 this.selected_node._data.view.element.className =
-                this.selected_node._data.view.element.className.replace(/\s*selected\b/i,'');
+                    this.selected_node._data.view.element.className.replace(/\s*selected\b/i,'');
                 this.reset_node_custom_style(this.selected_node);
             }
             if(!!node){

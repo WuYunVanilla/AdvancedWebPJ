@@ -1,6 +1,4 @@
-import {Component, OnInit, ɵEMPTY_ARRAY} from '@angular/core';
-
-
+import {Component, OnInit } from '@angular/core';
 
 import * as jsMind from './jsmind/jsmind.js';
 
@@ -80,6 +78,7 @@ export class MindmapComponent implements OnInit {
     // public mindMap;
 
     public mindMap;
+    public selected_knowledge_id: string;
 
     // public info: number[] = [1];
 
@@ -88,6 +87,7 @@ export class MindmapComponent implements OnInit {
 
     ngOnInit() {
         this.mindMap = jsMind.show(options);
+        this.selected_knowledge_id = '';
     }
 
     remove(): void {
@@ -123,14 +123,14 @@ export class MindmapComponent implements OnInit {
         this.mindMap.insert_node_after(selected_node, nodeid, topic);
     }
 
-    get_selected_nodeid() {
+    private get_selected_nodeid() {
         const selected_node = this.mindMap.get_selected_node();
         if (!!selected_node) {
             return selected_node.id;
         }
     }
 
-    change_background_color() {
+    change_node_color() {
         const selected_id = this.get_selected_nodeid();
         if (selected_id) {
             this.mindMap.set_node_color(selected_id, '#eee', null);
@@ -143,6 +143,16 @@ export class MindmapComponent implements OnInit {
         const sel = this.mindMap.get_selected_node();
         if (selected_id) {
             this.mindMap.set_node_color(selected_id, null, color);
+        }
+
+    }
+
+    update_selected_knowledge_id(): void {
+        const selected_node = this.mindMap.get_selected_node();
+        if (!selected_node) {
+            this.selected_knowledge_id = '';
+        } else {
+            this.selected_knowledge_id = selected_node.topic;
         }
 
     }
