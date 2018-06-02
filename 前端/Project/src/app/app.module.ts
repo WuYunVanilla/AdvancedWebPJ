@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpRequestService } from './http-request.service';
 
 import { HttpClientModule } from '@angular/common/http';
+import {UserService} from './user.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
   ],
   providers: [
-    HttpRequestService
+    HttpRequestService,
+    UserService
   ],
   bootstrap: [AppComponent],
   entryComponents: [

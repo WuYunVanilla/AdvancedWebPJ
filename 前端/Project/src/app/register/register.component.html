@@ -11,13 +11,13 @@
 
       <div class="formItem">
         <label>用户名：</label>
-        <input type="text" required name="userName" [(ngModel)]="userName" #username="ngModel">
+        <input type="text" required name="userName" [(ngModel)]="user_name" #username="ngModel">
         <span [hidden]="username.valid || username.pristine" class="prompt">请您输入用户名</span>
       </div>
 
       <div class="formItem" >
         <label>密码：</label>
-        <input type="password" required name="userPsd" [(ngModel)]="userPsd" #userpsd="ngModel">
+        <input type="password" required name="userPsd" [(ngModel)]="user_pwd" #userpsd="ngModel">
         <span [hidden]="userpsd.valid || userpsd.pristine"  class="prompt">请您输入密码</span>
       </div>
 

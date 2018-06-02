@@ -32,7 +32,7 @@ export class HttpRequestService {
     this.httpClient.get(reqUrl, this.httpOptions)
       .subscribe(
         value => {
-          console.log('get', value);
+          console.log('get请求成功', value);
           if (value['success']) {
             comp.getOk(value);
           } else {
@@ -40,7 +40,7 @@ export class HttpRequestService {
           }
         },
         error => {
-          console.log('get', error);
+          console.log('get请求失败', error);
           comp.getErr(error);
         }
       );

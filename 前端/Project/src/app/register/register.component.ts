@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { HttpRequestService } from '../http-request.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-register',
@@ -9,25 +9,18 @@ import { HttpRequestService } from '../http-request.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  userName: string;
-  userPsd: string;
   confirmedPsd: string;
 
-  constructor(public activeModal: NgbActiveModal, private httpRequestService: HttpRequestService) { }
+  constructor(public activeModal: NgbActiveModal, private userService: UserService) { }
 
   ngOnInit() {
   }
   closeWindow() {
     this.activeModal.close('Close click');
   }
-  onSubmit(value) {
+  onSubmit() {
     // console.log(value);
-    this.httpRequestService.httpPost('http://54.201.190.180:8081/register', value, this);
-  }
-  postOk(value) {
-    alert(value);
-  }
-  postErr(error) {
-    alert(error);
+    // this.httpRequestService.httpPost('http://54.201.190.180:8081/register', value, this);
+    alert(this.userService.register());
   }
 }
