@@ -21,37 +21,39 @@ import { HttpClientModule } from '@angular/common/http';
 import {UserService} from './user.service';
 import {CourseService} from './course.service';
 import { AddCourseComponent } from './add-course/add-course.component';
+import { HomeworkComponent } from './homework/homework.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    IndexComponent,
-    CoursesComponent,
-    MainComponent,
-    MenuComponent,
-    MindmapComponent,
-    LoginComponent,
-    RegisterComponent,
-    DetailsComponent,
-    AddCourseComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule.forRoot(),
-    FormsModule,
-    HttpClientModule
-  ],
-  providers: [
-    HttpRequestService,
-    UserService,
-    CourseService
-  ],
-  bootstrap: [AppComponent],
-  entryComponents: [
-    LoginComponent,
-    RegisterComponent,
-    AddCourseComponent
-  ]
+    declarations: [
+        AppComponent,
+        IndexComponent,
+        CoursesComponent,
+        MainComponent,
+        MenuComponent,
+        MindmapComponent,
+        LoginComponent,
+        RegisterComponent,
+        DetailsComponent,
+        AddCourseComponent,
+        HomeworkComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        NgbModule.forRoot(),
+        FormsModule,
+        HttpClientModule
+    ],
+    providers: [
+        HttpRequestService,
+        UserService,
+        CourseService
+    ],
+    bootstrap: [AppComponent],
+    entryComponents: [
+        LoginComponent,
+        RegisterComponent,
+        AddCourseComponent
+    ]
 })
 export class AppModule { }
