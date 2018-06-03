@@ -1,1 +1,37 @@
-<div id="jsmind_container"></div>
+
+<div class="row" style="margin-top: 10px;">
+    <div class="col">
+        <div ngbDropdown class="d-inline-block mr-2">
+            <button class="btn btn-outline-secondary" ngbDropdownToggle>增加节点</button>
+            <div ngbDropdownMenu>
+                <button class="dropdown-item" (click)="add_child()">添加子节点</button>
+                <button class="dropdown-item" (click)="add_brother()">添加兄弟节点</button>
+            </div>
+        </div>
+
+        <div class="d-inline-block mr-2">
+            <button class="btn btn-outline-secondary "  (click)="remove()">删除节点</button>
+        </div>
+
+        <div class="d-inline-block mr-2" ngbDropdown>
+            <button class="btn btn-outline-secondary" ngbDropdownToggle>修改颜色</button>
+            <div ngbDropdownMenu>
+                <button class="dropdown-item" (click)="change_node_color()">修改节点颜色</button>
+                <button class="dropdown-item" (click)="change_font_color()">修改文字颜色</button>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="col text-right">
+        <div class="d-inline-block mr-2">
+            <button class="btn btn-outline-secondary">保存</button>
+        </div>
+
+        <div class="d-inline-block mr-2">
+            <button class="btn btn-outline-secondary">截图</button>
+        </div>
+    </div>
+</div>
+
+<div id="jsmind_container" style="width: 100%; margin-top: 10px;"></div>

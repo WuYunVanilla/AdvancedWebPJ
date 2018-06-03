@@ -8,16 +8,15 @@
 
   <div class="modal-body">
     <form #registerForm="ngForm">
-
       <div class="formItem">
         <label>用户名：</label>
-        <input type="text" required name="userName" [(ngModel)]="userName" #username="ngModel">
+        <input type="text" required name="userName" [(ngModel)]="user_name" #username="ngModel">
         <span [hidden]="username.valid || username.pristine" class="prompt">请您输入用户名</span>
       </div>
 
       <div class="formItem" >
         <label>密码：</label>
-        <input type="password" required name="userPsd" [(ngModel)]="userPsd" #userpsd="ngModel">
+        <input type="password" required name="userPsd" [(ngModel)]="user_pwd" #userpsd="ngModel">
         <span [hidden]="userpsd.valid || userpsd.pristine"  class="prompt">请您输入密码</span>
       </div>
 
@@ -35,7 +34,7 @@
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="onSubmit(registerForm.value)"
+    <button type="button" class="btn btn-outline-dark" (click)="onSubmit()"
       [disabled]="(!username.valid) || (!userpsd.valid) || (!id.valid) || (userpsd.value != confirmedpsd.value)">确认</button>
     <button type="button" class="btn btn-outline-dark" (click)="closeWindow()">取消</button>
   </div>

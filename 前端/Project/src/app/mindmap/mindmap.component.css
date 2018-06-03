@@ -1,14 +1,10 @@
 #detail {
-    /* width: 80%; */
-    /* border: 1px solid blue; */
-    /* height: 800px; */
+
 }
 
 
 #jsmind_container {
-    /* width: auto; */
-    /* height: calc(100vh); */
-    /* height: 100%; */
-    height: 400px;
+
+    height: 600px;
     border: 1px red solid;
 }

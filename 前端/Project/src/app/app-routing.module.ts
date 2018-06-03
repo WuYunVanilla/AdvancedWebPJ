@@ -7,8 +7,8 @@ import { MainComponent } from './main/main.component';
 const routes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'index', component: IndexComponent },
-  { path: 'courses', component: CoursesComponent },
-  { path: 'main', component: MainComponent }
+  { path: 'courses/:userId', component: CoursesComponent },
+  { path: 'main', component: MainComponent },
 ]
 
 @NgModule({

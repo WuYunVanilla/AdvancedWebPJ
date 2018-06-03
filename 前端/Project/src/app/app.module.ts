@@ -18,33 +18,42 @@ import { FormsModule } from '@angular/forms';
 import { HttpRequestService } from './http-request.service';
 
 import { HttpClientModule } from '@angular/common/http';
+import {UserService} from './user.service';
+import {CourseService} from './course.service';
+import { AddCourseComponent } from './add-course/add-course.component';
+import { HomeworkComponent } from './homework/homework.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    IndexComponent,
-    CoursesComponent,
-    MainComponent,
-    MenuComponent,
-    MindmapComponent,
-    LoginComponent,
-    RegisterComponent,
-    DetailsComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule.forRoot(),
-    FormsModule,
-    HttpClientModule
-  ],
-  providers: [
-    HttpRequestService
-  ],
-  bootstrap: [AppComponent],
-  entryComponents: [
-    LoginComponent,
-    RegisterComponent
-  ]
+    declarations: [
+        AppComponent,
+        IndexComponent,
+        CoursesComponent,
+        MainComponent,
+        MenuComponent,
+        MindmapComponent,
+        LoginComponent,
+        RegisterComponent,
+        DetailsComponent,
+        AddCourseComponent,
+        HomeworkComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        NgbModule.forRoot(),
+        FormsModule,
+        HttpClientModule
+    ],
+    providers: [
+        HttpRequestService,
+        UserService,
+        CourseService
+    ],
+    bootstrap: [AppComponent],
+    entryComponents: [
+        LoginComponent,
+        RegisterComponent,
+        AddCourseComponent
+    ]
 })
 export class AppModule { }
