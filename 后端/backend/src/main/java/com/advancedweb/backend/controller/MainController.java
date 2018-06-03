@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MainController {
+
+
     @Autowired
     private TeacherServiceImpl teacherService;
     @Autowired
@@ -21,6 +23,7 @@ public class MainController {
     public String home() {
         return "Hello world";
     }
+
 
     @RequestMapping("/get/{course_id}")
     public Course get(@PathVariable String course_id) {

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 public interface TeacherRepository extends Neo4jRepository<Teacher, Long> {
     @Query("MATCH (n:Teacher) WHERE n.name = ({name}) RETURN n")
     Teacher findByName(@Param("name") String name);
+
+
 //    @Query("MATCH (n:Teacher) WHERE n.name = ({name}) " +
 //            "MATCH (m:Course) WHERE m.course_id = ({course_id})" +
 //            "CREATE (n)-[:TEACH_IN]->(m)")

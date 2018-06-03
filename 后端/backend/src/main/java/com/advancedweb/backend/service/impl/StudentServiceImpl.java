@@ -6,7 +6,7 @@ import com.advancedweb.backend.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("Student")
+@Service(value = "Student")
 public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentRepository studentRepository;
@@ -17,10 +17,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void save(Student student) {
-        studentRepository.save(student);
+    public void save(Student teacher) {
+        studentRepository.save(teacher);
     }
-
 //    @Override
 //    public void saveStudyIn(String name, String course_id) {
 //        studentRepository.saveStudyIn(name, course_id);
