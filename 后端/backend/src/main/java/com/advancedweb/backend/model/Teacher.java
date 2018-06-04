@@ -2,8 +2,11 @@ package com.advancedweb.backend.model;
 
 import org.neo4j.ogm.annotation.*;
 
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @NodeEntity(label = "Teacher")
 public class Teacher {
@@ -15,7 +18,7 @@ public class Teacher {
     @Property(name = "password")
     private String password;
 
-    @Relationship(type = "TEACH_IN")
+    @Relationship(type = "TEACH_IN", direction = Relationship.UNDIRECTED)
     private Set<Course> courses;
 
     public Set<Course> getCourses() {
@@ -51,5 +54,14 @@ public class Teacher {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String toString() {
+
+        return this.name + "'s courses => "
+                + Optional.ofNullable(this.courses).orElse(
+                Collections.emptySet()).stream()
+                .map(Course::getCourse_name)
+                .collect(Collectors.toList());
     }
 }

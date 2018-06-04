@@ -1,10 +1,13 @@
 package com.advancedweb.backend.service.impl;
 
+import com.advancedweb.backend.model.Course;
 import com.advancedweb.backend.model.Teacher;
 import com.advancedweb.backend.repository.TeacherRepository;
 import com.advancedweb.backend.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service("Teacher")
 public class TeacherServiceImpl implements TeacherService {
@@ -21,6 +24,10 @@ public class TeacherServiceImpl implements TeacherService {
         teacherRepository.save(teacher);
     }
 
+    @Override
+    public Course[] findCourses(long teacher_id){
+        return teacherRepository.findCourses(teacher_id);
+    }
 //    @Override
 //    public void saveTeachIn(String name, String course_id){
 //        teacherRepository.saveTeachIn(name, course_id);
