@@ -6,5 +6,6 @@
 #jsmind_container {
 
     height: 600px;
-    border: 1px red solid;
+    border: 1px gainsboro solid;
+    border-radius: 5px;
 }

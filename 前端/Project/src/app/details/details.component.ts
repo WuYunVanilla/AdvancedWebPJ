@@ -22,22 +22,22 @@ export class DetailsComponent implements OnInit {
     }
 
 
-    public beforeChange($event: NgbTabChangeEvent) {
-        if ($event.nextId === 'tab-homework'
-            || $event.nextId === 'tab-ppt'
-            || $event.nextId === 'tab-resource') {
-            // $event.preventDefault();
-            this.mindMap.update_selected_knowledge_id();
-            const info = this.mindMap.selected_node_id;
-            if (info === '') {
-                $event.preventDefault();
-                alert('请先选择一个知识节点');
-            } else {
-                this.selected_node_id = info;
-                // todo 通过 service 获取实际资源
-            }
-        }
-    }
+    // public beforeChange($event: NgbTabChangeEvent) {
+    //     if ($event.nextId === 'tab-homework'
+    //         || $event.nextId === 'tab-ppt'
+    //         || $event.nextId === 'tab-resource') {
+    //         // $event.preventDefault();
+    //         this.mindMap.update_selected_knowledge_id();
+    //         const info = this.mindMap.selected_node_id;
+    //         if (info === '') {
+    //             $event.preventDefault();
+    //             alert('请先选择一个知识节点');
+    //         } else {
+    //             this.selected_node_id = info;
+    //             // todo 通过 service 获取实际资源
+    //         }
+    //     }
+    // }
 
     checkTabStatus() {
         this.mindMap.update_selected_knowledge_id();

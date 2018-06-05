@@ -79,6 +79,7 @@ export class MindmapComponent implements OnInit {
 
     public mindMap;
     public selected_node_id: string;
+    // showTip: boolean;
 
     // public info: number[] = [1];
 
