@@ -78,7 +78,7 @@ export class MindmapComponent implements OnInit {
     // public mindMap;
 
     public mindMap;
-    public selected_knowledge_id: string;
+    public selected_node_id: string;
 
     // public info: number[] = [1];
 
@@ -87,7 +87,7 @@ export class MindmapComponent implements OnInit {
 
     ngOnInit() {
         this.mindMap = jsMind.show(options);
-        this.selected_knowledge_id = '';
+        this.selected_node_id = '';
     }
 
     remove(): void {
@@ -150,9 +150,9 @@ export class MindmapComponent implements OnInit {
     update_selected_knowledge_id(): void {
         const selected_node = this.mindMap.get_selected_node();
         if (!selected_node) {
-            this.selected_knowledge_id = '';
+            this.selected_node_id = '';
         } else {
-            this.selected_knowledge_id = selected_node.topic;
+            this.selected_node_id = selected_node.topic;
         }
 
     }

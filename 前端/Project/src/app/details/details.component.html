@@ -1,27 +1,27 @@
 <ngb-tabset (tabChange)="beforeChange($event)" [destroyOnHide]="false" class="table-secondary">
     <ngb-tab title="思维导图">
         <ng-template ngbTabContent>
-            <app-mindmap #jsmind></app-mindmap>
+            <app-mindmap (click)="checkTabStatus()" #jsmind></app-mindmap>
         </ng-template>
     </ngb-tab>
-    <ngb-tab title="作业" id="tab-homework">
+    <ngb-tab title="作业" id="tab-homework" *ngIf="selected_node_id!=''">
         <ng-template ngbTabContent>
             <p>
-                此处为{{info}}的作业组件
+                此处为{{selected_node_id}}的作业组件
             </p>
         </ng-template>
     </ngb-tab>
-    <ngb-tab title="课件" id="tab-ppt">
+    <ngb-tab title="课件" id="tab-ppt" *ngIf="selected_node_id!=''">
         <ng-template ngbTabContent>
             <p>
-                此处为{{info}}的课件组件
+                此处为{{selected_node_id}}的课件组件
             </p>
         </ng-template>
     </ngb-tab>
-    <ngb-tab title="资源" id="tab-resource">
+    <ngb-tab title="资源" id="tab-resource"  *ngIf="selected_node_id!=''">
         <ng-template ngbTabContent>
             <p>
-                此处为{{info}}的资源组件
+                此处为{{selected_node_id}}的资源组件
             </p>
 
         </ng-template>
