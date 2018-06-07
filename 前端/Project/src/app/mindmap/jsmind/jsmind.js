@@ -2917,6 +2917,7 @@
     // export jsmind
     if (typeof module !== 'undefined' && typeof exports === 'object') {
         module.exports = jm;
+        $w[__name__] = jm;
     } else if (typeof define === 'function' && (define.amd || define.cmd)) {
         define(function() { return jm; });
     } else {

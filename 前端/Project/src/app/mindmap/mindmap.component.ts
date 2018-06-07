@@ -1,6 +1,7 @@
 import {Component, OnInit } from '@angular/core';
 
 import * as jsMind from './jsmind/jsmind.js';
+import './jsmind/jsmind.screenshot.js';
 
 const options = {
     container: 'jsmind_container',
@@ -89,6 +90,10 @@ export class MindmapComponent implements OnInit {
     ngOnInit() {
         this.mindMap = jsMind.show(options);
         this.selected_node_id = '';
+    }
+
+    screen_shot() {
+        this.mindMap.screenshot.shootDownload();
     }
 
     remove(): void {
