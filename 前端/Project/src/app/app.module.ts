@@ -7,7 +7,6 @@ import { IndexComponent } from './index/index.component';
 import { CoursesComponent } from './courses/courses.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MainComponent } from './main/main.component';
-import { MenuComponent } from './menu/menu.component';
 import { MindmapComponent } from './mindmap/mindmap.component';
 import { DetailsComponent } from './details/details.component';
 
@@ -29,7 +28,6 @@ import { HomeworkComponent } from './homework/homework.component';
         IndexComponent,
         CoursesComponent,
         MainComponent,
-        MenuComponent,
         MindmapComponent,
         LoginComponent,
         RegisterComponent,
