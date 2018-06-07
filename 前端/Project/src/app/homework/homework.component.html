@@ -10,30 +10,52 @@
 <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
   <ngb-panel title="选择题">
     <ng-template ngbPanelContent>
-      <div id="multiple">
-        <div *ngFor="let multiple of multipleQuestion" class="course">
-          <div class="title">{{multiple.title}}</div>
-          <div class="optionA">{{multiple.optionA}}</div>
-          <div class="optionB">{{multiple.optionA}}</div>
-          <div class="optionC">{{multiple.optionA}}</div>
-          <div class="optionD">{{multiple.optionA}}</div>
-          <div class="correct_answer">{{multiple.correct_answer}}</div>
-          <div class="correct_number">{{multiple.correct_number}}</div>
-          <div class="number">{{multiple.number}}</div>
-        </div>
-      </div>
+      <ol>
+        <li *ngFor="let multiple of multipleQuestion" class="multiple">
+          <div class="title, item"><b>{{multiple.title}}</b></div>
+          <div class="options, item">
+            <div>
+              <span>A. </span><span class="optionA"> {{multiple.optionA}}</span>
+            </div>
+            <div>
+              <span>B. </span><span class="optionB"> {{multiple.optionB}}</span>
+            </div>
+            <div>
+              <span>C. </span><span class="optionC"> {{multiple.optionC}}</span>
+            </div>
+            <div>
+              <span>D. </span><span class="optionD"> {{multiple.optionD}}</span>
+            </div>
+          </div>
+          <div class="correct_answer, item">
+            <span><b>正确答案：</b></span>
+            <span>{{multiple.correct_answer}}</span>
+          </div>
+          <div class="number, item">
+            <span><b>正确率：</b></span>
+            <span class="correct_number">{{multiple.correct_number}}</span>
+            <span> / </span>
+            <span class="number">{{multiple.number}}</span>
+          </div>
+          <hr>
+        </li>
+      </ol>
     </ng-template>
   </ngb-panel>
 
 
   <ngb-panel title="简答题">
     <ng-template ngbPanelContent>
-      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia
-      aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-      sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica,
-      craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-      occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-      labore sustainable VHS.
+      <ol>
+        <li *ngFor="let short of shortQuestion" class="short">
+          <div class="title, item"><b>{{short.title}}</b></div>
+          <div class="correct_answer, item">
+            <span><b>正确答案：</b></span>
+            <span>{{short.correct_answer}}</span>
+          </div>
+          <hr>
+        </li>
+      </ol>
     </ng-template>
   </ngb-panel>
 </ngb-accordion>
