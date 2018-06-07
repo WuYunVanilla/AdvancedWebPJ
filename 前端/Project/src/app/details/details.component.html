@@ -1,4 +1,4 @@
-<ngb-tabset (tabChange)="beforeChange($event)" [destroyOnHide]="false" class="table-secondary">
+<ngb-tabset [destroyOnHide]="false" class="table-secondary">
     <ngb-tab title="思维导图">
         <ng-template ngbTabContent>
             <app-mindmap (click)="checkTabStatus()" #jsmind></app-mindmap>
