@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from '../user.service';
+import {User} from '../user';
 
 @Component({
   selector: 'app-login',
@@ -8,9 +9,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  user_name: string;
-  user_pwd: string;
-  identity: string;
+  user: User = new User();
 
   constructor(public activeModal: NgbActiveModal, private userService: UserService) { }
 
@@ -20,14 +19,15 @@ export class LoginComponent implements OnInit {
     this.activeModal.close('Close click');
   }
   onSubmit() {
-    this.userService.setUser(this.user_name, this.user_pwd, this.identity);
-    // this.userService.login()
+    // this.userService.login(this.user)
     //   .subscribe((value => this.checkSuccess(value)));
     this.checkSuccess(true);
   }
   checkSuccess(value) {
     if (value) {
-      window.location.href = 'http://localhost:4200/courses/' + this.user_name;
+      window.sessionStorage.setItem('user_name', this.user.user_name);
+      window.sessionStorage.setItem('identity', this.user.identity);
+      window.location.href = 'http://localhost:4200/courses';
     } else {
       window.alert('用户名与密码不匹配!');
     }

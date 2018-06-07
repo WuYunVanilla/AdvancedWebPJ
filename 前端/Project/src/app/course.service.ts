@@ -10,28 +10,21 @@ const httpOptions = {
 };
 @Injectable()
 export class CourseService {
-  userId: string;
-  private getCoursesUrl;
-  private addCourseUrl = 'http://localhost:8081/add_course/';
+  private baseUrl = 'http://localhost:8081/';
+  tempUrl: string;
 
   constructor(
     private http: HttpClient) {
 
   }
 
-  getCourses(): Observable<Course[]> {
-    this.getCoursesUrl = 'http://localhost:8081/teacher_courses/' + this.userId;
-    console.log(this.getCoursesUrl);
-    return this.http.get<Course[]>(this.getCoursesUrl);
+  getCourses(user_name: string, identity: string): Observable<Course[]> {
+    this.tempUrl = this.baseUrl + identity + '_courses/' + user_name;
+    return this.http.get<Course[]>(this.tempUrl);
   }
 
-  addCourse(course: Course): Observable<boolean> {
-    this.addCourseUrl = 'http://localhost:8081/add_course/' + this.userId;
-    console.log(this.addCourseUrl);
-    return this.http.post<boolean>(this.addCourseUrl, course, httpOptions);
-  }
-
-  setUserId(userId: string) {
-    this.userId = userId;
+  addCourse(course: Course, user_name: string, identity: string): Observable<boolean> {
+    this.tempUrl = this.baseUrl + identity + '_add_course/' + user_name;
+    return this.http.post<boolean>(this.tempUrl, course, httpOptions);
   }
 }

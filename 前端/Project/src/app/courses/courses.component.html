@@ -1,11 +1,11 @@
 <div id="addCourse" class="buttonDiv">
-  <button type="button" class="btn btn-outline-dark" (click)="addCourses()">添加课程</button>
+  <button type="button" class="btn btn-outline-dark" (click)="addCourse()">添加课程</button>
 </div>
 
 <div id="courses">
   <div *ngFor="let course of courses" class="course">
     <div class="courseName">{{course.course_id}}: <b>{{course.course_name}}</b></div>
     <div class="studentNumber">课程人数：{{course.course_number}}</div>
-    <button class="buttonWithoutBorder" routerLink="/main">进入课程</button>
+    <button class="buttonWithoutBorder" (click)="enterCourse(course.course_id)">进入课程</button>
   </div>
 </div>

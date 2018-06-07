@@ -25,9 +25,9 @@ export class CoursesComponent implements OnInit {
     private location: Location,
     private courseService: CourseService
   ) {
-    // this.courseService.setUserId(this.route.snapshot.paramMap.get('userId'));
-    // courseService.getCourses().subscribe(
-    //   value => this.showCourses(value));
+    // courseService.getCourses(window.sessionStorage.getItem('user_name'), window.sessionStorage.getItem('identity')).subscribe(
+    //   value => this.setCourses(value));
+
     this.course1.course_name = '离散数学';
     this.course1.course_number = '2';
     this.course1.course_id = '25';
@@ -49,10 +49,14 @@ export class CoursesComponent implements OnInit {
 
   ngOnInit() {
   }
-  showCourses(value) {
+  setCourses(value) {
     this.courses = value;
   }
-  addCourses(): void {
+  addCourse(): void {
     this.modalService.open(AddCourseComponent);
+  }
+  enterCourse(course_id: string) {
+    window.sessionStorage.setItem('course_id', course_id);
+    window.location.href = 'http://localhost:4200/main';
   }
 }

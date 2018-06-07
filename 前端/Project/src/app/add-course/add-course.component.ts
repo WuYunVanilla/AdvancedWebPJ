@@ -15,7 +15,6 @@ export class AddCourseComponent implements OnInit {
   constructor(
     public activeModal: NgbActiveModal,
     private courseService: CourseService) {
-    this.course.course_number = '0';
   }
 
   ngOnInit() {
@@ -24,10 +23,7 @@ export class AddCourseComponent implements OnInit {
     this.activeModal.close('Close click');
   }
   onSubmit() {
-    console.log(this.course.course_id);
-    console.log(this.course.course_name);
-    console.log(this.course.course_number);
-    // this.courseService.addCourse(this.course)
+    // this.courseService.addCourse(this.course, window.sessionStorage.getItem('user_name'), window.sessionStorage.getItem('identity'))
     //   .subscribe((value => this.checkSuccess(value)));
     this.checkSuccess(true);
   }

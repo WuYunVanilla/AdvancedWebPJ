@@ -10,13 +10,13 @@
     <form #registerForm="ngForm">
       <div class="formItem">
         <label>用户名：</label>
-        <input type="text" required name="userName" [(ngModel)]="user_name" #username="ngModel">
+        <input type="text" required name="userName" [(ngModel)]="user.user_name" #username="ngModel">
         <span [hidden]="username.valid || username.pristine" class="prompt">请您输入用户名</span>
       </div>
 
       <div class="formItem" >
         <label>密码：</label>
-        <input type="password" required name="userPsd" [(ngModel)]="user_pwd" #userpsd="ngModel">
+        <input type="password" required name="userPsd" [(ngModel)]="user.user_pwd" #userpsd="ngModel">
         <span [hidden]="userpsd.valid || userpsd.pristine"  class="prompt">请您输入密码</span>
       </div>
 
@@ -27,8 +27,8 @@
       </div>
 
       <div class="formItem" id="character">
-        <input type="radio" required name="identity" value="teacher" [(ngModel)]="identity" #id="ngModel"> 教师
-        <input type="radio" required name="identity" value="student" [(ngModel)]="identity" #id="ngModel"> 学生
+        <input type="radio" required name="identity" value="teacher" [(ngModel)]="user.identity" #id="ngModel"> 教师
+        <input type="radio" required name="identity" value="student" [(ngModel)]="user.identity" #id="ngModel"> 学生
       </div>
     </form>
   </div>
