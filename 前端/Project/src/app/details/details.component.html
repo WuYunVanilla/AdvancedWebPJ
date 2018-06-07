@@ -6,9 +6,10 @@
     </ngb-tab>
     <ngb-tab title="作业" id="tab-homework" *ngIf="selected_node_id!=''">
         <ng-template ngbTabContent>
-            <p>
-                此处为{{selected_node_id}}的作业组件
-            </p>
+            <!--<p>-->
+                <!--此处为{{selected_node_id}}的作业组件-->
+            <!--</p>-->
+          <app-homework></app-homework>
         </ng-template>
     </ngb-tab>
     <ngb-tab title="课件" id="tab-ppt" *ngIf="selected_node_id!=''">

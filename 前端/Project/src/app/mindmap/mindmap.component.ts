@@ -21,6 +21,7 @@ const mind = {
     'data': {
         'id': 'root',
         'topic': 'jsMind',
+        'data': {'background-color': '#f00'},
         'children': [
             {
                 'id': 'easy',
