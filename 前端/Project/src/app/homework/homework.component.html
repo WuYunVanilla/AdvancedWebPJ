@@ -5,3 +5,36 @@
 <div id="release_short" class="buttonDiv">
   <button type="button" class="btn btn-outline-dark" (click)="releaseShort()">发布简答题</button>
 </div>
+
+<div id="homework">
+<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+  <ngb-panel title="选择题">
+    <ng-template ngbPanelContent>
+      <div id="multiple">
+        <div *ngFor="let multiple of multipleQuestion" class="course">
+          <div class="title">{{multiple.title}}</div>
+          <div class="optionA">{{multiple.optionA}}</div>
+          <div class="optionB">{{multiple.optionA}}</div>
+          <div class="optionC">{{multiple.optionA}}</div>
+          <div class="optionD">{{multiple.optionA}}</div>
+          <div class="correct_answer">{{multiple.correct_answer}}</div>
+          <div class="correct_number">{{multiple.correct_number}}</div>
+          <div class="number">{{multiple.number}}</div>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-panel>
+
+
+  <ngb-panel title="简答题">
+    <ng-template ngbPanelContent>
+      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia
+      aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+      sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica,
+      craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
+      occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
+      labore sustainable VHS.
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
+</div>

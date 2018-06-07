@@ -21,6 +21,8 @@ import {UserService} from './user.service';
 import {CourseService} from './course.service';
 import { AddCourseComponent } from './add-course/add-course.component';
 import { HomeworkComponent } from './homework/homework.component';
+import {MindmapService} from './mindmap.service';
+import {NodeService} from './node.service';
 
 @NgModule({
     declarations: [
@@ -45,7 +47,9 @@ import { HomeworkComponent } from './homework/homework.component';
     providers: [
         HttpRequestService,
         UserService,
-        CourseService
+        CourseService,
+        MindmapService,
+        NodeService
     ],
     bootstrap: [AppComponent],
     entryComponents: [

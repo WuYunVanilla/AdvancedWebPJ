@@ -61,19 +61,13 @@ export class HomeworkComponent implements OnInit {
 
     this.multipleQuestion = [this.multiple1, this.multiple2];
 
-    this.multiple1.title = '简述';
-    this.multiple1.correct_answer = 'A';
+    this.short1.title = '简述你最喜欢的xxx';
+    this.short1.correct_answer = '我最喜欢xxx，是因为……';
 
-    this.multiple2.title = '请选择世界上最好吃的水果';
-    this.multiple2.optionA = '西瓜';
-    this.multiple2.optionB = '苹果';
-    this.multiple2.optionC = '凤梨';
-    this.multiple2.optionD = '桃子';
-    this.multiple2.correct_answer = 'C';
-    this.multiple2.correct_number = '5';
-    this.multiple2.number = '25';
+    this.short1.title = '高级web这节课好在哪里';
+    this.short1.correct_answer = 'TA好，老师好，大家都好';
 
-    this.multipleQuestion = [this.multiple1, this.multiple2];
+    this.shortQuestion = [this.short1, this.short2];
 
   }
 
@@ -91,46 +85,4 @@ export class HomeworkComponent implements OnInit {
   releaseShort() {
 
   }
-
-
-  // constructor(
-  //   private modalService: NgbModal,
-  //   private route: ActivatedRoute,
-  //   private location: Location,
-  //   private courseService: CourseService
-  // ) {
-  //   courseService.getCourses(window.sessionStorage.getItem('user_name'), window.sessionStorage.getItem('identity')).subscribe(
-  //     value => this.setCourses(value));
-  //
-  //   this.course1.course_name = '离散数学';
-  //   this.course1.course_number = '2';
-  //   this.course1.course_id = '25';
-  //
-  //   this.course2.course_name = '数据结构';
-  //   this.course2.course_number = '3';
-  //   this.course2.course_id = '26';
-  //
-  //   this.course3.course_name = '计算机网络';
-  //   this.course3.course_number = '4';
-  //   this.course3.course_id = '27';
-  //
-  //   this.course4.course_name = '高级WEB';
-  //   this.course4.course_number = '5';
-  //   this.course4.course_id = '28';
-  //
-  //   this.courses = [this.course1, this.course2, this.course3, this.course4];
-  // }
-  //
-  // ngOnInit() {
-  // }
-  // setCourses(value) {
-  //   this.courses = value;
-  // }
-  // addCourse(): void {
-  //   this.modalService.open(AddCourseComponent);
-  // }
-  // enterCourse(course_id: string) {
-  //   window.sessionStorage.setItem('course_id', course_id);
-  //   window.location.href = 'http://localhost:4200/main';
-  // }
 }

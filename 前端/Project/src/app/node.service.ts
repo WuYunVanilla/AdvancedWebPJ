@@ -5,9 +5,6 @@ import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class NodeService {
-
-  constructor() { }
-
   private baseUrl = 'http://localhost:8081/';
   tempUrl: string;
 
