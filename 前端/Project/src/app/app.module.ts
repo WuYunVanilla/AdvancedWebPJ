@@ -23,6 +23,8 @@ import { AddCourseComponent } from './add-course/add-course.component';
 import { HomeworkComponent } from './homework/homework.component';
 import {MindmapService} from './mindmap.service';
 import {NodeService} from './node.service';
+import { ReleaseMultipleComponent } from './release-multiple/release-multiple.component';
+import { ReleaseShortComponent } from './release-short/release-short.component';
 
 @NgModule({
     declarations: [
@@ -35,7 +37,9 @@ import {NodeService} from './node.service';
         RegisterComponent,
         DetailsComponent,
         AddCourseComponent,
-        HomeworkComponent
+        HomeworkComponent,
+        ReleaseMultipleComponent,
+        ReleaseShortComponent
     ],
     imports: [
         BrowserModule,
@@ -55,7 +59,9 @@ import {NodeService} from './node.service';
     entryComponents: [
         LoginComponent,
         RegisterComponent,
-        AddCourseComponent
+        AddCourseComponent,
+        ReleaseMultipleComponent,
+        ReleaseShortComponent
     ]
 })
 export class AppModule { }

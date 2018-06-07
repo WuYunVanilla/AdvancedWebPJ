@@ -9,6 +9,10 @@ import {MultipleQuestion} from '../multiple-question';
 import {ShortQuestion} from '../short-question';
 import {MindmapService} from '../mindmap.service';
 import {NodeService} from '../node.service';
+import {LoginComponent} from '../login/login.component';
+import {RegisterComponent} from '../register/register.component';
+import {ReleaseMultipleComponent} from '../release-multiple/release-multiple.component';
+import {ReleaseShortComponent} from '../release-short/release-short.component';
 
 @Component({
   selector: 'app-homework',
@@ -64,8 +68,8 @@ export class HomeworkComponent implements OnInit {
     this.short1.title = '简述你最喜欢的xxx';
     this.short1.correct_answer = '我最喜欢xxx，是因为……';
 
-    this.short1.title = '高级web这节课好在哪里';
-    this.short1.correct_answer = 'TA好，老师好，大家都好';
+    this.short2.title = '高级web这节课好在哪里';
+    this.short2.correct_answer = 'TA好，老师好，大家都好';
 
     this.shortQuestion = [this.short1, this.short2];
 
@@ -80,9 +84,9 @@ export class HomeworkComponent implements OnInit {
     this.shortQuestion = value;
   }
   releaseMultiple() {
-
+    this.modalService.open(ReleaseMultipleComponent);
   }
   releaseShort() {
-
+    this.modalService.open(ReleaseShortComponent);
   }
 }

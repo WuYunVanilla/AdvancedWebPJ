@@ -1,0 +1,56 @@
+<!--<ng-template #register let-c="close" let-d="dismiss">-->
+<div class="modal-header">
+  <h4 class="modal-title">新增选择题</h4>
+  <!--<button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">-->
+  <!--<span aria-hidden="true">&times;</span>-->
+  <!--</button>-->
+</div>
+
+<div class="modal-body">
+  <form #registerForm="ngForm">
+    <div class="formItem">
+      <label>问题标题：</label>
+      <input size="30" type="text" required name="title" [(ngModel)]="multiple.title" #title="ngModel">
+      <span [hidden]="title.valid || title.pristine" class="prompt">请您输入标题</span>
+    </div>
+
+    <div class="formItem" >
+      <label>选项A：</label>
+      <input size="30" type="text" required name="optionA" [(ngModel)]="multiple.optionA" #optionA="ngModel">
+      <span [hidden]="optionA.valid || optionA.pristine"  class="prompt">请您输入选项</span>
+    </div>
+
+    <div class="formItem" >
+      <label>选项B：</label>
+      <input size="30" type="text" required name="optionB" [(ngModel)]="multiple.optionB" #optionB="ngModel">
+      <span [hidden]="optionB.valid || optionB.pristine"  class="prompt">请您输入选项</span>
+    </div>
+
+    <div class="formItem" >
+      <label>选项C：</label>
+      <input size="30" type="text" required name="optionC" [(ngModel)]="multiple.optionC" #optionC="ngModel">
+      <span [hidden]="optionC.valid || optionC.pristine"  class="prompt">请您输入选项</span>
+    </div>
+
+    <div class="formItem" >
+      <label>选项D：</label>
+      <input size="30" type="text" required name="optionD" [(ngModel)]="multiple.optionD" #optionD="ngModel">
+      <span [hidden]="optionD.valid || optionD.pristine"  class="prompt">请您输入选项</span>
+    </div>
+
+    <div class="formItem" id="correct_answer">
+      <label>正确答案：</label>
+      <input type="radio" required name="correct_answer" value="A" [(ngModel)]="multiple.correct_answer" #correct_answer="ngModel"> A
+      <input type="radio" required name="correct_answer" value="B" [(ngModel)]="multiple.correct_answer" #correct_answer="ngModel"> B
+      <input type="radio" required name="correct_answer" value="C" [(ngModel)]="multiple.correct_answer" #correct_answer="ngModel"> C
+      <input type="radio" required name="correct_answer" value="D" [(ngModel)]="multiple.correct_answer" #correct_answer="ngModel"> D
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="onSubmit()"
+          [disabled]="(!title.valid) || (!optionA.valid) || (!optionB.valid)|| (!optionC.valid) || (!optionD.valid) || (!correct_answer.valid)">确认</button>
+  <button type="button" class="btn btn-outline-dark" (click)="closeWindow()">取消</button>
+</div>
+<!--</ng-template>-->
