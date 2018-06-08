@@ -2267,7 +2267,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+json_string: String",
+											"text": "+data: String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -10237,7 +10237,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFj2m5qUw+3WgA="
 							},
-							"name": "json_string",
+							"name": "data",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
