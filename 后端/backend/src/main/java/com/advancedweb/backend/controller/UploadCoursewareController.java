@@ -16,6 +16,7 @@
 //import java.util.List;
 //
 //@RestController
+//@CrossOrigin
 //public class UploadCoursewareController {
 //
 //    private static final Logger logger = LoggerFactory.getLogger(UploadCoursewareController.class);
