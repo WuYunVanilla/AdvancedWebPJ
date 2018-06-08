@@ -37,6 +37,12 @@ public class AddCourseStudentController {
             return s;
         }
 
+        //判断学生是否已经选过这门课
+        Course[] courses = sr.findCourses(student.getId());
+        for (int i = 0; i < courses.length; i++) {
+            if (courses[i].getCourse_id().equals(course.getCourse_id())) return s;
+        }
+
         //course的选课人数加1
         int number_before  =  Integer.parseInt(course.getCourse_number());
         course.setCourse_number((number_before+1)+"");
