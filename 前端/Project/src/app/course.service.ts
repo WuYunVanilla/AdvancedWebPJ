@@ -10,7 +10,7 @@ const httpOptions = {
 };
 @Injectable()
 export class CourseService {
-  private baseUrl = 'http://localhost:8081/';
+  private baseUrl = 'http://10.222.129.245:8081/';
   tempUrl: string;
 
   constructor(
@@ -24,7 +24,17 @@ export class CourseService {
   }
 
   addCourse(course: Course, user_name: string, identity: string): Observable<boolean> {
-    this.tempUrl = this.baseUrl + identity + '_add_course/' + user_name;
+    this.tempUrl = this.baseUrl + 'add_course_' + identity + '/' + user_name;
     return this.http.post<boolean>(this.tempUrl, course, httpOptions);
+  }
+
+  searchCourse(): Observable<Course[]> {
+    this.tempUrl = this.baseUrl + 'search_course';
+    return this.http.get<Course[]>(this.tempUrl);
+  }
+
+  stuAddCourse(user_name: string, course: Course): Observable<boolean> {
+    this.tempUrl = this.baseUrl + 'add_course_student/' + user_name;
+    return this.http.post<boolean>(this.tempUrl, course , httpOptions);
   }
 }

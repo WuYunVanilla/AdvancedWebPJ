@@ -64,7 +64,17 @@ div {
 }
 
 #courses {
+  clear: both;
   width: 100%;
   overflow: hidden;
   margin-left: 40px;
+}
+
+#modifyPwd {
+  float: right;
+  margin-right: 45px;
+}
+
+#addCourse {
+  float: left;
 }

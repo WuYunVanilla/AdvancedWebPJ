@@ -2,6 +2,10 @@
   <button type="button" class="btn btn-outline-dark" (click)="addCourse()">添加课程</button>
 </div>
 
+<div id="modifyPwd" class="buttonDiv">
+  <button type="button" class="btn btn-outline-dark" (click)="modifyPwd()">修改密码</button>
+</div>
+
 <div id="courses">
   <div *ngFor="let course of courses" class="course">
     <div class="courseName">{{course.course_id}}: <b>{{course.course_name}}</b></div>

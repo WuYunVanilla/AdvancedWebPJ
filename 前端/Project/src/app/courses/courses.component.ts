@@ -6,6 +6,8 @@ import {LoginComponent} from '../login/login.component';
 import {AddCourseComponent} from '../add-course/add-course.component';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
+import {StuAddCourseComponent} from '../stu-add-course/stu-add-course.component';
+import {ModifyPasswordComponent} from '../modify-password/modify-password.component';
 
 @Component({
   selector: 'app-courses',
@@ -13,11 +15,12 @@ import {Location} from '@angular/common';
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent implements OnInit {
-  courses: Course[] = new Course()[4];
-  course1: Course = new Course();
-  course2: Course = new Course();
-  course3: Course = new Course();
-  course4: Course = new Course();
+  courses: Course[];
+  // courses: Course[] = new Course()[4];
+  // course1: Course = new Course();
+  // course2: Course = new Course();
+  // course3: Course = new Course();
+  // course4: Course = new Course();
 
   constructor(
     private modalService: NgbModal,
@@ -25,26 +28,26 @@ export class CoursesComponent implements OnInit {
     private location: Location,
     private courseService: CourseService
   ) {
-    // courseService.getCourses(window.sessionStorage.getItem('user_name'), window.sessionStorage.getItem('identity')).subscribe(
-    //   value => this.setCourses(value));
+    courseService.getCourses(window.sessionStorage.getItem('user_name'), window.sessionStorage.getItem('identity')).subscribe(
+      value => this.setCourses(value));
 
-    this.course1.course_name = '离散数学';
-    this.course1.course_number = '2';
-    this.course1.course_id = '25';
-
-    this.course2.course_name = '数据结构';
-    this.course2.course_number = '3';
-    this.course2.course_id = '26';
-
-    this.course3.course_name = '计算机网络';
-    this.course3.course_number = '4';
-    this.course3.course_id = '27';
-
-    this.course4.course_name = '高级WEB';
-    this.course4.course_number = '5';
-    this.course4.course_id = '28';
-
-    this.courses = [this.course1, this.course2, this.course3, this.course4];
+    // this.course1.course_name = '离散数学';
+    // this.course1.course_number = '2';
+    // this.course1.course_id = '25';
+    //
+    // this.course2.course_name = '数据结构';
+    // this.course2.course_number = '3';
+    // this.course2.course_id = '26';
+    //
+    // this.course3.course_name = '计算机网络';
+    // this.course3.course_number = '4';
+    // this.course3.course_id = '27';
+    //
+    // this.course4.course_name = '高级WEB';
+    // this.course4.course_number = '5';
+    // this.course4.course_id = '28';
+    //
+    // this.courses = [this.course1, this.course2, this.course3, this.course4];
   }
 
   ngOnInit() {
@@ -53,10 +56,17 @@ export class CoursesComponent implements OnInit {
     this.courses = value;
   }
   addCourse(): void {
-    this.modalService.open(AddCourseComponent);
+    if (window.sessionStorage.getItem('identity') === 'teacher') {
+      this.modalService.open(AddCourseComponent);
+    } else if (window.sessionStorage.getItem('identity') === 'student') {
+      this.modalService.open(StuAddCourseComponent);
+    }
   }
   enterCourse(course_id: string) {
     window.sessionStorage.setItem('course_id', course_id);
     window.location.href = 'http://localhost:4200/main';
+  }
+  modifyPwd(): void{
+    this.modalService.open(ModifyPasswordComponent);
   }
 }

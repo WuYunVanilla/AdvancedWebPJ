@@ -9,8 +9,9 @@ const httpOptions = {
 };
 @Injectable()
 export class UserService {
-  private loginUrl = 'http://localhost:8081/login';
-  private registerUrl = 'http://localhost:8081/register';
+  private loginUrl = 'http://10.222.129.245:8081/login';
+  private registerUrl = 'http://10.222.129.245:8081/register';
+  private modifyPwdUrl = 'http://10.222.129.245:8081/modify_password';
   constructor(
     private http: HttpClient
   ) { }
@@ -21,5 +22,9 @@ export class UserService {
 
   register(user: User): Observable<boolean> {
     return this.http.post<boolean>(this.registerUrl, user, httpOptions);
+  }
+
+  modifyPassword(user: User): Observable<boolean> {
+    return this.http.post<boolean>(this.modifyPwdUrl, user, httpOptions);
   }
 }

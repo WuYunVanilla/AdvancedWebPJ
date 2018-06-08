@@ -19,9 +19,9 @@ export class LoginComponent implements OnInit {
     this.activeModal.close('Close click');
   }
   onSubmit() {
-    // this.userService.login(this.user)
-    //   .subscribe((value => this.checkSuccess(value)));
-    this.checkSuccess(true);
+    this.userService.login(this.user)
+      .subscribe((value => this.checkSuccess(value['success'])));
+    // this.checkSuccess(true);
   }
   checkSuccess(value) {
     if (value) {
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       window.sessionStorage.setItem('identity', this.user.identity);
       window.location.href = 'http://localhost:4200/courses';
     } else {
-      window.alert('用户名与密码不匹配!');
+      window.alert('登录失败!');
     }
   }
 }

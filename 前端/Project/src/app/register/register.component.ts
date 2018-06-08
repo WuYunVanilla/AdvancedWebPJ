@@ -21,9 +21,9 @@ export class RegisterComponent implements OnInit {
     this.activeModal.close('Close click');
   }
   onSubmit() {
-    // this.userService.register(this.user)
-    //   .subscribe((value => this.checkSuccess(value)));
-    this.checkSuccess(true);
+    this.userService.register(this.user)
+      .subscribe((value => this.checkSuccess(value['success'])));
+    // this.checkSuccess(true);
   }
   checkSuccess(value) {
     if (value) {
