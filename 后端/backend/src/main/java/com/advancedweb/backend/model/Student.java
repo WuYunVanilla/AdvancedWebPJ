@@ -10,9 +10,7 @@ public class Student {
     @Id
     @GeneratedValue
     private Long id;
-    @Property(name = "name")
     private String name;
-    @Property(name = "password")
     private String password;
 
     @Relationship(type = "STUDY_IN")

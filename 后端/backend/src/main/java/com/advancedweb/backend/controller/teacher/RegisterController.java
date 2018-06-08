@@ -1,11 +1,11 @@
-package com.advancedweb.backend.controller;
+package com.advancedweb.backend.controller.teacher;
 
 import com.advancedweb.backend.controller.json_model.Success;
 import com.advancedweb.backend.controller.json_model.User;
 import com.advancedweb.backend.model.Student;
 import com.advancedweb.backend.model.Teacher;
-import com.advancedweb.backend.service.impl.StudentServiceImpl;
-import com.advancedweb.backend.service.impl.TeacherServiceImpl;
+import com.advancedweb.backend.repository.StudentRepository;
+import com.advancedweb.backend.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class RegisterController {
 
     @Autowired
-    private StudentServiceImpl ssl;
+    private StudentRepository sr;
 
     @Autowired
-    private TeacherServiceImpl tsl;
+    private TeacherRepository tr;
 
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -31,8 +31,8 @@ public class RegisterController {
 
         //首先判断user_name是否已经存在
         boolean if_exist = false;
-        Student stu = ssl.findByName(name);
-        Teacher tea = tsl.findByName(name);
+        Student stu = sr.findByName(name);
+        Teacher tea = tr.findByName(name);
         if (stu != null || tea != null) {
             if_exist = true;
         }
@@ -44,13 +44,13 @@ public class RegisterController {
                     Student student_new = new Student();
                     student_new.setName(name);
                     student_new.setPassword(password);
-                    ssl.save(student_new);
+                    sr.save(student_new);
                     break;
                 case "teacher":
                     Teacher teacher_new = new Teacher();
                     teacher_new.setName(name);
                     teacher_new.setPassword(password);
-                    tsl.save(teacher_new);
+                    tr.save(teacher_new);
                     break;
             }
         }

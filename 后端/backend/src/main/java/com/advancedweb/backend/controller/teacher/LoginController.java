@@ -1,11 +1,12 @@
-package com.advancedweb.backend.controller;
+package com.advancedweb.backend.controller.teacher;
 
+import com.advancedweb.backend.controller.json_model.Identity;
 import com.advancedweb.backend.controller.json_model.Success;
 import com.advancedweb.backend.controller.json_model.User;
 import com.advancedweb.backend.model.Student;
 import com.advancedweb.backend.model.Teacher;
-import com.advancedweb.backend.service.impl.StudentServiceImpl;
-import com.advancedweb.backend.service.impl.TeacherServiceImpl;
+import com.advancedweb.backend.repository.StudentRepository;
+import com.advancedweb.backend.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,39 +16,39 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
     @Autowired
-    private StudentServiceImpl ssl;
+    private StudentRepository sr;
 
     @Autowired
-    private TeacherServiceImpl tsl;
+    private TeacherRepository tr;
 
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Success register(@RequestBody User user) {
-        Success s = new Success();
-        s.setSuccess(false);
+    public Identity login(@RequestBody User user) {
+
+        Identity identity = new Identity();
+        identity.setIdentity("illegal");
 
         String name = user.getUser_name();
         String password = user.getUser_pwd();
 
         //首先判断user_name是否已经存在
 
-        Student stu = ssl.findByName(name);
-        Teacher tea = tsl.findByName(name);
+        Student stu = sr.findByName(name);
+        Teacher tea = tr.findByName(name);
         if (stu == null && tea == null) {
-            return s;
+            return identity;
         }
 
         //再判断密码是否一致
         if (stu!=null){
             if (stu.getPassword().equals(password))
-                s.setSuccess(true);
-
+                identity.setIdentity("student");
         }
 
         if (tea!=null){
             if (tea.getPassword().equals(password))
-                s.setSuccess(true);
+                identity.setIdentity("teacher");
         }
-        return s;
+        return identity;
     }
 }

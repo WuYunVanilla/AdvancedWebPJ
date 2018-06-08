@@ -13,9 +13,7 @@ public class Teacher {
     @Id
     @GeneratedValue
     private Long id;
-    @Property(name = "name")
     private String name;
-    @Property(name = "password")
     private String password;
 
     @Relationship(type = "TEACH_IN", direction = Relationship.UNDIRECTED)

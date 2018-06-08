@@ -1,26 +1,31 @@
 package com.advancedweb.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.neo4j.ogm.annotation.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @NodeEntity(label = "Node")
 public class Node {
     @Id
     @GeneratedValue
+    @JsonProperty("null")
     private Long id;
-    @Property(name = "node_id")
-    private String nodeId;
-    @Property(name = "node_color")
-    private String nodeColor;
-    @Property(name = "node_name")
-    private String nodeName;
-    @Property(name = "node_name_color")
-    private String nodeNameColor;
+
+    @JsonProperty("id")
+    private String node_id;
+    private String topic;
+    private String background_color;
+    private String foreground_color;
+
+    private Boolean expanded;
+    private String direction;
 
     @Relationship(type = "HAS_CHILD")
-    private Set<Node> childNodes;
+    private List<Node> children;
+
     @Relationship(type = "HAS_MATERIAL")
     private Set<Material> materials;
     @Relationship(type = "HAS_COURSEWARE")
@@ -32,16 +37,7 @@ public class Node {
     @Relationship(type = "HAS_ASSIGNMENT_SHORT")
     private Set<AssignmentShort> assignmentShorts;
 
-    public Set<Node> getChildNodes() {
-        return childNodes;
-    }
 
-    public void setChild(Node node) {
-        if (childNodes == null) {
-            childNodes = new HashSet<>();
-        }
-        childNodes.add(node);
-    }
 
     public Set<Material> getMaterials() {
         return materials;
@@ -106,35 +102,59 @@ public class Node {
         this.id = id;
     }
 
-    public String getNodeId() {
-        return nodeId;
+    public String getNode_id() {
+        return node_id;
     }
 
-    public void setNodeId(String nodeId) {
-        this.nodeId = nodeId;
+    public void setNode_id(String node_id) {
+        this.node_id = node_id;
     }
 
-    public String getNodeColor() {
-        return nodeColor;
+    public String getTopic() {
+        return topic;
     }
 
-    public void setNodeColor(String nodeColor) {
-        this.nodeColor = nodeColor;
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 
-    public String getNodeName() {
-        return nodeName;
+    public String getBackground_color() {
+        return background_color;
     }
 
-    public void setNodeName(String nodeName) {
-        this.nodeName = nodeName;
+    public void setBackground_color(String background_color) {
+        this.background_color = background_color;
     }
 
-    public String getNodeNameColor() {
-        return nodeNameColor;
+    public String getForeground_color() {
+        return foreground_color;
     }
 
-    public void setNodeNameColor(String nodeNameColor) {
-        this.nodeNameColor = nodeNameColor;
+    public void setForeground_color(String foreground_color) {
+        this.foreground_color = foreground_color;
+    }
+
+    public Boolean getExpanded() {
+        return expanded;
+    }
+
+    public void setExpanded(Boolean expanded) {
+        this.expanded = expanded;
+    }
+
+    public String getDirection() {
+        return direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
+    public List<Node> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Node> children) {
+        this.children = children;
     }
 }

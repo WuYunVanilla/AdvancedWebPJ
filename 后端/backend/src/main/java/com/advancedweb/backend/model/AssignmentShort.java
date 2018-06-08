@@ -15,7 +15,7 @@ public class AssignmentShort {
     @Property(name = "title")
     private String title;
     @Property(name = "correct_answer")
-    private String correctAnswer;
+    private String correct_answer;
     @Property(name = "number")
     private String number;
     @Property(name = "correct_number")
@@ -59,12 +59,12 @@ public class AssignmentShort {
         this.title = title;
     }
 
-    public String getCorrectAnswer() {
-        return correctAnswer;
+    public String getCorrect_answer() {
+        return correct_answer;
     }
 
-    public void setCorrectAnswer(String correctAnswer) {
-        this.correctAnswer = correctAnswer;
+    public void setCorrect_answer(String correct_answer) {
+        this.correct_answer = correct_answer;
     }
 
     public String getNumber() {

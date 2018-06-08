@@ -1,10 +1,10 @@
-package com.advancedweb.backend.controller;
+package com.advancedweb.backend.controller.teacher;
 
 import com.advancedweb.backend.controller.json_model.Success;
 import com.advancedweb.backend.model.Course;
 import com.advancedweb.backend.model.Teacher;
-import com.advancedweb.backend.service.impl.CourseServiceImpl;
-import com.advancedweb.backend.service.impl.TeacherServiceImpl;
+import com.advancedweb.backend.repository.CourseRepository;
+import com.advancedweb.backend.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.*;
 public class AddCourseController {
 
     @Autowired
-    private CourseServiceImpl csl;
+    private CourseRepository cr;
 
     @Autowired
-    private TeacherServiceImpl tsl;
+    private TeacherRepository tr;
 
 
-    @RequestMapping(value = "/add_course/{user_name}", method = RequestMethod.POST)
-    public Success register(@PathVariable String user_name, @RequestBody Course course) {
+    @RequestMapping(value = "/add_course_teacher/{user_name}", method = RequestMethod.POST)
+    public Success add_course(@PathVariable String user_name, @RequestBody Course course) {
         Success s = new Success();
         s.setSuccess(false);
 
@@ -28,24 +28,24 @@ public class AddCourseController {
 
         //首先判断course_id是否已经存在
 
-        Course course_db = csl.findByCourseId(course_id);
+        Course course_db = cr.findByCourseId(course_id);
         if (course_db != null) {
             return s;
         }
 
-        Teacher teacher =tsl.findByName(user_name);
+        Teacher teacher =tr.findByName(user_name);
         if (teacher==null){
             return s;
         }
 
         //创建新的course
         course.setCourse_number("0");
-        csl.save(course);
+        cr.save(course);
 
-        Course course_in_db = csl.findByCourseId(course_id);
+        Course course_in_db = cr.findByCourseId(course_id);
         //再创建course和teacher的关系
         teacher.teachIn(course_in_db);
-        tsl.save(teacher);
+        tr.save(teacher);
 
         //打印出这时候teacher的课程列表
         System.out.println(teacher.toString());

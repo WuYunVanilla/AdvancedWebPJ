@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface MindmapRepository extends Neo4jRepository<Mindmap, Long> {
-    @Query("MATCH (n:Mindmap) WHERE n.mindmap_id = ({mindmap_id}) RETURN n")
-    Mindmap findByMindmap_id(@Param("mindmap_id") int mindmap_id);
+    @Query("MATCH (n:Mindmap) WHERE  n.mindmap_id = ({mindmap_id}) RETURN n")
+    Mindmap[] findByMindmap_id(@Param("mindmap_id") String mindmap_id);
+
+    @Query("start mindmap = node({id}) match (mindmap)-[:HAS_ROOT]->(rootNode) return rootNode")
+    Node findRootNode(@Param("id") long id);
 }
