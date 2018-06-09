@@ -35,10 +35,11 @@ export class ModifyPasswordComponent implements OnInit {
   }
   checkSuccess(value) {
     if (value) {
-      window.alert('修改成功');
+      window.sessionStorage.setItem('user_pwd', this.user.user_pwd);
+      window.alert('修改成功！');
       this.closeWindow();
     } else {
-      window.alert('修改失败!');
+      window.alert('修改失败！');
     }
   }
 }

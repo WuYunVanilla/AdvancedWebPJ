@@ -27,8 +27,9 @@ export class RegisterComponent implements OnInit {
   }
   checkSuccess(value) {
     if (value) {
-      window.sessionStorage.setItem('username', this.user.user_name);
+      window.sessionStorage.setItem('user_name', this.user.user_name);
       window.sessionStorage.setItem('identity', this.user.identity);
+      window.sessionStorage.setItem('user_pwd', this.user.user_pwd);
       window.alert('注册成功!');
       window.location.href = 'http://localhost:4200/courses';
     } else {
