@@ -1,7 +1,9 @@
-import {Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 import * as jsMind from './jsmind/jsmind.js';
 import './jsmind/jsmind.screenshot.js';
+import {MindmapService} from '../mindmap.service';
+import {st} from '@angular/core/src/render3';
 
 const options = {
     container: 'jsmind_container',
@@ -11,61 +13,15 @@ const options = {
 
 const mind = {
     'meta' : {
-        'name': 'jsMind-demo-tree',
-        'author': 'hizzgdev@163.com',
+        'name': 'Advanced-Web-PJ-jsMind-root',
+        'author': 'nhua15@fudan.edu.cn',
         'version': '0.2'
     },
     /* 数据格式声明 */
     'format': 'node_tree',
     /* 数据内容 */
-    'data': {
-        'id': 'root',
-        'topic': 'jsMind',
-        'data': {'background-color': '#f00'},
-        'children': [
-            {
-                'id': 'easy',
-                'topic': 'Easy',
-                'direction': 'left',
-                'expanded': false,
-                'children': [
-                    {'id': 'easy1', 'topic': 'Easy to show'},
-                    {'id': 'easy2', 'topic': 'Easy to edit'},
-                    {'id': 'easy3', 'topic': 'Easy to store'},
-                    {'id': 'easy4', 'topic': 'Easy to embed'}
-                ]
-            },
-            {
-                'id': 'open',
-                'topic': 'Open Source',
-                'direction': 'right',
-                'expanded': true,
-                'children': [
-                    {'id': 'open1', 'topic': 'on GitHub'},
-                    {'id': 'open2', 'topic': 'BSD License'}
-                ]
-            },
-            {
-                'id': 'powerful',
-                'topic': 'Powerful',
-                'direction': 'right',
-                'children': [
-                    {'id': 'powerful1', 'topic': 'Base on Javascript'},
-                    {'id': 'powerful2', 'topic': 'Base on HTML5'},
-                    {'id': 'powerful3', 'topic': 'Depends on you'}
-                ]
-            },
-            {
-                'id': 'other',
-                'topic': 'test node',
-                'direction': 'left',
-                'children': [
-                    {'id': 'other1', 'topic': 'I\'m from local variable'},
-                    {'id': 'other2', 'topic': 'I can do everything'}
-                ]
-            }
-        ]
-    }
+
+    'data': {'id': 'root', 'topic': '* 根节点 *', 'expanded': true}
 };
 
 
@@ -77,18 +33,29 @@ const mind = {
 })
 export class MindmapComponent implements OnInit {
 
-    // public mindMap;
+    // current_mind = {
+    //     'meta': {
+    //         'name': 'jsMind-demo-tree',
+    //         'author': 'hizzgdev@163.com',
+    //         'version': '0.2'
+    //     },
+    //     'format': 'node_tree',
+    //     /* 数据内容 */
+    //     'data': {}
+    // };
 
-    public mindMap;
-    public selected_node_id: string;
-    // showTip: boolean;
+    @Input() course_id: string; // 与上层组件中course绑定
+    @Input() mind_id: string; // 与上层组件中选中的mindMap绑定
 
-    // public info: number[] = [1];
+    public mindMap; // 思维导图组件
+    public selected_node_id: string; // 当前思维导图中被选中的节点
 
-
-    constructor() { }
+    constructor(private mindService: MindmapService) { }
 
     ngOnInit() {
+
+        // this.mindService.getMind().subscribe();
+
         this.mindMap = jsMind.show(options);
         this.selected_node_id = '';
     }
@@ -114,7 +81,7 @@ export class MindmapComponent implements OnInit {
             return;
         }
         const nodeid = jsMind.util.uuid.newid();
-        const topic = '* Node_' + nodeid.substr(0, 5) + ' *';
+        const topic = '* 新节点 *';
         this.mindMap.add_node(selected_node, nodeid, topic);
     }
 
@@ -126,7 +93,7 @@ export class MindmapComponent implements OnInit {
             return;
         }
         const nodeid = jsMind.util.uuid.newid();
-        const topic = '* Node_' + nodeid.substr(0, 5) + ' *';
+        const topic = '* 新节点 *';
         this.mindMap.insert_node_after(selected_node, nodeid, topic);
     }
 
@@ -137,10 +104,10 @@ export class MindmapComponent implements OnInit {
         }
     }
 
-    change_node_color() {
+    change_node_color(color: string) {
         const selected_id = this.get_selected_nodeid();
         if (selected_id) {
-            this.mindMap.set_node_color(selected_id, '#eee', null);
+            this.mindMap.set_node_color(selected_id, color, null);
         }
 
     }
@@ -162,6 +129,27 @@ export class MindmapComponent implements OnInit {
             this.selected_node_id = selected_node.topic;
         }
 
+    }
+
+    // 显示新的mindMap
+    updateMindMap() {
+        // const data = this.mindService.getMind();
+
+
+
+        const data = mind;
+        alert('哈哈哈');
+        // this.mindMap.show(data);
+
+    }
+
+    save() {
+        const data = this.mindMap.get_data();
+        const str = jsMind.util.json.json2string(data.data); // 最终要传输的字符串
+
+        console.log(str);
+
+        // this.mindService.saveMind(this.mind_id, str);
     }
 
 }

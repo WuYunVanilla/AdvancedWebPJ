@@ -569,10 +569,8 @@
                     "author":__author__,
                     "version":__version__
                 },
-                "format":"node_array",
-                "data":[
-                    {"id":"root","topic":"课程名称", "isroot":true}
-                ]
+                "format":"node_tree",
+                "data":{"id": "root", "topic": "* 根节点 *", "expanded": true}
             },
 
             get_mind:function(source){

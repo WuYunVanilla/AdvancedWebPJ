@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { AppComponent } from './app.component';
 import { IndexComponent } from './index/index.component';
@@ -17,16 +19,17 @@ import { FormsModule } from '@angular/forms';
 import { HttpRequestService } from './http-request.service';
 
 import { HttpClientModule } from '@angular/common/http';
-import {UserService} from './user.service';
-import {CourseService} from './course.service';
+import { UserService } from './user.service';
+import { CourseService } from './course.service';
 import { AddCourseComponent } from './add-course/add-course.component';
 import { HomeworkComponent } from './homework/homework.component';
-import {MindmapService} from './mindmap.service';
-import {NodeService} from './node.service';
+import { MindmapService } from './mindmap.service';
+import { NodeService } from './node.service';
 import { ReleaseMultipleComponent } from './release-multiple/release-multiple.component';
 import { ReleaseShortComponent } from './release-short/release-short.component';
 import { StuAddCourseComponent } from './stu-add-course/stu-add-course.component';
 import { ModifyPasswordComponent } from './modify-password/modify-password.component';
+import { ResourcesComponent } from './resources/resources.component';
 
 @NgModule({
     declarations: [
@@ -43,14 +46,17 @@ import { ModifyPasswordComponent } from './modify-password/modify-password.compo
         ReleaseMultipleComponent,
         ReleaseShortComponent,
         StuAddCourseComponent,
-        ModifyPasswordComponent
+        ModifyPasswordComponent,
+        ResourcesComponent
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         NgbModule.forRoot(),
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        CommonModule,
+        FileUploadModule
     ],
     providers: [
         HttpRequestService,
