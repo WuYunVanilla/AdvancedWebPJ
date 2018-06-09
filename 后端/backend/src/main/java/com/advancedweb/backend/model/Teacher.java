@@ -54,12 +54,4 @@ public class Teacher {
         this.password = password;
     }
 
-    public String toString() {
-
-        return this.name + "'s courses => "
-                + Optional.ofNullable(this.courses).orElse(
-                Collections.emptySet()).stream()
-                .map(Course::getCourse_name)
-                .collect(Collectors.toList());
-    }
 }

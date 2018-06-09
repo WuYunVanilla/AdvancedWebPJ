@@ -1,7 +1,5 @@
 package com.advancedweb.backend.controller.teacher;
 
-import com.advancedweb.backend.controller.json_model.Data;
-import com.advancedweb.backend.controller.json_model.Node_json;
 import com.advancedweb.backend.model.Course;
 import com.advancedweb.backend.model.Mindmap;
 import com.advancedweb.backend.model.Node;
@@ -9,10 +7,11 @@ import com.advancedweb.backend.repository.CourseRepository;
 import com.advancedweb.backend.repository.MindmapRepository;
 import com.advancedweb.backend.repository.NodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 @RestController
-@CrossOrigin
 public class MindmapController {
     @Autowired
     private MindmapRepository mr;
@@ -20,13 +19,9 @@ public class MindmapController {
     @Autowired
     private CourseRepository cr;
 
-    @Autowired
-    private NodeRepository nr;
-
     @RequestMapping(value = "/mindmap/{course_id}/{mindmap_id}", method = RequestMethod.GET)
-    public Data mindmap(@PathVariable String course_id, @PathVariable String mindmap_id) {
-        Data data = new Data();
-
+    public String mindmap(@PathVariable String course_id, @PathVariable String mindmap_id) {
+        String json=null;
         //先找到mindmap
         Course course = cr.findByCourseId(course_id);
         Mindmap[] mindmaps_course = cr.findMindmaps(course.getId());
@@ -40,9 +35,10 @@ public class MindmapController {
         }
 
         if (result_mindmap != null) {
-            data.setData(result_mindmap.getJson_string());
+            json = result_mindmap.getJson_string();
+
         }
-        return data;
+        return json;
     }
 
 }

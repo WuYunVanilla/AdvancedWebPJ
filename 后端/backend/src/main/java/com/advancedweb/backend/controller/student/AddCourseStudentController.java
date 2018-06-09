@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin
 public class AddCourseStudentController {
     @Autowired
     private CourseRepository cr;
@@ -35,12 +34,6 @@ public class AddCourseStudentController {
         Student student = sr.findByName(user_name);
         if (student == null) {
             return s;
-        }
-
-        //判断学生是否已经选过这门课
-        Course[] courses = sr.findCourses(student.getId());
-        for (int i = 0; i < courses.length; i++) {
-            if (courses[i].getCourse_id().equals(course.getCourse_id())) return s;
         }
 
         //course的选课人数加1

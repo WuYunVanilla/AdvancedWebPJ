@@ -10,11 +10,8 @@ public class Course {
     @Id
     @GeneratedValue
     private Long id;
-    @Property(name = "course_id")
     private String course_id;
-    @Property(name = "course_name")
     private String course_name;
-    @Property(name = "course_number")
     private String course_number;
 
     @Relationship(type = "OWN")

@@ -10,38 +10,16 @@ public class AssignmentMultiple {
     @Id
     @GeneratedValue
     private Long id;
-    @Property(name = "multi_id")
     private String multi_id;
-    @Property(name = "title")
     private String title;
-    @Property(name = "optionA")
     private String optionA;
-    @Property(name = "optionB")
     private String optionB;
-    @Property(name = "optionC")
     private String optionC;
-    @Property(name = "optionD")
     private String optionD;
-    @Property(name = "correct_answer")
     private String correct_answer;
-    @Property(name = "number")
     private String number;
-    @Property(name = "correct_number")
     private String correct_number;
 
-    @Relationship(type = "ANSWER_SHEET")
-    private Set<Answer> answers;
-
-    public Set<Answer> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswer(Answer answer) {
-        if (answers == null) {
-            answers = new HashSet<>();
-        }
-        answers.add(answer);
-    }
 
     public Long getId() {
         return id;

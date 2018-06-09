@@ -6,10 +6,12 @@ import com.advancedweb.backend.model.Course;
 import com.advancedweb.backend.model.Teacher;
 import com.advancedweb.backend.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin
 public class TeacherCoursesController {
 
     @Autowired
@@ -24,7 +26,7 @@ public class TeacherCoursesController {
             return null;
         }
 
-//        System.out.println(teacher.getId());
+        System.out.println(teacher.getId());
         //得到数据库的课程列表
         Course[] courses = tr.findCourses(teacher.getId());
 

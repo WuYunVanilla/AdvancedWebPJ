@@ -11,11 +11,11 @@ import java.util.Set;
 public class Node {
     @Id
     @GeneratedValue
-    @JsonProperty("null")
-    private Long id;
+    private Long long_id;
 
-    @JsonProperty("id")
-    private String node_id;
+    private String course_mindmap;
+    @Property(name = "node_id")
+    private String id;
     private String topic;
     private String background_color;
     private String foreground_color;
@@ -94,20 +94,20 @@ public class Node {
         assignmentShorts.add(assignmentShort);
     }
 
-    public Long getId() {
+    public Long getLong_id() {
+        return long_id;
+    }
+
+    public void setLong_id(Long long_id) {
+        this.long_id = long_id;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public String getNode_id() {
-        return node_id;
-    }
-
-    public void setNode_id(String node_id) {
-        this.node_id = node_id;
     }
 
     public String getTopic() {
@@ -156,5 +156,14 @@ public class Node {
 
     public void setChildren(List<Node> children) {
         this.children = children;
+    }
+
+
+    public String getCourse_mindmap() {
+        return course_mindmap;
+    }
+
+    public void setCourse_mindmap(String course_mindmap) {
+        this.course_mindmap = course_mindmap;
     }
 }

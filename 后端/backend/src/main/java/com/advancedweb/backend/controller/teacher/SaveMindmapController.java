@@ -1,6 +1,5 @@
 package com.advancedweb.backend.controller.teacher;
 
-import com.advancedweb.backend.controller.json_model.Data;
 import com.advancedweb.backend.controller.json_model.Success;
 import com.advancedweb.backend.model.Course;
 import com.advancedweb.backend.model.Mindmap;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin
 public class SaveMindmapController {
     @Autowired
     private CourseRepository cr;
@@ -28,7 +26,7 @@ public class SaveMindmapController {
     private String mindmap_id;
 
     @RequestMapping(value = "/save_mindmap/{course_id}/{mindmap_id}", method = RequestMethod.POST)
-    public Success save_mindmap(@PathVariable String course_id, @PathVariable String mindmap_id, @RequestBody Data data) {
+    public Success save_mindmap(@PathVariable String course_id, @PathVariable String mindmap_id,@RequestBody String json_string) {
         this.course_id=course_id;
         this.mindmap_id=mindmap_id;
 
@@ -47,19 +45,22 @@ public class SaveMindmapController {
 
         //2..不存在mindmap_id
 
-        //存下node_root，其余node会自动生成
-        Node node_root = gson.fromJson(data.getData(),Node.class);
+//
+        Node root_node = gson.fromJson(json_string,Node.class);
+        //向每个node添加course_mindmap属性
+        root_node.setCourse_mindmap(course_id+" "+mindmap_id);
+        root_node= setCourseMindmapForNode(root_node);
 
-        //向每个node
-        nr.save(node_root);
+        //存下node_root，其余node会自动生成
+        nr.save(root_node);
 
         //保存mindmap
         Mindmap mindmap= new Mindmap();
-        mindmap.setJson_string(data.getData());
+        mindmap.setJson_string(json_string);
         mindmap.setMindmap_id(mindmap_id);
 
         //保存两者关系
-        mindmap.setRootNode(node_root);
+        mindmap.setRootNode(root_node);
         mr.save(mindmap);
 
         course.owns(mindmap);
@@ -69,4 +70,14 @@ public class SaveMindmapController {
         return success;
     }
 
+    //recursion 递归
+    private Node setCourseMindmapForNode(Node node_root) {
+        if (node_root.getChildren() != null) {
+            for (Node child : node_root.getChildren()) {
+                child.setCourse_mindmap(course_id+" "+mindmap_id);
+                child = setCourseMindmapForNode(child);
+            }
+        }
+        return node_root;
+    }
 }

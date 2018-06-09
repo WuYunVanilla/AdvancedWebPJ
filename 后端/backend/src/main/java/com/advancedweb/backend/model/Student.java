@@ -15,8 +15,7 @@ public class Student {
 
     @Relationship(type = "STUDY_IN")
     private Set<Course> courses;
-    @Relationship(type = "COMPLETE")
-    private Set<Answer> answers;
+
 
     public Set<Course> getCourses() {
         return courses;
@@ -27,17 +26,6 @@ public class Student {
             courses = new HashSet<>();
         }
         courses.add(course);
-    }
-
-    public Set<Answer> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswer(Answer answer) {
-        if (answers == null) {
-            answers = new HashSet<>();
-        }
-        answers.add(answer);
     }
 
     public String getName() {

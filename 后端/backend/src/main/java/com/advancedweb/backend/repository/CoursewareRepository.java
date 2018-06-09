@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface CoursewareRepository extends Neo4jRepository<Courseware, Long> {
-    @Query("MATCH (n:Courseware) WHERE n.courseware_name = ({course_name}) RETURN n")
-    Courseware findByCoursewareName(@Param("courseware_name") String courseware_name);
+    @Query("MATCH (n:Courseware) WHERE n.store_address = ({store_address}) RETURN n")
+    Courseware findByStoreAddress(@Param("store_address") String store_address);
 }
