@@ -35,6 +35,12 @@ div {
   height: 30px;
   font-size: 10px;
 }
+.loginOut {
+  margin-left: 20px;
+  width: 80px;
+  height: 30px;
+  font-size: 10px;
+}
 
 /*.left {*/
   /*width: 30%;*/

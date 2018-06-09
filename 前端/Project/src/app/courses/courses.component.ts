@@ -72,4 +72,8 @@ export class CoursesComponent implements OnInit {
   modifyPwd(): void {
     this.modalService.open(ModifyPasswordComponent);
   }
+  loginOut(): void {
+    window.sessionStorage.clear();
+    window.location.href = 'http://localhost:4200/';
+  }
 }
