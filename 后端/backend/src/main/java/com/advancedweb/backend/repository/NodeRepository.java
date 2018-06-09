@@ -17,6 +17,13 @@ public interface NodeRepository extends Neo4jRepository<Node, Long> {
 //    List<Node> findNodeChildren(@Param("id") long id);
 
     @Query("start node = node({id}) match (node)-[:HAS_COURSEWARE]->(coursewares) return coursewares")
-        //@Query("MATCH (n:Course) RETURN n")
     Courseware[] findCoursewares(@Param("id") long id);
+
+    @Query("start node = node({id}) match (node)-[:HAS_LINK]->(links) return links")
+    Link[] findLinks(@Param("id") long id);
+
+
+    @Query("start node = node({id}) match (node)-[:HAS_MATERIAL]->(materials) return materials")
+    Material[] findMaterials(@Param("id") long id);
+
 }

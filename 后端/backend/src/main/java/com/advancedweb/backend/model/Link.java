@@ -7,8 +7,7 @@ public class Link {
     @Id
     @GeneratedValue
     private Long id;
-    @Property(name = "link_address")
-    private String linkAddress;
+    private String link_address;
 
     public Long getId() {
         return id;
@@ -18,11 +17,11 @@ public class Link {
         this.id = id;
     }
 
-    public String getLinkAddress() {
-        return linkAddress;
+    public String getLink_address() {
+        return link_address;
     }
 
-    public void setLinkAddress(String linkAddress) {
-        this.linkAddress = linkAddress;
+    public void setLink_address(String link_address) {
+        this.link_address = link_address;
     }
 }
