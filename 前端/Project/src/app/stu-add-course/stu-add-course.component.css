@@ -6,13 +6,9 @@ li {
   margin-top: 20px;
 }
 
-.addCourse {
-  float: right;
-  margin-top: -40px;
-}
-
 hr {
   clear: both;
+  margin-left: -20px;
 }
 
 .modal-footer {

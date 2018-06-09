@@ -10,6 +10,7 @@ import {Course} from '../course';
 })
 export class StuAddCourseComponent implements OnInit {
   courses: Course[];
+  course: Course;
 
   constructor(
     public activeModal: NgbActiveModal,

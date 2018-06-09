@@ -1,0 +1,22 @@
+.buttonDiv {
+  float: left;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.item {
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: larger;
+}
+
+#homework {
+  clear: both;
+}
+
+li {
+  margin-top: 20px;
+}

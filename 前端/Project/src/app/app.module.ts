@@ -30,6 +30,7 @@ import { ReleaseShortComponent } from './release-short/release-short.component';
 import { StuAddCourseComponent } from './stu-add-course/stu-add-course.component';
 import { ModifyPasswordComponent } from './modify-password/modify-password.component';
 import { ResourcesComponent } from './resources/resources.component';
+import { StuHomeworkComponent } from './stu-homework/stu-homework.component';
 
 @NgModule({
     declarations: [
@@ -47,7 +48,8 @@ import { ResourcesComponent } from './resources/resources.component';
         ReleaseShortComponent,
         StuAddCourseComponent,
         ModifyPasswordComponent,
-        ResourcesComponent
+        ResourcesComponent,
+        StuHomeworkComponent
     ],
     imports: [
         BrowserModule,

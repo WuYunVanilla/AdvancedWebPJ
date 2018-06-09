@@ -33,13 +33,11 @@ export class HomeworkComponent implements OnInit {
     private nodeService: NodeService
   ) {
     // this.nodeService.getMultiple(
-    //   window.sessionStorage.getItem('user_name'),
     //   window.sessionStorage.getItem('course_id'),
     //   window.sessionStorage.getItem('mindmap_id'),
     //   window.sessionStorage.getItem('node_id')).subscribe(
     //     value => this.setMultiple(value));
     // this.nodeService.getShort(
-    //   window.sessionStorage.getItem('user_name'),
     //   window.sessionStorage.getItem('course_id'),
     //   window.sessionStorage.getItem('mindmap_id'),
     //   window.sessionStorage.getItem('node_id')).subscribe(

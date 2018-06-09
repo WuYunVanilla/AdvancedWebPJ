@@ -22,8 +22,12 @@ export class ReleaseShortComponent implements OnInit {
     this.activeModal.close('Close click');
   }
   onSubmit() {
-    // this.nodeService.releaseShort(window.sessionStorage.getItem('user_name'), this.short)
-    //   .subscribe((value => this.checkSuccess(value)));
+    // this.nodeService.releaseShort(
+    //   window.sessionStorage.getItem('course_id'),
+    //   window.sessionStorage.getItem('mindmap_id'),
+    //   window.sessionStorage.getItem('node_id'),
+    //   this.short)
+    //   .subscribe((value => this.checkSuccess(value['success'])));
     this.checkSuccess(true);
   }
   checkSuccess(value) {
