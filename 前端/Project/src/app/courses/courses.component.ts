@@ -15,6 +15,7 @@ import {ModifyPasswordComponent} from '../modify-password/modify-password.compon
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent implements OnInit {
+  user_name: string;
   courses: Course[];
   // courses: Course[] = new Course()[4];
   // course1: Course = new Course();
@@ -28,6 +29,7 @@ export class CoursesComponent implements OnInit {
     private location: Location,
     private courseService: CourseService
   ) {
+    this.user_name = window.sessionStorage.getItem('user_name');
     courseService.getCourses(window.sessionStorage.getItem('user_name'), window.sessionStorage.getItem('identity')).subscribe(
       value => this.setCourses(value));
 
@@ -59,6 +61,7 @@ export class CoursesComponent implements OnInit {
     if (window.sessionStorage.getItem('identity') === 'teacher') {
       this.modalService.open(AddCourseComponent);
     } else if (window.sessionStorage.getItem('identity') === 'student') {
+      console.log('student');
       this.modalService.open(StuAddCourseComponent);
     }
   }
@@ -66,7 +69,7 @@ export class CoursesComponent implements OnInit {
     window.sessionStorage.setItem('course_id', course_id);
     window.location.href = 'http://localhost:4200/main';
   }
-  modifyPwd(): void{
+  modifyPwd(): void {
     this.modalService.open(ModifyPasswordComponent);
   }
 }

@@ -23,7 +23,7 @@ export class AddCourseComponent implements OnInit {
     this.activeModal.close('Close click');
   }
   onSubmit() {
-    this.courseService.addCourse(this.course, window.sessionStorage.getItem('user_name'), window.sessionStorage.getItem('identity'))
+    this.courseService.addCourse(this.course, window.sessionStorage.getItem('user_name'))
       .subscribe((value => this.checkSuccess(value['success'])));
     // this.checkSuccess(true);
   }

@@ -11,13 +11,13 @@
     <div class="formItem">
       <label>课程id：</label>
       <input type="text" required name="courseID" [(ngModel)]="course.course_id" #courseID="ngModel">
-      <span [hidden]="courseID.valid || courseID.pristine" class="prompt">请您输入用户名</span>
+      <span [hidden]="courseID.valid || courseID.pristine" class="prompt">请您输入课程id</span>
     </div>
 
     <div class="formItem" >
       <label>课程名称：</label>
       <input type="text" required name="courseName" [(ngModel)]="course.course_name" #courseName="ngModel">
-      <span [hidden]="courseName.valid || courseName.pristine"  class="prompt">请您输入密码</span>
+      <span [hidden]="courseName.valid || courseName.pristine"  class="prompt">请您输入课程名称</span>
     </div>
   </form>
 </div>

@@ -18,10 +18,8 @@ div {
   margin-top: 20px;
 }
 
-
 .buttonDiv {
-  margin-left: 45px;
-  margin-top: 45px;
+  margin-left: 50px;
 }
 
 .buttonWithoutBorder {
@@ -29,6 +27,13 @@ div {
   font-size: 15px;
   color: #0099CC;
   outline: none;
+}
+
+.modify {
+  margin-left: 20px;
+  width: 80px;
+  height: 30px;
+  font-size: 10px;
 }
 
 /*.left {*/
@@ -72,9 +77,10 @@ div {
 
 #modifyPwd {
   float: right;
-  margin-right: 45px;
+  margin-right: 50px;
 }
 
 #addCourse {
+  clear: both;
   float: left;
 }
