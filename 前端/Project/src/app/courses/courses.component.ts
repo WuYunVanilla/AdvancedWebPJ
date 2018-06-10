@@ -17,46 +17,25 @@ import {ModifyPasswordComponent} from '../modify-password/modify-password.compon
 export class CoursesComponent implements OnInit {
   user_name: string;
   courses: Course[];
-  // courses: Course[] = new Course()[4];
-  // course1: Course = new Course();
-  // course2: Course = new Course();
-  // course3: Course = new Course();
-  // course4: Course = new Course();
 
   constructor(
     private modalService: NgbModal,
     private route: ActivatedRoute,
     private location: Location,
     private courseService: CourseService
-  ) {
-    this.user_name = window.sessionStorage.getItem('user_name');
-    courseService.getCourses(window.sessionStorage.getItem('user_name'), window.sessionStorage.getItem('identity')).subscribe(
-      value => this.setCourses(value));
-
-    // this.course1.course_name = '离散数学';
-    // this.course1.course_number = '2';
-    // this.course1.course_id = '25';
-    //
-    // this.course2.course_name = '数据结构';
-    // this.course2.course_number = '3';
-    // this.course2.course_id = '26';
-    //
-    // this.course3.course_name = '计算机网络';
-    // this.course3.course_number = '4';
-    // this.course3.course_id = '27';
-    //
-    // this.course4.course_name = '高级WEB';
-    // this.course4.course_number = '5';
-    // this.course4.course_id = '28';
-    //
-    // this.courses = [this.course1, this.course2, this.course3, this.course4];
-  }
+  ) { }
 
   ngOnInit() {
+    this.user_name = window.sessionStorage.getItem('user_name');
+    // 获取课程列表
+    this.courseService.getCourses(window.sessionStorage.getItem('user_name'), window.sessionStorage.getItem('identity')).subscribe(
+      value => this.setCourses(value));
   }
   setCourses(value) {
     this.courses = value;
   }
+
+  // 添加课程，如果是老师，打开新建课程组件；如果是学生，打开选课组件
   addCourse(): void {
     if (window.sessionStorage.getItem('identity') === 'teacher') {
       this.modalService.open(AddCourseComponent);
@@ -65,13 +44,18 @@ export class CoursesComponent implements OnInit {
       this.modalService.open(StuAddCourseComponent);
     }
   }
+
+  // 进入课程对应的思维导图页
   enterCourse(course_id: string) {
     window.sessionStorage.setItem('course_id', course_id);
     window.location.href = 'http://localhost:4200/main';
   }
+
   modifyPwd(): void {
     this.modalService.open(ModifyPasswordComponent);
   }
+
+  // 登出，清除sessionStorage
   loginOut(): void {
     window.sessionStorage.clear();
     window.location.href = 'http://localhost:4200/';
