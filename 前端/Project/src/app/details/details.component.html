@@ -21,14 +21,17 @@
     </ngb-tab>
     <ngb-tab title="作业" id="tab-homework" *ngIf="selected_node_id!=''">
         <ng-template ngbTabContent>
-            <!--<p>-->
-                <!--此处为{{selected_node_id}}的作业组件-->
-            <!--</p>-->
+
           <app-homework></app-homework>
         </ng-template>
     </ngb-tab>
     <ngb-tab title="课件" id="tab-ppt" *ngIf="selected_node_id!=''">
         <ng-template ngbTabContent>
+            <app-courseware [course_id]="course_id"
+                            [mind_id]="currentMind"
+                            [node_id]="selected_node_id">
+
+            </app-courseware>
             <p>
                 此处为{{selected_node_id}}的课件组件
             </p>
@@ -36,9 +39,6 @@
     </ngb-tab>
     <ngb-tab title="资源" id="tab-resource"  *ngIf="selected_node_id!=''">
         <ng-template ngbTabContent>
-            <!--<p>-->
-                <!--此处为{{selected_node_id}}的资源组件-->
-            <!--</p>-->
 
             <app-resources [course_id]="course_id"
                            [mind_id]="currentMind"

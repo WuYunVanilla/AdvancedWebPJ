@@ -31,6 +31,7 @@ import { StuAddCourseComponent } from './stu-add-course/stu-add-course.component
 import { ModifyPasswordComponent } from './modify-password/modify-password.component';
 import { ResourcesComponent } from './resources/resources.component';
 import { StuHomeworkComponent } from './stu-homework/stu-homework.component';
+import { CoursewareComponent } from './courseware/courseware.component';
 
 @NgModule({
     declarations: [
@@ -49,7 +50,8 @@ import { StuHomeworkComponent } from './stu-homework/stu-homework.component';
         StuAddCourseComponent,
         ModifyPasswordComponent,
         ResourcesComponent,
-        StuHomeworkComponent
+        StuHomeworkComponent,
+        CoursewareComponent
     ],
     imports: [
         BrowserModule,

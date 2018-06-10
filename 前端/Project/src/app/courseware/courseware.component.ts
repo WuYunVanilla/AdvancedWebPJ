@@ -1,13 +1,13 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FileItem, FileUploader} from 'ng2-file-upload';
 import {ParsedResponseHeaders} from 'ng2-file-upload/file-upload/file-uploader.class';
 
 @Component({
-    selector: 'app-resources',
-    templateUrl: './resources.component.html',
-    styleUrls: ['./resources.component.css']
+    selector: 'app-courseware',
+    templateUrl: './courseware.component.html',
+    styleUrls: ['./courseware.component.css']
 })
-export class ResourcesComponent implements OnInit, OnChanges {
+export class CoursewareComponent implements OnInit {
 
     baseUrl = 'http://10.222.129.245:8081/upload_material/';
 
@@ -24,8 +24,7 @@ export class ResourcesComponent implements OnInit, OnChanges {
 
 
 
-    material_names: string[] = ['1.txt', '2.txt'];
-    links: string[] = ['github.com', 'www.w3cschool.com'];
+    courseware_names: string[] = ['1.pdf', '2.pdf'];
 
 
     public hasBaseDropZoneOver = false;
@@ -66,8 +65,5 @@ export class ResourcesComponent implements OnInit, OnChanges {
     successItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
         console.log('上传成功，response为' + response);
     }
-
-
-
 
 }
