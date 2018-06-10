@@ -40,10 +40,10 @@ export class MindmapComponent implements OnInit {
     mind_id: string; // 与上层组件中选中的mindMap绑定
     @Input()
     set mindId(mind_id: string) {
-        console.log('mindId 变化->' + mind_id + ' end');
+        window.sessionStorage.setItem('mindmap_id', mind_id);
+
         this.mind_id = mind_id;
         if (this.mind_id !== '') {
-            console.log('调用updateMindMap()');
             this.updateMindMap();
         }
 
@@ -140,6 +140,8 @@ export class MindmapComponent implements OnInit {
     }
 
     update_selected_knowledge_id(): void {
+
+
         if (!this.mindMap) {
             return;
         }
@@ -148,9 +150,10 @@ export class MindmapComponent implements OnInit {
         if (!selected_node) {
             this.selected_node_id = '';
         } else {
-            this.selected_node_id = selected_node.topic;
+            this.selected_node_id = selected_node.id;
         }
 
+        window.sessionStorage.setItem('node_id', this.selected_node_id);
     }
 
     // 显示新的mindMap
