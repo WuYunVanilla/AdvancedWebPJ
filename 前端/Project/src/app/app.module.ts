@@ -33,6 +33,7 @@ import { ResourcesComponent } from './resources/resources.component';
 import { StuHomeworkComponent } from './stu-homework/stu-homework.component';
 import { CoursewareComponent } from './courseware/courseware.component';
 import { StuMainComponent } from './stu-main/stu-main.component';
+import { StuDetailsComponent } from './stu-details/stu-details.component';
 
 @NgModule({
     declarations: [
@@ -53,7 +54,8 @@ import { StuMainComponent } from './stu-main/stu-main.component';
         ResourcesComponent,
         StuHomeworkComponent,
         CoursewareComponent,
-        StuMainComponent
+        StuMainComponent,
+        StuDetailsComponent
     ],
     imports: [
         BrowserModule,

@@ -1,18 +1,16 @@
 package com.advancedweb.backend.controller;
 
 import com.advancedweb.backend.controller.json_model.Success;
-import com.advancedweb.backend.controller.json_model.User;
+import com.advancedweb.backend.model.UserTemp;
 import com.advancedweb.backend.model.Student;
 import com.advancedweb.backend.model.Teacher;
 import com.advancedweb.backend.repository.StudentRepository;
 import com.advancedweb.backend.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 public class ModifyPasswordController {
     @Autowired
     private StudentRepository sr;
@@ -22,7 +20,7 @@ public class ModifyPasswordController {
 
 
     @RequestMapping(value = "/modify_password", method = RequestMethod.POST)
-    public Success modifyPassword(@RequestBody User user) {
+    public Success modifyPassword(@RequestBody UserTemp user) {
 
         String name = user.getUser_name();
         String password = user.getUser_pwd();

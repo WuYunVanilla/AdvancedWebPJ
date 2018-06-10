@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 
 @RestController
+@CrossOrigin
 public class UploadMaterialController {
     @Autowired
     private NodeRepository nr;

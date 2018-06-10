@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 
 @RestController
+@CrossOrigin
 public class DownloadCoursewareController {
     @Autowired
     private NodeRepository nr;

@@ -5,15 +5,13 @@ import com.advancedweb.backend.controller.json_model.AssignmentMultiple_json;
 import com.advancedweb.backend.model.AssignmentMultiple;
 import com.advancedweb.backend.repository.AssignmentMultipleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedList;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class MultiplesStudentController {
     @Autowired
     private AssignmentMultipleRepository amr;
