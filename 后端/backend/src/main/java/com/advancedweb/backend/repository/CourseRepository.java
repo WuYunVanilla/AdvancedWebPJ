@@ -6,7 +6,6 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.Min;
 
 @Component
 public interface CourseRepository extends Neo4jRepository<Course, Long>{
