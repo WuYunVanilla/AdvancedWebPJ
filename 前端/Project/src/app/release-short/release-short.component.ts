@@ -22,13 +22,13 @@ export class ReleaseShortComponent implements OnInit {
     this.activeModal.close('Close click');
   }
   onSubmit() {
-    // this.nodeService.releaseShort(
-    //   window.sessionStorage.getItem('course_id'),
-    //   window.sessionStorage.getItem('mindmap_id'),
-    //   window.sessionStorage.getItem('node_id'),
-    //   this.short)
-    //   .subscribe((value => this.checkSuccess(value['success'])));
-    this.checkSuccess(true);
+    // 发布简答题
+    this.nodeService.releaseShort(
+      window.sessionStorage.getItem('course_id'),
+      window.sessionStorage.getItem('mindmap_id'),
+      window.sessionStorage.getItem('node_id'),
+      this.short)
+      .subscribe((value => this.checkSuccess(value['success'])));
   }
   checkSuccess(value) {
     if (value) {

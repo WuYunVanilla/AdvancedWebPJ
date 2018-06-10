@@ -20,60 +20,28 @@ import {ReleaseShortComponent} from '../release-short/release-short.component';
   styleUrls: ['./homework.component.css']
 })
 export class HomeworkComponent implements OnInit {
-  multipleQuestion: MultipleQuestion[] = new MultipleQuestion()[2];
-  shortQuestion: ShortQuestion[] = new ShortQuestion()[2];
-  multiple1: MultipleQuestion = new MultipleQuestion();
-  multiple2: MultipleQuestion = new MultipleQuestion();
-  short1: ShortQuestion = new ShortQuestion();
-  short2: ShortQuestion = new ShortQuestion();
-
+  multipleQuestion: MultipleQuestion[];
+  shortQuestion: ShortQuestion[];
 
   constructor(
     private modalService: NgbModal,
     private nodeService: NodeService
-  ) {
-    // this.nodeService.getMultiple(
-    //   window.sessionStorage.getItem('course_id'),
-    //   window.sessionStorage.getItem('mindmap_id'),
-    //   window.sessionStorage.getItem('node_id')).subscribe(
-    //     value => this.setMultiple(value));
-    // this.nodeService.getShort(
-    //   window.sessionStorage.getItem('course_id'),
-    //   window.sessionStorage.getItem('mindmap_id'),
-    //   window.sessionStorage.getItem('node_id')).subscribe(
-    //   value => this.setShort(value));
-
-    this.multiple1.title = '请选择世界上最好用的语言';
-    this.multiple1.optionA = 'java';
-    this.multiple1.optionB = 'php';
-    this.multiple1.optionC = 'c++';
-    this.multiple1.optionD = 'python';
-    this.multiple1.correct_answer = 'A';
-    this.multiple1.correct_number = '10';
-    this.multiple1.number = '20';
-
-    this.multiple2.title = '请选择世界上最好吃的水果';
-    this.multiple2.optionA = '西瓜';
-    this.multiple2.optionB = '苹果';
-    this.multiple2.optionC = '凤梨';
-    this.multiple2.optionD = '桃子';
-    this.multiple2.correct_answer = 'C';
-    this.multiple2.correct_number = '5';
-    this.multiple2.number = '25';
-
-    this.multipleQuestion = [this.multiple1, this.multiple2];
-
-    this.short1.title = '简述你最喜欢的xxx';
-    this.short1.correct_answer = '我最喜欢xxx，是因为……';
-
-    this.short2.title = '高级web这节课好在哪里';
-    this.short2.correct_answer = 'TA好，老师好，大家都好';
-
-    this.shortQuestion = [this.short1, this.short2];
-
-  }
+  ) { }
 
   ngOnInit() {
+    // 获取所有的选择题
+    this.nodeService.getMultiple(
+      window.sessionStorage.getItem('course_id'),
+      window.sessionStorage.getItem('mindmap_id'),
+      window.sessionStorage.getItem('node_id')).subscribe(
+      value => this.setMultiple(value));
+
+    // 获取所有的简答题
+    this.nodeService.getShort(
+      window.sessionStorage.getItem('course_id'),
+      window.sessionStorage.getItem('mindmap_id'),
+      window.sessionStorage.getItem('node_id')).subscribe(
+      value => this.setShort(value));
   }
   setMultiple(value) {
     this.multipleQuestion = value;

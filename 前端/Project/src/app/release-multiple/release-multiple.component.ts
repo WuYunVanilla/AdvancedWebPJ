@@ -24,13 +24,13 @@ export class ReleaseMultipleComponent implements OnInit {
     this.activeModal.close('Close click');
   }
   onSubmit() {
-    // this.nodeService.releaseMutiple(
-    //   window.sessionStorage.getItem('course_id'),
-    //   window.sessionStorage.getItem('mindmap_id'),
-    //   window.sessionStorage.getItem('node_id'),
-    //   this.multiple)
-    //   .subscribe((value => this.checkSuccess(value['success'])));
-    this.checkSuccess(true);
+    // 发布选择题
+    this.nodeService.releaseMutiple(
+      window.sessionStorage.getItem('course_id'),
+      window.sessionStorage.getItem('mindmap_id'),
+      window.sessionStorage.getItem('node_id'),
+      this.multiple)
+      .subscribe((value => this.checkSuccess(value['success'])));
   }
   checkSuccess(value) {
     if (value) {
