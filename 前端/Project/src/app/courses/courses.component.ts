@@ -48,7 +48,11 @@ export class CoursesComponent implements OnInit {
   // 进入课程对应的思维导图页
   enterCourse(course_id: string) {
     window.sessionStorage.setItem('course_id', course_id);
-    window.location.href = 'http://localhost:4200/main';
+    if (window.sessionStorage.getItem('identity') === 'teacher') {
+      window.location.href = 'http://localhost:4200/main';
+    } else if (window.sessionStorage.getItem('identity') === 'student') {
+      window.location.href = 'http://localhost:4200/stu-main';
+    }
   }
 
   modifyPwd(): void {
