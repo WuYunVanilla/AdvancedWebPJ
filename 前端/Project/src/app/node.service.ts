@@ -46,14 +46,15 @@ export class NodeService {
     return this.http.post<boolean>(this.tempUrl, short, httpOptions);
   }
 
-  //
-  // getStuMultiple(course_id: string, mindmap_id: string, node_id: string): Observable<StuMultiple[]> {
-  //   this.tempUrl = this.baseUrl + 'multiples_student/' + course_id + '/' + mindmap_id + '/' + node_id;
-  //   return this.http.get<StuMultiple[]>(this.tempUrl);
-  // }
-  //
-  // getStuShort(course_id: string, mindmap_id: string, node_id: string): Observable<StuShort[]> {
-  //   this.tempUrl = this.baseUrl + 'shorts/' + course_id + '/' + mindmap_id + '/' + node_id;
-  //   return this.http.get<StuShort[]>(this.tempUrl);
-  // }
+  // 学生获取选择题列表
+  getStuMultiple(course_id: string, mindmap_id: string, node_id: string): Observable<StuMultiple[]> {
+    this.tempUrl = this.baseUrl + 'multiples_student/' + course_id + '/' + mindmap_id + '/' + node_id;
+    return this.http.get<StuMultiple[]>(this.tempUrl);
+  }
+
+  // 学生回答选择题
+  answerMultiple(course_id: string, mindmap_id: string, node_id: string, user_name: string, stuMultiple: StuMultiple): Observable<boolean> {
+    this.tempUrl = this.baseUrl + 'answer_multiple/' + course_id + '/' + mindmap_id + '/' + node_id + '/' + user_name;
+    return this.http.post<boolean>(this.tempUrl, stuMultiple, httpOptions);
+  }
 }

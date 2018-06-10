@@ -12,63 +12,56 @@ import {StuShort} from '../stu-short';
   styleUrls: ['./stu-homework.component.css']
 })
 export class StuHomeworkComponent implements OnInit {
-  stuMultiples: StuMultiple[] = new StuMultiple()[2];
-  stuShorts: StuShort[] = new StuShort()[2];
-  multiple1: StuMultiple = new StuMultiple();
-  multiple2: StuMultiple = new StuMultiple();
-  short1: StuShort = new StuShort();
-  short2: StuShort = new StuShort();
+  stuMultiples: StuMultiple[];
+  stuShorts: ShortQuestion[];
 
   constructor(
     private modalService: NgbModal,
     private nodeService: NodeService
-  ) {
-    // this.nodeService.getStuMultiple(
-    //   window.sessionStorage.getItem('course_id'),
-    //   window.sessionStorage.getItem('mindmap_id'),
-    //   window.sessionStorage.getItem('node_id')).subscribe(
-    //     value => this.setMultiple(value));
-    // this.nodeService.getStuShort(
-    //   window.sessionStorage.getItem('course_id'),
-    //   window.sessionStorage.getItem('mindmap_id'),
-    //   window.sessionStorage.getItem('node_id')).subscribe(
-    //   value => this.setShort(value));
-
-    this.multiple1.title = '请选择世界上最好用的语言';
-    this.multiple1.optionA = 'java';
-    this.multiple1.optionB = 'php';
-    this.multiple1.optionC = 'c++';
-    this.multiple1.optionD = 'python';
-
-    this.multiple2.title = '请选择世界上最好吃的水果';
-    this.multiple2.optionA = '西瓜';
-    this.multiple2.optionB = '苹果';
-    this.multiple2.optionC = '凤梨';
-    this.multiple2.optionD = '桃子';
-
-    this.stuMultiples = [this.multiple1, this.multiple2];
-
-    this.short1.title = '简述你最喜欢的xxx';
-
-    this.short2.title = '高级web这节课好在哪里';
-
-    this.stuShorts = [this.short1, this.short2];
-  }
+  ) { }
 
   ngOnInit() {
+    this.nodeService.getStuMultiple(
+      window.sessionStorage.getItem('course_id'),
+      window.sessionStorage.getItem('mindmap_id'),
+      window.sessionStorage.getItem('node_id')).subscribe(
+        value => this.setMultiple(value));
+    this.nodeService.getShort(
+      window.sessionStorage.getItem('course_id'),
+      window.sessionStorage.getItem('mindmap_id'),
+      window.sessionStorage.getItem('node_id')).subscribe(
+      value => this.setShort(value));
   }
 
   setMultiple(value) {
     this.stuMultiples = value;
   }
+
   setShort(value) {
     this.stuShorts = value;
   }
 
+  // 提交选择题
   submitMultiple(stuMultiple: StuMultiple) {
-
+    this.nodeService.answerMultiple(
+      window.sessionStorage.getItem('course_id'),
+      window.sessionStorage.getItem('mindmap_id'),
+      window.sessionStorage.getItem('node_id'),
+      window.sessionStorage.getItem('user_name'),
+      stuMultiple).subscribe(
+      value => this.checkSubmit(value['success']));
   }
-  submitShort(stuShort: StuShort) {
 
+  // 提交简答题
+  submitShort(stuShort: ShortQuestion) {
+    alert('提交成功！');
+  }
+
+  checkSubmit(value) {
+    if (value) {
+      alert('提交成功！');
+    } else {
+      alert('提交失败！');
+    }
   }
 }
