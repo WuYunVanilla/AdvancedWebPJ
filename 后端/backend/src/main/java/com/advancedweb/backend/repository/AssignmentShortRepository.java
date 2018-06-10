@@ -14,4 +14,13 @@ public interface AssignmentShortRepository extends Neo4jRepository<AssignmentSho
     @Query("MATCH (n:Assignment_short) WHERE n.short_id = ({short_id}) RETURN n")
     public List<AssignmentShort> findByShortId(@Param("short_id") String short_id);
 
+    @Query("start n = node({id}) " +
+            "MATCH (:Node)-[r:HAS_ASSIGNMENT_SHORT]->(n) DELETE r")
+    void deleteFather(@Param("id") Long id);
+
+    @Query("start n = node({id}) " +
+            "MATCH (m:Node) WHERE m.course_mindmap = ({course_mindmap}) and m.node_id=({node_id}) " +
+            "CREATE (m)-[:HAS_ASSIGNMENT_SHORT]->(n)")
+    void createFather(@Param("id") Long id, @Param("course_mindmap") String course_mindmap, @Param("node_id") String node_id);
+
 }

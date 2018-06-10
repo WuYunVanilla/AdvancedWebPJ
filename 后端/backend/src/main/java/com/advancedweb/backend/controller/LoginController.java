@@ -1,6 +1,5 @@
 package com.advancedweb.backend.controller;
 
-import com.advancedweb.backend.controller.json_model.Identity;
 import com.advancedweb.backend.controller.json_model.Success;
 import com.advancedweb.backend.controller.json_model.User;
 import com.advancedweb.backend.model.Student;
@@ -23,32 +22,32 @@ public class LoginController {
 
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Identity login(@RequestBody User user) {
+    public Success login(@RequestBody User user) {
 
-        Identity identity = new Identity();
-        identity.setIdentity("illegal");
+        Success s = new Success();
+        s.setSuccess(false);
 
         String name = user.getUser_name();
         String password = user.getUser_pwd();
+        String identity = user.getIdentity();
 
         //首先判断user_name是否已经存在
+        if (identity.equals("teacher")) {
+            Teacher tea = tr.findByName(name);
+            if (tea != null) {
+                if (tea.getPassword().equals(password))
+                    s.setSuccess(true);
 
-        Student stu = sr.findByName(name);
-        Teacher tea = tr.findByName(name);
-        if (stu == null && tea == null) {
-            return identity;
+            }
+        } else if (identity.equals("student")) {
+            Student stu = sr.findByName(name);
+            //再判断密码是否一致
+            if (stu != null) {
+                if (stu.getPassword().equals(password))
+                    s.setSuccess(true);
+            }
         }
 
-        //再判断密码是否一致
-        if (stu!=null){
-            if (stu.getPassword().equals(password))
-                identity.setIdentity("student");
-        }
-
-        if (tea!=null){
-            if (tea.getPassword().equals(password))
-                identity.setIdentity("teacher");
-        }
-        return identity;
+        return s;
     }
 }
