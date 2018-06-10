@@ -14,6 +14,8 @@ import {RegisterComponent} from '../register/register.component';
 import {ReleaseMultipleComponent} from '../release-multiple/release-multiple.component';
 import {ReleaseShortComponent} from '../release-short/release-short.component';
 
+import '../../assets/bootstrap/js/bootstrap.js';
+
 @Component({
   selector: 'app-homework',
   templateUrl: './homework.component.html',
