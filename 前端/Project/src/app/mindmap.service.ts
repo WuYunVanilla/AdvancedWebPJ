@@ -11,6 +11,7 @@ const httpOptions = {
 export class MindmapService {
 
     private baseUrl = 'http://10.222.129.245:8081/';
+
     tempUrl: string;
 
     constructor(
@@ -18,25 +19,25 @@ export class MindmapService {
 
     }
 
-    getMindList(course_id: string): Observable<string[]> {
+    getMindList(course_id: string): Observable<any> {
         this.tempUrl = this.baseUrl + 'mindmap_id_list/' + course_id;
-        return this.http.get<string[]>(this.tempUrl);
-    }
-
-    getMind(course_id: string, mind_id): Observable<string> {
-        this.tempUrl = this.baseUrl + 'mindmap/' + course_id + '/' + mind_id;
-        return this.http.get<string>(this.tempUrl);
-    }
-
-    // 返回值为根的信息
-    createMind(course_id: string, mind_id: string): Observable<any> {
-        this.tempUrl = this.baseUrl + 'mindmap/' + course_id + '/' + mind_id; // ???????
         return this.http.get<any>(this.tempUrl);
     }
 
-    saveMind(course_id: string, mind_id: string, data: string): Observable<string> {
+    getMind(course_id: string, mind_id: string): Observable<any> {
+        console.log('in getMind: mind_id=' + mind_id);
+        this.tempUrl = this.baseUrl + 'mindmap/' + course_id + '/' + mind_id;
+        return this.http.get<any>(this.tempUrl);
+    }
+
+    // 返回值为根的信息
+    createMind(course_id: string, mind_id: string, data: string): Observable<any> {
+        return this.saveMind(course_id, mind_id, data);
+    }
+
+    saveMind(course_id: string, mind_id: string, data: string): Observable<any> {
         this.tempUrl = this.baseUrl + 'save_mindmap/' + course_id + '/' + mind_id;
-        return this.http.post<string>(this.tempUrl, data);
+        return this.http.post<any>(this.tempUrl, data);
     }
 
 
