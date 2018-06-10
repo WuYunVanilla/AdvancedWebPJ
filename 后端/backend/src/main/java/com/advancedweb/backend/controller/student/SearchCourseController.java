@@ -1,6 +1,7 @@
 package com.advancedweb.backend.controller.student;
 
 import com.advancedweb.backend.controller.json_model.Course_json;
+import com.advancedweb.backend.controller.teacher.TeacherCoursesController;
 import com.advancedweb.backend.model.Course;
 import com.advancedweb.backend.model.Student;
 import com.advancedweb.backend.repository.CourseRepository;
@@ -16,23 +17,12 @@ public class SearchCourseController {
     @Autowired
     private CourseRepository cr;
 
-    @RequestMapping(value = "/search_course/{course_id}", method = RequestMethod.GET)
-    public cour student_courses(@PathVariable String course_id) {
+    @RequestMapping(value = "/search_course", method = RequestMethod.GET)
+    public Course_json[] student_courses() {
+        Course[] courses= cr.findAllCourses();
 
-        Course course = cr.findByCourseId(course_id);
-
-        cour c = new cour();
-
-        c.course_name="Unknown";
-        if (course != null) {
-            c.course_name=course.getCourse_name();
-        }
-
-        return c;
+        return TeacherCoursesController.getJsonModel(courses);
     }
 
-    class cour{
-        public  String course_name;
-    }
 
 }

@@ -1,4 +1,4 @@
-package com.advancedweb.backend.controller;
+package com.advancedweb.backend.controller.teacher;
 
 import com.advancedweb.backend.controller.json_model.AssignmentMultiple_json;
 import com.advancedweb.backend.model.AssignmentMultiple;
@@ -10,14 +10,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 @RestController
-public class MultiplesController {
+public class MultiplesTeacherController {
 
     @Autowired
     private AssignmentMultipleRepository amr;
 
-
-    @RequestMapping(value = "/multiples/{course_id}/{mindmap_id}/{node_id}", method = RequestMethod.GET)
-    public List<AssignmentMultiple_json> release_multiple(@PathVariable String course_id, @PathVariable String mindmap_id,
+    @RequestMapping(value = "/multiples_teacher/{course_id}/{mindmap_id}/{node_id}", method = RequestMethod.GET)
+    public List<AssignmentMultiple_json> multiples_teacher(@PathVariable String course_id, @PathVariable String mindmap_id,
                                                           @PathVariable String node_id) {
 
         String multi_id =course_id+" "+mindmap_id+" "+node_id;

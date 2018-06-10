@@ -1,8 +1,9 @@
 package com.advancedweb.backend.controller.teacher;
 
 import com.advancedweb.backend.controller.json_model.Success;
-import com.advancedweb.backend.model.*;
-import com.advancedweb.backend.repository.CoursewareRepository;
+import com.advancedweb.backend.model.Material;
+import com.advancedweb.backend.model.Node;
+import com.advancedweb.backend.repository.MaterialRepository;
 import com.advancedweb.backend.repository.NodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,19 +11,19 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 
-
 @RestController
-public class UploadCoursewareController {
+public class UploadMaterialController {
     @Autowired
     private NodeRepository nr;
     @Autowired
-    private CoursewareRepository cr;
+    private MaterialRepository mr;
 
-    @RequestMapping(value = "/upload_courseware/{course_id}/{mindmap_id}/{node_id}", method = RequestMethod.POST)
-    public Success upload_courseware(@PathVariable String course_id, @PathVariable String mindmap_id,
-                                     @PathVariable String node_id, @RequestParam(value = "courseware") MultipartFile file) {
+    @RequestMapping(value = "/upload_material/{course_id}/{mindmap_id}/{node_id}", method = RequestMethod.POST)
+    public Success upload_material(@PathVariable String course_id, @PathVariable String mindmap_id,
+                               @PathVariable String node_id,
+                                   @RequestParam(value = "material") MultipartFile file) {
 
-        final String filePath = "/Users/wy/Desktop/MindMapFileStorage/"+course_id+"/"+mindmap_id+"/"+node_id+"/courseware/";
+        final String filePath = "/Users/wy/Desktop/MindMapFileStorage/"+course_id+"/"+mindmap_id+"/"+node_id+"/"+"/material/";
         Success s = new Success();
         s.setSuccess(false);
 
@@ -30,11 +31,10 @@ public class UploadCoursewareController {
         String fileName = file.getOriginalFilename();
 
         //首先判断文件名字是否已经存在
-        Courseware cw = cr.findByStoreAddress(filePath+fileName);
-        if (cw!=null){
+        Material material = mr.findByStoreAddress(filePath+fileName);
+        if (material!=null){
             return s;
         }
-
 
         File dest = new File(filePath + fileName);
 
@@ -53,13 +53,13 @@ public class UploadCoursewareController {
             }
 
             //新建Courseware
-            Courseware courseware = new Courseware();
-            courseware.setCoursewareName(fileName);
-            courseware.setStoreAddress(filePath + fileName);
-            cr.save(courseware);
+            Material ma = new Material();
+            ma.setMaterialName(fileName);
+            ma.setStoreAddress(filePath + fileName);
+            mr.save(ma);
 
             //建立关系
-            result_node.setCourseware(courseware);
+            result_node.setMaterial(ma);
             nr.save(result_node);
             s.setSuccess(true);
         }
@@ -67,4 +67,5 @@ public class UploadCoursewareController {
     }
 
 }
+
 
