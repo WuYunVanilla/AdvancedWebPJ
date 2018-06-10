@@ -13,7 +13,7 @@ import {RegisterUser} from '../register-user';
 export class RegisterComponent implements OnInit {
   user: RegisterUser = new RegisterUser();
   confirmedPsd: string;
-  isChecking: boolean = false;
+  isChecking = false;
 
   constructor(public activeModal: NgbActiveModal, private userService: UserService) { }
 
