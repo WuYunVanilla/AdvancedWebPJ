@@ -30,12 +30,34 @@
         <input type="radio" required name="identity" value="teacher" [(ngModel)]="user.identity" #id="ngModel"> 教师
         <input type="radio" required name="identity" value="student" [(ngModel)]="user.identity" #id="ngModel"> 学生
       </div>
+
+      <hr>
+
+      <div class="formItem" >
+        <label>输入邮箱：</label>
+        <input type="email" required name="email" [(ngModel)]="user.email" #email="ngModel">
+      </div>
+
+      <div class="formItem">
+        <button class="btn-outline-dark" (click)="sendCode()"
+                [disabled]="(!username.valid) || (!userpsd.valid) || (!confirmedpsd.valid) ||
+          (!id.valid) || (!email.valid) || (userpsd.value != confirmedpsd.value)">发送验证码</button>
+        <span [hidden]="username.valid && userpsd.valid && confirmedpsd.valid &&
+        id.valid && email.valid && (userpsd.value == confirmedpsd.value)" class="prompt">请先完成上述内容的填写</span>
+      </div>
+
+      <div class="formItem">
+        <label>输入验证码：</label>
+        <input type="text" required name="code" [(ngModel)]="user.code" #code="ngModel">
+      </div>
+
     </form>
   </div>
 
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="onSubmit()"
-      [disabled]="(!username.valid) || (!userpsd.valid) || (!id.valid) || (userpsd.value != confirmedpsd.value)">确认</button>
+      [disabled]="(!username.valid) || (!userpsd.valid) || (!confirmedpsd.valid) ||
+          (!id.valid) || (!email.valid) || (!code.valid) || (userpsd.value != confirmedpsd.value)">确认</button>
     <button type="button" class="btn btn-outline-dark" (click)="closeWindow()">取消</button>
   </div>
 <!--</ng-template>-->
