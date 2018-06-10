@@ -10,7 +10,7 @@
         </div>
       </div>
 
-      <app-mindmap [mindId]="currentMind" [courseId]="course_id" (click)="checkTabStatus()" #jsmind></app-mindmap>
+      <app-stu-mindmap [mindId]="currentMind" [courseId]="course_id" (click)="checkTabStatus()" #jsmind></app-stu-mindmap>
 
 
     </ng-template>
@@ -36,10 +36,10 @@
   <ngb-tab title="资源" id="tab-resource"  *ngIf="selected_node_id!=''">
     <ng-template ngbTabContent>
 
-      <app-resources [course_id]="course_id"
-                     [mind_id]="currentMind"
-                     [node_id]="selected_node_id">
-      </app-resources>
+      <!--<app-resources [course_id]="course_id"-->
+                     <!--[mind_id]="currentMind"-->
+                     <!--[node_id]="selected_node_id">-->
+      <!--</app-resources>-->
 
     </ng-template>
   </ngb-tab>

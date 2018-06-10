@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MindmapComponent} from '../mindmap/mindmap.component';
 import {MindmapService} from '../mindmap.service';
+import {StuMindmapComponent} from '../stu-mindmap/stu-mindmap.component';
 
 @Component({
     selector: 'app-stu-details',
@@ -16,8 +16,8 @@ export class StuDetailsComponent implements OnInit {
 
     selected_node_id: string;
 
-    @ViewChild(MindmapComponent)
-    private mindComponent: MindmapComponent;
+    @ViewChild(StuMindmapComponent)
+    private stuMindComponent: StuMindmapComponent;
 
     constructor(private mindService: MindmapService) { }
 
@@ -42,8 +42,8 @@ export class StuDetailsComponent implements OnInit {
     }
 
     checkTabStatus() {
-        this.mindComponent.update_selected_knowledge_id();
-        this.selected_node_id = this.mindComponent.selected_node_id;
+        this.stuMindComponent.update_selected_knowledge_id();
+        this.selected_node_id = this.stuMindComponent.selected_node_id;
     }
 
 }
