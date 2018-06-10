@@ -8,7 +8,7 @@ import {MindmapComponent} from './mindmap/mindmap.component';
 const routes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'index', component: IndexComponent },
-  { path: 'courses/:id', component: CoursesComponent },
+  { path: 'courses', component: CoursesComponent },
   { path: 'main', component: MainComponent },
 ]
 
