@@ -12,6 +12,7 @@ import java.io.File;
 
 
 @RestController
+@CrossOrigin
 public class UploadCoursewareController {
     @Autowired
     private NodeRepository nr;

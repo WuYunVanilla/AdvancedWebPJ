@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 
 @RestController
+@CrossOrigin
 public class DownloadMaterialController {
 
     @Autowired

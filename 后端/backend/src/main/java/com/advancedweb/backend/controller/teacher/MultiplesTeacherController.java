@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class MultiplesTeacherController {
 
     @Autowired
