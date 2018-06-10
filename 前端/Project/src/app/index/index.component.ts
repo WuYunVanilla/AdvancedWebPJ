@@ -12,6 +12,7 @@ export class IndexComponent implements OnInit {
   constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
+    window.sessionStorage.setItem('ip', '');
   }
   openLogin() {
     this.modalService.open(LoginComponent);
