@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
       window.sessionStorage.setItem('user_name', this.user.user_name);
       window.sessionStorage.setItem('identity', this.user.identity);
       window.sessionStorage.setItem('user_pwd', this.user.user_pwd);
-      window.location.href = 'http://localhost:4200/courses';
+      window.location.href = 'http://localhost:4200/courses/' + this.user.user_name;
     } else {
       window.alert('登录失败!');
     }
