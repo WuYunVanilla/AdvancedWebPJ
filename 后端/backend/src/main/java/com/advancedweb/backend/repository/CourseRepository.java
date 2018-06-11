@@ -6,7 +6,6 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 
-
 @Component
 public interface CourseRepository extends Neo4jRepository<Course, Long>{
     @Query("MATCH (n:Course) WHERE n.course_id = ({course_id}) RETURN n")

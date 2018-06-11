@@ -6,7 +6,7 @@
     <groupId>com.advancedweb</groupId>
     <artifactId>backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>backend</name>
     <description>Demo project for Spring Boot</description>
@@ -25,7 +25,6 @@
     </properties>
 
     <dependencies>
-
         <!-- marked the embedded servlet container as provided -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

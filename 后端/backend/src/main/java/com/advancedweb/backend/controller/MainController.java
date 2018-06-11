@@ -1,19 +1,18 @@
 package com.advancedweb.backend.controller;
 
 import com.advancedweb.backend.controller.json_model.Success;
-import com.advancedweb.backend.model.UserTemp;
+import com.advancedweb.backend.controller.json_model.User;
 import com.advancedweb.backend.model.Student;
 import com.advancedweb.backend.model.Teacher;
-import com.advancedweb.backend.repository.StudentRepository;
-import com.advancedweb.backend.repository.TeacherRepository;
-import com.advancedweb.backend.repository.UserTempRepository;
+import com.advancedweb.backend.model.UserTemp;
+import com.advancedweb.backend.repository.*;
 import com.advancedweb.backend.service.mailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-public class RegisterController {
+public class MainController {
     @Autowired
     private StudentRepository sr;
 
@@ -21,10 +20,40 @@ public class RegisterController {
     private TeacherRepository tr;
 
     @Autowired
-    private UserTempRepository userRepository;
+    private UserTempRepository userTempRepository;
 
     @Autowired
     private mailService mailService;
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public Success login(@RequestBody User user) {
+
+        Success s = new Success();
+        s.setSuccess(false);
+
+        String name = user.getUser_name();
+        String password = user.getUser_pwd();
+        String identity = user.getIdentity();
+
+        //首先判断user_name是否已经存在
+        if (identity.equals("teacher")) {
+            Teacher tea = tr.findByName(name);
+            if (tea != null) {
+                if (tea.getPassword().equals(password))
+                    s.setSuccess(true);
+
+            }
+        } else if (identity.equals("student")) {
+            Student stu = sr.findByName(name);
+            //再判断密码是否一致
+            if (stu != null) {
+                if (stu.getPassword().equals(password))
+                    s.setSuccess(true);
+            }
+        }
+
+        return s;
+    }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public Success register(@RequestBody UserTemp user) {
@@ -32,16 +61,12 @@ public class RegisterController {
         String password = user.getUser_pwd();
         String email = user.getEmail();
         String identity = user.getIdentity();
-        System.out.println(name);
-        System.out.println(password);
-        System.out.println(email);
-        System.out.println(identity);
 
         //首先判断user_name是否已经存在
         boolean if_exist = false;
         Student stu = sr.findByName(name);
         Teacher tea = tr.findByName(name);
-        UserTemp userTemp = userRepository.findByUser_name(name);
+        UserTemp userTemp = userTempRepository.findByUser_name(name);
         if (stu != null || tea != null || userTemp != null) {
             if_exist = true;
         }
@@ -51,7 +76,7 @@ public class RegisterController {
             String code = hash + "";
 
             user.setCode(code);
-            userRepository.save(user);
+            userTempRepository.save(user);
 
             // 标题
             String subject = "登录验证码";
@@ -87,13 +112,14 @@ public class RegisterController {
         Success s = new Success();
         s.setSuccess(false);
 
-        UserTemp temp = userRepository.findByUser_name(name);
+        UserTemp temp = userTempRepository.findByUser_name(name);
         if (temp == null) {
             return s;
         } else {
             if (!(temp.getUser_name().equals(name) && temp.getUser_pwd().equals(password) && temp.getEmail().equals(email) && temp.getIdentity().equals(identity) && temp.getCode().equals(code)))
                 return s;
             else {
+                userTempRepository.delete(temp);
                 if (identity.equalsIgnoreCase("teacher")) {
                     Teacher teacher = new Teacher();
                     teacher.setName(name);
@@ -113,5 +139,34 @@ public class RegisterController {
 
         return s;
     }
-}
 
+    @RequestMapping(value = "/modify_password", method = RequestMethod.POST)
+    public Success modifyPassword(@RequestBody UserTemp user) {
+
+        String name = user.getUser_name();
+        String password = user.getUser_pwd();
+
+        //首先判断user_name是否已经存在
+        boolean if_exist = false;
+        Student stu = sr.findByName(name);
+        Teacher tea = tr.findByName(name);
+        if (stu != null || tea != null) {
+            if_exist = true;
+        }
+
+
+        if (stu != null) {
+            stu.setPassword(password);
+            sr.save(stu);
+        }
+
+        if (tea != null) {
+            tea.setPassword(password);
+            tr.save(tea);
+        }
+
+        Success s = new Success();
+        s.setSuccess(if_exist);
+        return s;
+    }
+}

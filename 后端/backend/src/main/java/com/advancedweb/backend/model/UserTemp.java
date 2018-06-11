@@ -1,6 +1,14 @@
 package com.advancedweb.backend.model;
 
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
+import org.neo4j.ogm.annotation.NodeEntity;
+
+@NodeEntity(label = "UserTemp")
 public class UserTemp {
+    @Id
+    @GeneratedValue
+    private Long id;
     private String user_name;
     private String user_pwd;
     private String email;

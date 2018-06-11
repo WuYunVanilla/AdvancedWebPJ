@@ -1,5 +1,6 @@
-package com.advancedweb.backend.controller.teacher;
+package com.advancedweb.backend.controller;
 
+import com.advancedweb.backend.controller.json_model.MindmapIdList;
 import com.advancedweb.backend.controller.json_model.Success;
 import com.advancedweb.backend.model.*;
 import com.advancedweb.backend.repository.*;
@@ -7,11 +8,9 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
-
 @RestController
 @CrossOrigin
-public class SaveMindmapController {
+public class MindmapController {
     @Autowired
     private CourseRepository cr;
     @Autowired
@@ -34,8 +33,48 @@ public class SaveMindmapController {
     private String course_id;
     private String mindmap_id;
 
+    @RequestMapping(value = "/mindmap/{course_id}/{mindmap_id}", method = RequestMethod.GET)
+    public String mindmap(@PathVariable String course_id, @PathVariable String mindmap_id) {
+        String json=null;
+        //先找到mindmap
+        Course course = cr.findByCourseId(course_id);
+        Mindmap[] mindmaps_course = cr.findMindmaps(course.getId());
+
+        Mindmap result_mindmap = null;
+        for (Mindmap mindmap : mindmaps_course) {
+            if (mindmap.getMindmap_id().equals(mindmap_id)) {
+                result_mindmap = mindmap;
+                break;
+            }
+        }
+
+        if (result_mindmap != null) {
+            json = result_mindmap.getJson_string();
+
+        }
+        return json;
+    }
+
+    @RequestMapping(value = "/mindmap_id_list/{course_id}", method = RequestMethod.GET)
+    public MindmapIdList mindmap_id_list(@PathVariable String course_id) {
+        //先找到course
+        Course course = cr.findByCourseId(course_id);
+
+        //找OWN关系
+        Mindmap[] mindmaps = cr.findMindmaps(course.getId());
+        String[] mindmaps_id = new String[mindmaps.length];
+        for (int i =0;i<mindmaps.length;i++){
+            mindmaps_id[i] = mindmaps[i].getMindmap_id();
+        }
+
+
+        MindmapIdList mindmapIdList= new MindmapIdList();
+        mindmapIdList.setMindmap_id_list(mindmaps_id);
+        return mindmapIdList;
+    }
+
     @RequestMapping(value = "/save_mindmap/{course_id}/{mindmap_id}", method = RequestMethod.POST)
-    public Success save_mindmap(@PathVariable String course_id, @PathVariable String mindmap_id,@RequestBody String json_string) {
+    public Success save_mindmap(@PathVariable String course_id, @PathVariable String mindmap_id, @RequestBody String json_string) {
         this.course_id=course_id;
         this.mindmap_id=mindmap_id;
 
@@ -165,7 +204,6 @@ public class SaveMindmapController {
         }
         return node_root;
     }
-
 
     private void deleteChildren(Node node_root) {
         if (node_root.getChildren() != null) {
