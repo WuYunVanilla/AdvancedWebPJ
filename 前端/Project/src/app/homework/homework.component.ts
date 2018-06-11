@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AddCourseComponent} from '../add-course/add-course.component';
 import {Course} from '../course';
 import {CourseService} from '../course.service';
@@ -25,12 +25,20 @@ export class HomeworkComponent implements OnInit {
   multipleQuestion: MultipleQuestion[];
   shortQuestion: ShortQuestion[];
 
+  multiple: MultipleQuestion = new MultipleQuestion();
+  short: ShortQuestion = new ShortQuestion();
+
   constructor(
     private modalService: NgbModal,
     private nodeService: NodeService
   ) { }
 
   ngOnInit() {
+    // 加载所有的选择题和简答题
+    this.updateHomework();
+  }
+
+  updateHomework() {
     // 获取所有的选择题
     this.nodeService.getMultiple(
       window.sessionStorage.getItem('course_id'),
@@ -45,16 +53,61 @@ export class HomeworkComponent implements OnInit {
       window.sessionStorage.getItem('node_id')).subscribe(
       value => this.setShort(value));
   }
+
   setMultiple(value) {
     this.multipleQuestion = value;
   }
+
   setShort(value) {
     this.shortQuestion = value;
   }
-  releaseMultiple() {
-    this.modalService.open(ReleaseMultipleComponent);
+
+  // releaseMultiple() {
+  //   this.modalService.open(ReleaseMultipleComponent);
+  // }
+  // releaseShort() {
+  //   this.modalService.open(ReleaseShortComponent);
+  // }
+
+  releaseMultiple () {
+    // 发布选择题
+    this.nodeService.releaseMutiple(
+      window.sessionStorage.getItem('course_id'),
+      window.sessionStorage.getItem('mindmap_id'),
+      window.sessionStorage.getItem('node_id'),
+      this.multiple)
+      .subscribe((value => this.checkMultiple(value['success'])));
   }
+
   releaseShort() {
-    this.modalService.open(ReleaseShortComponent);
+    // 发布简答题
+    this.nodeService.releaseShort(
+      window.sessionStorage.getItem('course_id'),
+      window.sessionStorage.getItem('mindmap_id'),
+      window.sessionStorage.getItem('node_id'),
+      this.short)
+      .subscribe((value => this.checkShort(value['success'])));
+  }
+
+  checkMultiple(value) {
+    if (value) {
+      window.alert('发布成功!');
+      // 如果发布成功则重新加载作业（以获取最新添加的作业）
+      this.updateHomework();
+      // 如果发布成功则新建一个选择题（清除缓存）
+      this.multiple = new MultipleQuestion();
+    } else {
+      window.alert('发布失败!');
+    }
+  }
+
+  checkShort(value) {
+    if (value) {
+      window.alert('发布成功!');
+      this.updateHomework();
+      this.short = new ShortQuestion();
+    } else {
+      window.alert('发布失败!');
+    }
   }
 }

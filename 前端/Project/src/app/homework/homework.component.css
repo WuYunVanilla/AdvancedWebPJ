@@ -20,3 +20,17 @@
 li {
   margin-top: 20px;
 }
+
+.formItem {
+  margin: 10px;
+}
+
+.prompt {
+  margin-left: 20px;
+  font-size: smaller;
+  color: sienna;
+}
+
+.modal-footer {
+  clear: both;
+}

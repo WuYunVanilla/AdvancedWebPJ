@@ -1,27 +1,61 @@
-<!-- 按钮：用于打开模态框 -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-  打开模态框
-</button>
+<!-- 发布选择题 -->
+<div id="release_multiple" class="buttonDiv">
+  <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#releaseMultiple">发布选择题</button>
+</div>
 
 <!-- 模态框 -->
-<div class="modal fade" id="myModal">
+<div class="modal fade" id="releaseMultiple">
   <div class="modal-dialog">
     <div class="modal-content">
 
       <!-- 模态框头部 -->
       <div class="modal-header">
-        <h4 class="modal-title">模态框头部</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">发布选择题</h4>
       </div>
 
       <!-- 模态框主体 -->
       <div class="modal-body">
-        模态框内容..
+        <form>
+          <div class="formItem">
+            <label>问题标题：</label>
+            <input size="30" type="text" required name="mtitle" [(ngModel)]="multiple.title" #mtitle="ngModel">
+          </div>
+
+          <div class="formItem" >
+            <label>选项A：</label>
+            <input size="30" type="text" required name="optionA" [(ngModel)]="multiple.optionA" #optionA="ngModel">
+          </div>
+
+          <div class="formItem" >
+            <label>选项B：</label>
+            <input size="30" type="text" required name="optionB" [(ngModel)]="multiple.optionB" #optionB="ngModel">
+          </div>
+
+          <div class="formItem" >
+            <label>选项C：</label>
+            <input size="30" type="text" required name="optionC" [(ngModel)]="multiple.optionC" #optionC="ngModel">
+          </div>
+
+          <div class="formItem" >
+            <label>选项D：</label>
+            <input size="30" type="text" required name="optionD" [(ngModel)]="multiple.optionD" #optionD="ngModel">
+          </div>
+
+          <div class="formItem" id="correct_answer">
+            <label>正确答案：</label>
+            <input type="radio" required name="mcorrect_answer" value="A" [(ngModel)]="multiple.correct_answer" #mcorrect_answer="ngModel"> A
+            <input type="radio" required name="mcorrect_answer" value="B" [(ngModel)]="multiple.correct_answer" #mcorrect_answer="ngModel"> B
+            <input type="radio" required name="mcorrect_answer" value="C" [(ngModel)]="multiple.correct_answer" #mcorrect_answer="ngModel"> C
+            <input type="radio" required name="mcorrect_answer" value="D" [(ngModel)]="multiple.correct_answer" #mcorrect_answer="ngModel"> D
+          </div>
+        </form>
       </div>
 
       <!-- 模态框底部 -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-outline-dark" (click)="releaseMultiple()"
+                [disabled]="(!mtitle.valid) || (!optionA.valid) || (!optionB.valid)|| (!optionC.valid) || (!optionD.valid) || (!mcorrect_answer.valid)">确认</button>
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">关闭</button>
       </div>
 
     </div>
@@ -30,23 +64,58 @@
 
 
 
-
-
-
-
-
-
-
-
-
-<div id="release_multiple" class="buttonDiv">
-  <button type="button" class="btn btn-outline-dark" (click)="releaseMultiple()">发布选择题</button>
-</div>
-
+<!-- 发布简答题 -->
 <div id="release_short" class="buttonDiv">
-  <button type="button" class="btn btn-outline-dark" (click)="releaseShort()">发布简答题</button>
+<button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#releaseShort">发布简答题</button>
 </div>
 
+<!-- 模态框 -->
+<div class="modal fade" id="releaseShort">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- 模态框头部 -->
+      <div class="modal-header">
+        <h4 class="modal-title">发布简答题</h4>
+      </div>
+
+      <!-- 模态框主体 -->
+      <div class="modal-body">
+        <form #registerForm="ngForm" id="form">
+          <div class="formItem">
+            <label>问题标题：</label>
+            <input size="50" type="text" required name="stitle" [(ngModel)]="short.title" #stitle="ngModel">
+          </div>
+
+          <div class="formItem">
+            <label>正确答案：</label>
+            <input size="50" type="text" required name="scorrect_answer" [(ngModel)]="short.correct_answer" #scorrect_answer="ngModel">
+          </div>
+        </form>
+      </div>
+
+      <!-- 模态框底部 -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="releaseShort()"
+                [disabled]="(!stitle.valid) || (!scorrect_answer.valid)">确认</button>
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--<div id="release_multiple" class="buttonDiv">-->
+  <!--<button type="button" class="btn btn-outline-dark" (click)="releaseMultiple()">发布选择题</button>-->
+<!--</div>-->
+
+<!--<div id="release_short" class="buttonDiv">-->
+  <!--<button type="button" class="btn btn-outline-dark" (click)="releaseShort()">发布简答题</button>-->
+<!--</div>-->
+
+
+<!-- 展示作业(选择题&简答题) -->
 <div id="homework">
 <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
   <ngb-panel title="选择题">
