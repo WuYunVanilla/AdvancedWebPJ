@@ -70,7 +70,7 @@ export class NodeService {
         return this.http.get<string[]>(this.tempUrl);
     }
 
-    upload_link(course_id: string, mind_id: string, node_id: string, link_addr: string): Observable<any> {
+    upload_link(course_id: string, mind_id: string, node_id: string, link_addr: string): Observable<boolean> {
         this.tempUrl = this.baseUrl + 'upload_link/' + course_id + '/' + mind_id + '/' + node_id;
         const target = {'link_address': link_addr};
         return this.http.post<boolean>(this.tempUrl, target, httpOptions);
@@ -78,15 +78,16 @@ export class NodeService {
 
     downloadResource(course_id: string, mind_id: string, node_id: string, resource_name: string): Observable<any> {
 
-        this.tempUrl = this.baseUrl + 'download_material/' + course_id + '/' + mind_id + '/' + node_id;
-
-        console.log(this.tempUrl);
-
-        const body = {'material_name': resource_name};
-
-        const options = new HttpHeaders({'Content-Type': 'application/force-download'});
-
-        return this.http.post<any>(this.tempUrl, body, options);
+        // this.tempUrl = this.baseUrl + 'download_material/' + course_id + '/' + mind_id + '/' + node_id;
+        //
+        // console.log(this.tempUrl);
+        //
+        // const body = {'material_name': resource_name};
+        //
+        // const options = new HttpHeaders({'Content-Type': 'application/force-download'});
+        //
+        // return this.http.post<any>(this.tempUrl, body, options);
+      return;
     }
 
 }
