@@ -12,23 +12,13 @@ const options = {
 
 const init_data = {'id': 'root', 'topic': '* 根节点 *', 'expanded': true};
 
-@Component({
-    selector: 'app-mindmap',
-    templateUrl: './mindmap.component.html',
-    styleUrls: ['./mindmap.component.css']
-})
-export class MindmapComponent implements OnInit {
 
-    // current_mind = {
-    //     'meta': {
-    //         'name': 'jsMind-demo-tree',
-    //         'author': 'hizzgdev@163.com',
-    //         'version': '0.2'
-    //     },
-    //     'format': 'node_tree',
-    //     /* 数据内容 */
-    //     'data': {}
-    // };
+@Component({
+    selector: 'app-stu-mindmap',
+    templateUrl: './stu-mindmap.component.html',
+    styleUrls: ['./stu-mindmap.component.css']
+})
+export class StuMindmapComponent implements OnInit {
 
     course_id = ''; // 与上层组件中course绑定
     @Input()
@@ -61,53 +51,17 @@ export class MindmapComponent implements OnInit {
         'data': null
     };
 
-
     public mindMap; // 思维导图组件
     public selected_node_id: string; // 当前思维导图中被选中的节点
 
     constructor(private mindService: MindmapService) { }
 
     ngOnInit() {
-
         this.selected_node_id = '';
-
     }
 
     screen_shot() {
         this.mindMap.screenshot.shootDownload();
-    }
-
-    remove(): void {
-        const selected_id = this.mindMap.get_selected_node();
-        if (!selected_id) {
-            console.log('please select a node first.');
-            return;
-        }
-        this.mindMap.remove_node(selected_id);
-    }
-
-    add_child() {
-        const selected_node = this.mindMap.get_selected_node(); // as parent of new node
-        // alert(selected_node);
-        if (!selected_node) {
-            console.log('please select a node first.');
-            return;
-        }
-        const nodeid = jsMind.util.uuid.newid();
-        const topic = '* 新节点 *';
-        this.mindMap.add_node(selected_node, nodeid, topic);
-    }
-
-    add_brother(): void {
-        const selected_node = this.mindMap.get_selected_node(); // as parent of new node
-
-        if (!selected_node) {
-            console.log('please select a node first.');
-            return;
-        }
-        const nodeid = jsMind.util.uuid.newid();
-        const topic = '* 新节点 *';
-        this.mindMap.insert_node_after(selected_node, nodeid, topic);
     }
 
     private get_selected_nodeid() {
@@ -115,23 +69,6 @@ export class MindmapComponent implements OnInit {
         if (!!selected_node) {
             return selected_node.id;
         }
-    }
-
-    change_node_color(color: string) {
-        const selected_id = this.get_selected_nodeid();
-        if (selected_id) {
-            this.mindMap.set_node_color(selected_id, color, null);
-        }
-
-    }
-
-    change_font_color(color: string) {
-        const selected_id = this.get_selected_nodeid();
-        const sel = this.mindMap.get_selected_node();
-        if (selected_id) {
-            this.mindMap.set_node_color(selected_id, null, color);
-        }
-
     }
 
     update_selected_knowledge_id(): void {
@@ -173,20 +110,6 @@ export class MindmapComponent implements OnInit {
         });
 
 
-
-    }
-
-    save() {
-        const mindJson = this.mindMap.get_data(); // 格式同 const mind
-
-        const str = jsMind.util.json.json2string(mindJson.data); // 最终要传输的字符串
-
-        console.log(str);
-
-        this.mindService.saveMind(this.course_id, this.mind_id, str).subscribe(r => {
-            console.log(r);
-            console.log('保存结果' + r['success']);
-        });
     }
 
 }

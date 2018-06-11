@@ -47,7 +47,6 @@ export class StuHomeworkComponent implements OnInit {
       window.sessionStorage.getItem('course_id'),
       window.sessionStorage.getItem('mindmap_id'),
       window.sessionStorage.getItem('node_id'),
-      window.sessionStorage.getItem('user_name'),
       stuMultiple).subscribe(
       value => this.checkSubmit(value['success']));
   }
@@ -57,6 +56,7 @@ export class StuHomeworkComponent implements OnInit {
     alert('提交成功！');
   }
 
+  // 检查提交
   checkSubmit(value) {
     if (value) {
       alert('提交成功！');

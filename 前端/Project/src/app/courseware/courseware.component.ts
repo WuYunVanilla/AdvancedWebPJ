@@ -9,7 +9,7 @@ import {ParsedResponseHeaders} from 'ng2-file-upload/file-upload/file-uploader.c
 })
 export class CoursewareComponent implements OnInit {
 
-    baseUrl = 'http://10.222.129.245:8081/upload_material/';
+    baseUrl = 'http://10.222.129.245:8081/upload_courseware/';
 
     @Input() course_id: string; // 与上层组件中course绑定
     @Input() mind_id: string; // 与上层组件中选中的mindMap绑定
@@ -41,7 +41,6 @@ export class CoursewareComponent implements OnInit {
 
     ngOnChanges() {
         this.uploader.options.url = this.baseUrl + this.course_id + '/' + this.mind_id + '/' + this.node_id;
-
 
     }
 

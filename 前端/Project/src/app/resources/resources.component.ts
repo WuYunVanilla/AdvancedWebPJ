@@ -1,6 +1,7 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {FileItem, FileUploader} from 'ng2-file-upload';
 import {ParsedResponseHeaders} from 'ng2-file-upload/file-upload/file-uploader.class';
+import {NodeService} from '../node.service';
 
 @Component({
     selector: 'app-resources',
@@ -24,14 +25,14 @@ export class ResourcesComponent implements OnInit, OnChanges {
 
 
 
-    material_names: string[] = ['1.txt', '2.txt'];
-    links: string[] = ['github.com', 'www.w3cschool.com'];
+    material_names: string[] = [];
+    links: string[] = [];
 
 
     public hasBaseDropZoneOver = false;
 
 
-    constructor() { }
+    constructor(private nodeService: NodeService) { }
 
     ngOnInit() {
 
@@ -43,7 +44,7 @@ export class ResourcesComponent implements OnInit, OnChanges {
     ngOnChanges() {
         this.uploader.options.url = this.baseUrl + this.course_id + '/' + this.mind_id + '/' + this.node_id;
 
-
+        this.updateResources();
     }
 
 
@@ -65,9 +66,19 @@ export class ResourcesComponent implements OnInit, OnChanges {
 
     successItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
         console.log('上传成功，response为' + response);
+
+        this.updateResources();
     }
 
-
+    updateResources() {
+        this.nodeService.getResourses(this.course_id, this.mind_id, this.node_id).subscribe(r => {
+            this.material_names = [];
+            // for (f in r) {
+            //     this.material_names.
+            // }
+            console.log(r);
+        });
+    }
 
 
 }

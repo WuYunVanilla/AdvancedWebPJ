@@ -41,9 +41,10 @@
       <div class="formItem">
         <button class="btn-outline-dark" (click)="sendCode()"
                 [disabled]="(!username.valid) || (!userpsd.valid) || (!confirmedpsd.valid) ||
-          (!id.valid) || (!email.valid) || (userpsd.value != confirmedpsd.value)">发送验证码</button>
+          (!id.valid) || (!email.valid) || (userpsd.value != confirmedpsd.value) || isChecking">发送验证码</button>
         <span [hidden]="username.valid && userpsd.valid && confirmedpsd.valid &&
         id.valid && email.valid && (userpsd.value == confirmedpsd.value)" class="prompt">请先完成上述内容的填写</span>
+        <span [hidden]="!isChecking" class="prompt">信息正在校验中，请稍后</span>
       </div>
 
       <div class="formItem">

@@ -27,7 +27,7 @@
                 <input type="radio" required name="answer" value="C" [(ngModel)]="stuMultiple.answer" #answer="ngModel"> C
                 <input type="radio" required name="answer" value="D" [(ngModel)]="stuMultiple.answer" #answer="ngModel"> D
               </div>
-              <button class="btn-outline-dark" (click)="submitMultiple(stuMultiple)">提交回答</button>
+              <button class="btn-outline-dark" (click)="submitMultiple(stuMultiple)" [disabled]="(!answer.valid)">提交回答</button>
             </form>
             <hr>
           </li>
