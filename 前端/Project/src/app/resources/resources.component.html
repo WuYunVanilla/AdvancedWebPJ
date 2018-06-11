@@ -1,14 +1,14 @@
-<!--<div id="upload_resources" class="buttonDiv">-->
-<!--<input type="file" multiple ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged($event)"/>-->
-<!--</div>-->
-
-<p id="upload_button">
-    <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed"
-            [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+<p class="upload_buttons">
+    <button type="button" class="btn btn-outline-primary" (click)="isCollapsed_file = !isCollapsed_file"
+            [attr.aria-expanded]="!isCollapsed_file" aria-controls="collapseExample">
         上传文件
     </button>
+    <button type="button" class="btn btn-outline-primary" (click)="isCollapsed_link = !isCollapsed_link"
+            [attr.aria-expanded]="!isCollapsed_link" aria-controls="collapseExample">
+        上传链接
+    </button>
 </p>
-<div id="upload_card" [ngbCollapse]="!isCollapsed">
+<div class="upload_card" [ngbCollapse]="!isCollapsed_file">
     <div class="card">
         <div class="card-body">
             <div class="row">
@@ -67,18 +67,19 @@
                                         class="btn btn-success btn-sm"
                                         (click)="item.upload()"
                                         [disabled]="item.isReady || item.isUploading || item.isSuccess">
-                                    Upload
+                                    上传
                                 </button>
                                 <button style="margin-right: 5px;"
                                         type="button"
                                         class="btn btn-warning btn-sm"
                                         (click)="item.cancel()"
                                         [disabled]="!item.isUploading">
-                                    Cancel
+                                    取消
                                 </button>
                                 <button type="button"
                                         class="btn btn-danger btn-sm"
-                                        (click)="item.remove()">Remove
+                                        (click)="item.remove()">
+                                    删除
                                 </button>
                             </td>
                         </tr>
@@ -98,12 +99,6 @@
                                 [disabled]="!uploader.getNotUploadedItems().length">
                             上传所有文件
                         </button>
-                        <button style="margin-right: 5px;"
-                                class="btn btn-warning btn-sm"
-                                (click)="uploader.cancelAll()"
-                                [disabled]="!uploader.isUploading">
-                            取消所有上传
-                        </button>
                         <button class="btn btn-danger btn-sm"
                                 (click)="uploader.clearQueue()"
                                 [disabled]="!uploader.queue.length">
@@ -114,6 +109,13 @@
                 </div>
 
             </div>
+        </div>
+    </div>
+</div>
+<div class="upload_card" [ngbCollapse]="!isCollapsed_link">
+    <div class="card">
+        <div class="card-body">
+            <p>哈哈哈哈或</p>
         </div>
     </div>
 </div>
@@ -134,6 +136,8 @@
 
     <ngb-panel title="文件资源">
         <ng-template ngbPanelContent>
+            <button (click)="download()"></button>
+
             <ol>
                 <li *ngFor="let material of material_names">
                     <span><b>{{material}}</b></span>

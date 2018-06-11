@@ -67,10 +67,12 @@ export class MindmapComponent implements OnInit {
 
     constructor(private mindService: MindmapService) { }
 
+    init_str = '';
+
     ngOnInit() {
 
         this.selected_node_id = '';
-
+        this.init_str = jsMind.util.json.json2string(init_data);
     }
 
     screen_shot() {

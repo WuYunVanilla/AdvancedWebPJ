@@ -12,7 +12,7 @@
 .nv-file-over { border: dotted 3px green; } /* Default class applied to drop zones on over */
 
 
-#upload_bottom {
+.upload_bottom {
     margin-top: 20px;
 }
 
@@ -25,10 +25,15 @@
     margin-top: 20px;
 }
 
-#upload_button {
+.upload_buttons {
     margin-top: 20px;
+    /*padding-top: 20px;*/
 }
 
-#upload_card {
+.upload_buttons button {
+    margin-right: 10px;
+}
+
+.upload_card {
     margin-bottom: 20px;
 }

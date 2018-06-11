@@ -10,13 +10,14 @@ const httpOptions = {
 @Injectable()
 export class MindmapService {
 
-    private baseUrl = 'http://10.222.129.245:8081/';
+    private baseUrl = '';
 
     tempUrl: string;
 
     constructor(
         private http: HttpClient) {
-
+        const ip = window.sessionStorage.getItem('ip');
+        this.baseUrl = 'http://' + ip + ':8081/';
     }
 
     getMindList(course_id: string): Observable<any> {

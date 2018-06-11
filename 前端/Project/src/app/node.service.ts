@@ -14,12 +14,13 @@ const httpOptions = {
 
 @Injectable()
 export class NodeService {
-    private baseUrl = 'http://10.222.129.245:8081/';
+    private baseUrl = '';
     tempUrl: string;
 
     constructor(
         private http: HttpClient) {
-
+        const ip = window.sessionStorage.getItem('ip');
+        this.baseUrl = 'http://' + ip + ':8081/';
     }
 
     // 教师获取选择题列表
@@ -67,6 +68,25 @@ export class NodeService {
     getLinkResourses(course_id: string, mind_id: string, node_id: string): Observable<string[]> {
         this.tempUrl = this.baseUrl + 'links/' + course_id + '/' + mind_id + '/' + node_id;
         return this.http.get<string[]>(this.tempUrl);
+    }
+
+    upload_link(course_id: string, mind_id: string, node_id: string, link_addr: string): Observable<any> {
+        this.tempUrl = this.baseUrl + 'upload_link/' + course_id + '/' + mind_id + '/' + node_id;
+        const target = {'link_address': link_addr};
+        return this.http.post<boolean>(this.tempUrl, target, httpOptions);
+    }
+
+    downloadResource(course_id: string, mind_id: string, node_id: string, resource_name: string): Observable<any> {
+
+        this.tempUrl = this.baseUrl + 'download_material/' + course_id + '/' + mind_id + '/' + node_id;
+
+        console.log(this.tempUrl);
+
+        const body = {'material_name': resource_name};
+
+        const options = new HttpHeaders({'Content-Type': 'application/force-download'});
+
+        return this.http.post<any>(this.tempUrl, body, options);
     }
 
 }

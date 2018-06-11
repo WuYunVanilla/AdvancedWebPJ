@@ -10,7 +10,7 @@ import {NodeService} from '../node.service';
 })
 export class ResourcesComponent implements OnInit, OnChanges {
 
-    baseUrl = 'http://10.222.129.245:8081/upload_material/';
+    baseUrl = '';
 
     @Input() course_id: string; // 与上层组件中course绑定
     @Input() mind_id: string; // 与上层组件中选中的mindMap绑定
@@ -32,13 +32,20 @@ export class ResourcesComponent implements OnInit, OnChanges {
     public hasBaseDropZoneOver = false;
 
 
-    constructor(private nodeService: NodeService) { }
+    constructor(private nodeService: NodeService) {
+        const ip = window.sessionStorage.getItem('ip');
+        this.baseUrl = 'http://' + ip + ':8081/upload_material/';
+    }
 
     ngOnInit() {
 
+        this.uploader.onSuccessItem = this.successItem.bind(this);
         this.uploader.onAfterAddingFile = this.afterAddingFile;
         this.uploader.onBuildItemForm = this.buildItemForm;
-        this.uploader.onSuccessItem = this.successItem;
+        // this.uploader.onSuccessItem = this.successItem;
+        console.log('course_id=' + this.course_id);
+        console.log('mind_id=' + this.mind_id);
+        console.log('node_id=' + this.node_id);
     }
 
     ngOnChanges() {
@@ -72,13 +79,24 @@ export class ResourcesComponent implements OnInit, OnChanges {
 
     updateResources() {
         this.nodeService.getResourses(this.course_id, this.mind_id, this.node_id).subscribe(r => {
-            this.material_names = [];
-            // for (f in r) {
-            //     this.material_names.
-            // }
+            this.material_names = r;
             console.log(r);
         });
     }
+
+    download() {
+        this.nodeService.downloadResource(
+            this.course_id, this.mind_id, this.node_id, 'bull.png').subscribe(r => {
+            console.log(r);
+        });
+
+
+        // const blob = new Blob([data], {type: 'application/json'});
+        // const objectUrl = URL.createObjectURL(blob);
+        // // window.open(objectUrl);
+    }
+
+
 
 
 }
