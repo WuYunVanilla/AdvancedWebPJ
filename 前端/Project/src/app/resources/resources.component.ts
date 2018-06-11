@@ -95,7 +95,7 @@ export class ResourcesComponent implements OnInit, OnChanges {
         this.nodeService.downFile(r, file_name, 'application/json');
       });
     }
-    
+
     getLinkAddrs() {
       this.nodeService.getLinkResourses(
         this.course_id,

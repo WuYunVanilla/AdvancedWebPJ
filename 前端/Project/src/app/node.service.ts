@@ -76,18 +76,24 @@ export class NodeService {
         return this.http.post<boolean>(this.tempUrl, target, httpOptions);
     }
 
-    downloadResource(course_id: string, mind_id: string, node_id: string, resource_name: string): Observable<any> {
+    // Blob请求
+    requestBlob(course_id: string, mind_id: string, node_id: string, material_name: string): Observable<any> {
+      this.tempUrl = this.baseUrl + 'download_material/' + course_id + '/' + mind_id + '/' + node_id;
+      const data = {'material_name': material_name};
 
-        // this.tempUrl = this.baseUrl + 'download_material/' + course_id + '/' + mind_id + '/' + node_id;
-        //
-        // console.log(this.tempUrl);
-        //
-        // const body = {'material_name': resource_name};
-        //
-        // const options = new HttpHeaders({'Content-Type': 'application/force-download'});
-        //
-        // return this.http.post<any>(this.tempUrl, body, options);
-      return;
+      return this.http.request('post', this.tempUrl, { body: data, observe: 'response', responseType: 'blob'});
     }
 
+    // Blob文件转换下载
+    downFile(result, fileName, fileType?) {
+      const data = result.body;
+      const blob = new Blob([data], { type: fileType || data.type });
+      const objectUrl = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.setAttribute('style', 'display:none');
+      a.setAttribute('href', objectUrl);
+      a.setAttribute('download', fileName);
+      a.click();
+      URL.revokeObjectURL(objectUrl);
+    }
 }
