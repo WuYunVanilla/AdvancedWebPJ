@@ -1,14 +1,9 @@
 package com.advancedweb.backend.controller;
 
 import com.advancedweb.backend.controller.json_model.*;
-import com.advancedweb.backend.model.AssignmentMultiple;
-import com.advancedweb.backend.model.AssignmentShort;
-import com.advancedweb.backend.model.Link;
-import com.advancedweb.backend.model.Node;
-import com.advancedweb.backend.repository.AssignmentMultipleRepository;
-import com.advancedweb.backend.repository.AssignmentShortRepository;
-import com.advancedweb.backend.repository.LinkRepository;
-import com.advancedweb.backend.repository.NodeRepository;
+import com.advancedweb.backend.model.*;
+import com.advancedweb.backend.service.NodeChildService;
+import com.advancedweb.backend.service.NodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,20 +14,16 @@ import java.util.List;
 @CrossOrigin
 public class AssignmentController {
     @Autowired
-    private AssignmentShortRepository asr;
+    private NodeService nodeService;
     @Autowired
-    private AssignmentMultipleRepository amr;
-    @Autowired
-    private NodeRepository nr;
-    @Autowired
-    private LinkRepository lr;
+    private NodeChildService nodeChildService;
 
     @RequestMapping(value = "/shorts/{course_id}/{mindmap_id}/{node_id}", method = RequestMethod.GET)
-    public List<AssignmentShort_json> release_multiple(
+    public List<AssignmentShort_json> shorts(
             @PathVariable String course_id, @PathVariable String mindmap_id, @PathVariable String node_id) {
 
-        String short_id =course_id+" "+mindmap_id+" "+node_id;
-        List<AssignmentShort> shorts =asr.findByShortId(short_id);
+        String shortId = course_id + " " + mindmap_id + " " + node_id;
+        List<AssignmentShort> shorts = nodeChildService.findShorts(shortId);
 
         List<AssignmentShort_json> short_jsons = new LinkedList<>();
 
@@ -54,7 +45,8 @@ public class AssignmentController {
         s.setSuccess(false);
 
         //找到multiple
-        List<AssignmentMultiple> multiples = amr.findByMultiId(course_id+" "+mindmap_id+" "+node_id);
+        String multiId = course_id + " " + mindmap_id + " " + node_id;
+        List<AssignmentMultiple> multiples = nodeChildService.findMultis(multiId);
 
         AssignmentMultiple multiple_result=null;
         for (AssignmentMultiple multiple :multiples) {
@@ -64,9 +56,8 @@ public class AssignmentController {
             }
         }
 
-
         //比对答案
-        if(multiple_result!=null){
+        if(multiple_result != null){
 
             int number_before = Integer.parseInt(multiple_result.getNumber());
             int correct_number_before =Integer.parseInt(multiple_result.getCorrect_number());
@@ -78,7 +69,7 @@ public class AssignmentController {
             }
 
             //保存multiple
-            amr.save(multiple_result);
+            nodeChildService.saveMulti(multiple_result);
             s.setSuccess(true);
         }
         return s;
@@ -88,8 +79,8 @@ public class AssignmentController {
     public List<AssignmentMultipleStudent> multiples_student(@PathVariable String course_id, @PathVariable String mindmap_id,
                                                              @PathVariable String node_id) {
 
-        String multi_id = course_id + " " + mindmap_id + " " + node_id;
-        List<AssignmentMultiple> multiples = amr.findByMultiId(multi_id);
+        String multiId = course_id + " " + mindmap_id + " " + node_id;
+        List<AssignmentMultiple> multiples = nodeChildService.findMultis(multiId);
 
         List<AssignmentMultipleStudent> multiples_student = new LinkedList<>();
         for (AssignmentMultiple multiple : multiples) {
@@ -113,8 +104,8 @@ public class AssignmentController {
     public List<AssignmentMultiple_json> multiples_teacher(@PathVariable String course_id, @PathVariable String mindmap_id,
                                                            @PathVariable String node_id) {
 
-        String multi_id =course_id+" "+mindmap_id+" "+node_id;
-        List<AssignmentMultiple> multiples =amr.findByMultiId(multi_id);
+        String multiId =course_id + " " + mindmap_id + " " + node_id;
+        List<AssignmentMultiple> multiples = nodeChildService.findMultis(multiId);
 
         List<AssignmentMultiple_json> multiple_jsons = new LinkedList<>();
         for (AssignmentMultiple multiple :multiples){
@@ -130,7 +121,6 @@ public class AssignmentController {
             multiple_json.setCorrect_number(multiple.getCorrect_number());
 
             multiple_jsons.add(multiple_json);
-
         }
 
         return multiple_jsons;
@@ -143,9 +133,8 @@ public class AssignmentController {
         Success success = new Success();
         success.setSuccess(false);
 
-
         //找到node
-        Node result_node = nr.findByNodeId(course_id+" "+mindmap_id,node_id);
+        Node result_node = nodeService.findByNodeId(course_id + " " + mindmap_id, node_id);
 
         //向node节点添加HAS_ASSIGNMENT_MULTI关系
         if (result_node != null) {
@@ -156,10 +145,10 @@ public class AssignmentController {
             multiple.setCorrect_number("0");
 
             //增加节点
-            amr.save(multiple);
+            nodeChildService.saveMulti(multiple);
             //建立关系
             result_node.setAssignmentMultiple(multiple);
-            nr.save(result_node);
+            nodeService.save(result_node);
             success.setSuccess(true);
 
         }
@@ -173,50 +162,23 @@ public class AssignmentController {
         success.setSuccess(false);
 
         //找到node
-        Node result_node = nr.findByNodeId(course_id+" "+mindmap_id,node_id);
+        Node result_node = nodeService.findByNodeId(course_id + " " + mindmap_id, node_id);
 
         //向node节点添加HAS_ASSIGNMENT_MULTI关系
         if (result_node != null) {
-
             //向节点里增加multi_id number correct_number值
             assignmentShort.setShort_id(course_id+" "+mindmap_id+" "+node_id);
 
             //增加节点
-            asr.save(assignmentShort);
+            nodeChildService.saveShort(assignmentShort);
 
             //建立关系
             result_node.setAssignmentShorts(assignmentShort);
-            nr.save(result_node);
+            nodeService.save(result_node);
             success.setSuccess(true);
 
         }
         return success;
-    }
-
-    @RequestMapping(value = "/upload_link/{course_id}/{mindmap_id}/{node_id}", method = RequestMethod.POST)
-    public Success upload_link(@PathVariable String course_id, @PathVariable String mindmap_id,
-                               @PathVariable String node_id,
-                               @RequestBody Link link) {
-
-        Success s = new Success();
-        s.setSuccess(false);
-
-
-        //找到node
-        Node result_node = nr.findByNodeId(course_id + " " + mindmap_id, node_id);
-
-        if (result_node != null) {
-
-            //新建Courseware
-
-            lr.save(link);
-
-            //建立关系
-            result_node.setLink(link);
-            nr.save(result_node);
-            s.setSuccess(true);
-        }
-        return s;
     }
 
 }

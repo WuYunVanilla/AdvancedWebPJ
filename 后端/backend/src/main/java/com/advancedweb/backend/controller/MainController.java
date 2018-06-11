@@ -5,7 +5,7 @@ import com.advancedweb.backend.controller.json_model.User;
 import com.advancedweb.backend.model.Student;
 import com.advancedweb.backend.model.Teacher;
 import com.advancedweb.backend.model.UserTemp;
-import com.advancedweb.backend.repository.*;
+import com.advancedweb.backend.service.UserService;
 import com.advancedweb.backend.service.mailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class MainController {
     @Autowired
-    private StudentRepository sr;
-
-    @Autowired
-    private TeacherRepository tr;
-
-    @Autowired
-    private UserTempRepository userTempRepository;
+    private UserService userService;
 
     @Autowired
     private mailService mailService;
@@ -37,14 +31,14 @@ public class MainController {
 
         //首先判断user_name是否已经存在
         if (identity.equals("teacher")) {
-            Teacher tea = tr.findByName(name);
+            Teacher tea = userService.findTeacherByName(name);
+            //再判断密码是否一致
             if (tea != null) {
                 if (tea.getPassword().equals(password))
                     s.setSuccess(true);
-
             }
         } else if (identity.equals("student")) {
-            Student stu = sr.findByName(name);
+            Student stu = userService.findStudentByName(name);
             //再判断密码是否一致
             if (stu != null) {
                 if (stu.getPassword().equals(password))
@@ -63,20 +57,14 @@ public class MainController {
         String identity = user.getIdentity();
 
         //首先判断user_name是否已经存在
-        boolean if_exist = false;
-        Student stu = sr.findByName(name);
-        Teacher tea = tr.findByName(name);
-        UserTemp userTemp = userTempRepository.findByUser_name(name);
-        if (stu != null || tea != null || userTemp != null) {
-            if_exist = true;
-        }
-        else {
+        boolean if_exist = (userService.findUser(name) || userService.findTemp(name));
+        if (!if_exist) {
             Long curTime = System.currentTimeMillis();
             int hash = curTime.hashCode() % 100000000 + 100000000;
             String code = hash + "";
 
             user.setCode(code);
-            userTempRepository.save(user);
+            userService.saveUserTemp(user);
 
             // 标题
             String subject = "登录验证码";
@@ -86,10 +74,10 @@ public class MainController {
             builder.append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />");
             builder.append("</head><body>");
             builder.append("您好：<br/>");
-            builder.append("    您在课程网站上进行了注册，账户信息如下：<br/>");
-            builder.append("    用户账号：" + name + "<br/>用户密码：" + password + "<br/>");
-            builder.append("    用户权限：" + identity + "<br/><br/>");
-            builder.append("    您的邮箱验证码为：" + code);
+            builder.append("您在课程网站上进行了注册，账户信息如下：<br/>");
+            builder.append("用户账号：" + name + "<br/>用户密码：" + password + "<br/>");
+            builder.append("用户权限：" + identity + "<br/><br/>");
+            builder.append("您的邮箱验证码为：" + code);
             builder.append("</body></html>");
             String htmlContent = builder.toString();
 
@@ -112,24 +100,24 @@ public class MainController {
         Success s = new Success();
         s.setSuccess(false);
 
-        UserTemp temp = userTempRepository.findByUser_name(name);
+        UserTemp temp = userService.findUserByName(name);
         if (temp == null) {
             return s;
         } else {
             if (!(temp.getUser_name().equals(name) && temp.getUser_pwd().equals(password) && temp.getEmail().equals(email) && temp.getIdentity().equals(identity) && temp.getCode().equals(code)))
                 return s;
             else {
-                userTempRepository.delete(temp);
+                userService.deleteUser(temp);
                 if (identity.equalsIgnoreCase("teacher")) {
                     Teacher teacher = new Teacher();
                     teacher.setName(name);
                     teacher.setPassword(password);
-                    tr.save(teacher);
+                    userService.saveTeacher(teacher);
                 } else if (identity.equalsIgnoreCase("student")) {
                     Student student = new Student();
                     student.setName(name);
                     student.setPassword(password);
-                    sr.save(student);
+                    userService.saveStudent(student);
                 } else {
                     return s;
                 }
@@ -147,22 +135,19 @@ public class MainController {
         String password = user.getUser_pwd();
 
         //首先判断user_name是否已经存在
-        boolean if_exist = false;
-        Student stu = sr.findByName(name);
-        Teacher tea = tr.findByName(name);
-        if (stu != null || tea != null) {
-            if_exist = true;
-        }
+        boolean if_exist = userService.findUser(name);
 
+        Student stu = userService.findStudentByName(name);
+        Teacher tea = userService.findTeacherByName(name);
 
         if (stu != null) {
             stu.setPassword(password);
-            sr.save(stu);
+            userService.saveStudent(stu);
         }
 
         if (tea != null) {
             tea.setPassword(password);
-            tr.save(tea);
+            userService.saveTeacher(tea);
         }
 
         Success s = new Success();

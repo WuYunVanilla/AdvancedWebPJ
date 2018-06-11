@@ -1,6 +1,6 @@
 package com.advancedweb.backend.controller.json_model;
 
-public  class MaterialName {
+public class MaterialName {
     private String material_name;
 
     public String getMaterial_name() {

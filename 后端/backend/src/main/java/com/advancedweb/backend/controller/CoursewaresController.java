@@ -6,6 +6,8 @@ import com.advancedweb.backend.model.Courseware;
 import com.advancedweb.backend.model.Node;
 import com.advancedweb.backend.repository.CoursewareRepository;
 import com.advancedweb.backend.repository.NodeRepository;
+import com.advancedweb.backend.service.NodeChildService;
+import com.advancedweb.backend.service.NodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,33 +20,31 @@ import java.io.*;
 @CrossOrigin
 public class CoursewaresController {
     @Autowired
-    private NodeRepository nr;
+    private NodeService nodeService;
     @Autowired
-    private CoursewareRepository cr;
+    private NodeChildService nodeChildService;
 
     @RequestMapping(value = "/coursewares/{course_id}/{mindmap_id}/{node_id}", method = RequestMethod.GET)
-    public CoursewareName[] coursewares(@PathVariable String course_id, @PathVariable String mindmap_id,
+    public String[] coursewares(@PathVariable String course_id, @PathVariable String mindmap_id,
                                         @PathVariable String node_id) {
-
         //找到node
-        Node result_node = nr.findByNodeId(course_id + " " + mindmap_id, node_id);
-        Courseware[] coursewares = nr.findCoursewares(result_node.getLong_id());
+        Node result_node = nodeService.findByNodeId(course_id + " " + mindmap_id, node_id);
+        Courseware[] coursewares = nodeService.findCoursewares(result_node.getLong_id());
 
+        String[] ans = new String[coursewares.length];
 
-        CoursewareName[] coursewareNames= new CoursewareName[coursewares.length];
-        for (int i=0;i<coursewares.length;i++){
-            coursewareNames[i] = new CoursewareName();
-            coursewareNames[i].setCourseware_name(coursewares[i].getCoursewareName());
+        for (int i = 0; i < coursewares.length; i++){
+            ans[i] = coursewares[i].getCoursewareName();
         }
 
-        return coursewareNames;
+        return ans;
     }
 
     @RequestMapping(value = "/upload_courseware/{course_id}/{mindmap_id}/{node_id}", method = RequestMethod.POST)
     public Success upload_courseware(@PathVariable String course_id, @PathVariable String mindmap_id,
                                      @PathVariable String node_id, @RequestParam(value = "courseware") MultipartFile file) {
 
-        final String filePath = "G:/MindMapFileStorage/"+course_id+"/"+mindmap_id+"/"+node_id+"/courseware/";
+        final String filePath = "G:/MindMapFileStorage/" + course_id + "/" + mindmap_id + "/" + node_id + "/courseware/";
         Success s = new Success();
         s.setSuccess(false);
 
@@ -52,18 +52,16 @@ public class CoursewaresController {
         String fileName = file.getOriginalFilename();
 
         //首先判断文件名字是否已经存在
-        Courseware cw = cr.findByStoreAddress(filePath+fileName);
-        if (cw!=null){
+        Courseware cw = nodeChildService.findCourseware(filePath + fileName);
+        if (cw != null){
             return s;
         }
-
 
         File dest = new File(filePath + fileName);
 
         //找到node
-        Node result_node = nr.findByNodeId(course_id + " " + mindmap_id, node_id);
+        Node result_node = nodeService.findByNodeId(course_id + " " + mindmap_id, node_id);
         if (result_node != null) {
-
             // 检测是否存在目录
             if (!dest.getParentFile().exists()) {
                 dest.getParentFile().mkdirs();
@@ -78,11 +76,11 @@ public class CoursewaresController {
             Courseware courseware = new Courseware();
             courseware.setCoursewareName(fileName);
             courseware.setStoreAddress(filePath + fileName);
-            cr.save(courseware);
+            nodeChildService.saveCourseware(courseware);
 
             //建立关系
             result_node.setCourseware(courseware);
-            nr.save(result_node);
+            nodeService.save(result_node);
             s.setSuccess(true);
         }
         return s;
@@ -95,8 +93,7 @@ public class CoursewaresController {
 
         final String filePath = "G:/MindMapFileStorage/" + course_id + "/" + mindmap_id + "/" + node_id + "/courseware/";
 
-
-        String courseware_name =courseware.getCourseware_name();
+        String courseware_name = courseware.getCourseware_name();
         String fileUrl = filePath + courseware_name;
 
         File file = new File(fileUrl);
@@ -116,7 +113,6 @@ public class CoursewaresController {
                     os.write(buffer, 0, i);
                     i = bis.read(buffer);
                 }
-                System.out.println("success");
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {

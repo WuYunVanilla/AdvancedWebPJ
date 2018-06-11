@@ -5,8 +5,11 @@ import com.advancedweb.backend.controller.json_model.Success;
 import com.advancedweb.backend.model.Link;
 import com.advancedweb.backend.model.Material;
 import com.advancedweb.backend.model.Node;
+import com.advancedweb.backend.repository.LinkRepository;
 import com.advancedweb.backend.repository.MaterialRepository;
 import com.advancedweb.backend.repository.NodeRepository;
+import com.advancedweb.backend.service.NodeChildService;
+import com.advancedweb.backend.service.NodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,21 +25,24 @@ public class MaterialsController {
     private NodeRepository nr;
     @Autowired
     private MaterialRepository mr;
+    @Autowired
+    private LinkRepository lr;
+    @Autowired
+    private NodeService nodeService;
+    @Autowired
+    private NodeChildService nodeChildService;
 
     @RequestMapping(value = "/materials/{course_id}/{mindmap_id}/{node_id}", method = RequestMethod.GET)
     public String[] materials(@PathVariable String course_id, @PathVariable String mindmap_id,
                                                               @PathVariable String node_id) {
 
         //找到node
-        Node result_node = nr.findByNodeId(course_id + " " + mindmap_id, node_id);
-        Material[] materials = nr.findMaterials(result_node.getLong_id());
+        Node result_node = nodeService.findByNodeId(course_id + " " + mindmap_id, node_id);
+        Material[] materials = nodeService.findMaterials(result_node.getLong_id());
 
-//        MaterialName[] materialNames= new MaterialName[materials.length];
         String[] ans = new String[materials.length];
 
-        for (int i=0;i<materials.length;i++){
-//            materialNames[i] = new MaterialName();
-//            materialNames[i].setMaterial_name(materials[i].getMaterialName());
+        for (int i = 0; i < materials.length; i++){
             ans[i] = materials[i].getMaterialName();
         }
 
@@ -48,7 +54,7 @@ public class MaterialsController {
                                    @PathVariable String node_id,
                                    @RequestParam(value = "material") MultipartFile file) {
 
-        final String filePath = "G:/MindMapFileStorage/"+course_id+"/"+mindmap_id+"/"+node_id+"/"+"/material/";
+        final String filePath = "G:/MindMapFileStorage/" + course_id + "/" + mindmap_id + "/" + node_id + "/" + "/material/";
         Success s = new Success();
         s.setSuccess(false);
 
@@ -56,17 +62,16 @@ public class MaterialsController {
         String fileName = file.getOriginalFilename();
 
         //首先判断文件名字是否已经存在
-        Material material = mr.findByStoreAddress(filePath+fileName);
-        if (material!=null){
+        Material material = nodeChildService.findMaterial(filePath + fileName);
+        if (material != null){
             return s;
         }
 
         File dest = new File(filePath + fileName);
 
         //找到node
-        Node result_node = nr.findByNodeId(course_id + " " + mindmap_id, node_id);
+        Node result_node = nodeService.findByNodeId(course_id + " " + mindmap_id, node_id);
         if (result_node != null) {
-
             // 检测是否存在目录
             if (!dest.getParentFile().exists()) {
                 dest.getParentFile().mkdirs();
@@ -81,11 +86,11 @@ public class MaterialsController {
             Material ma = new Material();
             ma.setMaterialName(fileName);
             ma.setStoreAddress(filePath + fileName);
-            mr.save(ma);
+            nodeChildService.saveMaterial(ma);
 
             //建立关系
             result_node.setMaterial(ma);
-            nr.save(result_node);
+            nodeService.save(result_node);
             s.setSuccess(true);
         }
         return s;
@@ -95,16 +100,13 @@ public class MaterialsController {
     public String download_material(@PathVariable String course_id, @PathVariable String mindmap_id,
                                     @PathVariable String node_id, @RequestBody MaterialName material,
                                     HttpServletRequest request, HttpServletResponse response) {
-
         final String filePath = "G:/MindMapFileStorage/" + course_id + "/" + mindmap_id + "/" + node_id + "/material/";
-        System.out.println(filePath);
 
         String material_name = material.getMaterial_name();
         String fileUrl = filePath + material_name;
 
         File file = new File(fileUrl);
         if (file.exists()) {
-            System.out.println("exist!!");
             response.setContentType("application/force-download");// 设置强制下载不打开
             response.addHeader("Content-Disposition",
                     "attachment;fileName=" + material_name);// 设置文件名
@@ -120,7 +122,6 @@ public class MaterialsController {
                     os.write(buffer, 0, i);
                     i = bis.read(buffer);
                 }
-                System.out.println("success");
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -148,20 +149,39 @@ public class MaterialsController {
                           @PathVariable String node_id) {
 
         //找到node
-        Node result_node = nr.findByNodeId(course_id + " " + mindmap_id, node_id);
+        Node result_node = nodeService.findByNodeId(course_id + " " + mindmap_id, node_id);
+        Link[] links = nodeService.findLinks(result_node.getLong_id());
 
-        Link[] links = nr.findLinks(result_node.getLong_id());
-
-//        LinkAdd[] linksAdd = new LinkAdd[links.length];
         String[] ans = new String[links.length];
 
         for (int i = 0; i < links.length; i++){
-//            linksAdd[i] = new LinkAdd();
-//            linksAdd[i].setLink_address(links[i].getLink_address());
             ans[i] = links[i].getLink_address();
         }
 
         return ans;
+    }
+
+    @RequestMapping(value = "/upload_link/{course_id}/{mindmap_id}/{node_id}", method = RequestMethod.POST)
+    public Success upload_link(@PathVariable String course_id, @PathVariable String mindmap_id,
+                               @PathVariable String node_id,
+                               @RequestBody Link link) {
+        Success s = new Success();
+        s.setSuccess(false);
+
+        //找到node
+        Node result_node = nodeService.findByNodeId(course_id + " " + mindmap_id, node_id);
+
+        if (result_node != null) {
+
+            //新建Courseware
+            nodeChildService.saveLink(link);
+
+            //建立关系
+            result_node.setLink(link);
+            nodeService.save(result_node);
+            s.setSuccess(true);
+        }
+        return s;
     }
 
 }

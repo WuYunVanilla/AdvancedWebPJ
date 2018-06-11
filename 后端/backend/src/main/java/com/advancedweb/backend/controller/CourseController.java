@@ -8,6 +8,8 @@ import com.advancedweb.backend.model.Teacher;
 import com.advancedweb.backend.repository.CourseRepository;
 import com.advancedweb.backend.repository.StudentRepository;
 import com.advancedweb.backend.repository.TeacherRepository;
+import com.advancedweb.backend.service.CourseService;
+import com.advancedweb.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,11 +17,9 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class CourseController {
     @Autowired
-    private CourseRepository cr;
+    private CourseService courseService;
     @Autowired
-    private TeacherRepository tr;
-    @Autowired
-    private StudentRepository sr;
+    private UserService userService;
 
     @RequestMapping(value = "/add_course_student/{user_name}", method = RequestMethod.POST)
     public Success add_course_student(@PathVariable String user_name, @RequestBody Course course_json) {
@@ -29,13 +29,13 @@ public class CourseController {
         String course_id = course_json.getCourse_id();
 
         //找到course
-        Course course = cr.findByCourseId(course_id);
+        Course course = courseService.findByCourseId(course_id);
         if (course == null) {
             return s;
         }
 
         //找到student
-        Student student = sr.findByName(user_name);
+        Student student = userService.findStudentByName(user_name);
         if (student == null) {
             return s;
         }
@@ -43,12 +43,12 @@ public class CourseController {
         //course的选课人数加1
         int number_before  =  Integer.parseInt(course.getCourse_number());
         course.setCourse_number((number_before+1)+"");
-        cr.save(course);
+        courseService.saveCourse(course);
 
-        Course course_in_db = cr.findByCourseId(course_id);
+        Course course_in_db = courseService.findByCourseId(course_id);
         //再创建course和student的关系
         student.studyIn(course_in_db);
-        sr.save(student);
+        userService.saveStudent(student);
 
         s.setSuccess(true);
         return s;
@@ -59,39 +59,35 @@ public class CourseController {
         Success s = new Success();
         s.setSuccess(false);
 
-        String name = course.getCourse_name();
         String course_id = course.getCourse_id();
 
         //首先判断course_id是否已经存在
-
-        Course course_db = cr.findByCourseId(course_id);
+        Course course_db = courseService.findByCourseId(course_id);
         if (course_db != null) {
             return s;
         }
 
-        Teacher teacher =tr.findByName(user_name);
-        if (teacher==null){
+        Teacher teacher = userService.findTeacherByName(user_name);
+        if (teacher == null){
             return s;
         }
 
         //创建新的course
         course.setCourse_number("0");
-        cr.save(course);
+        courseService.saveCourse(course);
 
-        Course course_in_db = cr.findByCourseId(course_id);
+        Course course_in_db = courseService.findByCourseId(course_id);
         //再创建course和teacher的关系
         teacher.teachIn(course_in_db);
-        tr.save(teacher);
+        userService.saveTeacher(teacher);
 
-        //打印出这时候teacher的课程列表
-        System.out.println(teacher.toString());
         s.setSuccess(true);
         return s;
     }
 
     @RequestMapping(value = "/search_course", method = RequestMethod.GET)
     public Course_json[] search_course() {
-        Course[] courses= cr.findAllCourses();
+        Course[] courses= courseService.findCourses();
 
         return getJsonModel(courses);
     }
@@ -99,13 +95,13 @@ public class CourseController {
     @RequestMapping(value = "/student_courses/{user_name}", method = RequestMethod.GET)
     public Course_json[] student_courses(@PathVariable String user_name) {
 
-        Student student = sr.findByName(user_name);
+        Student student = userService.findStudentByName(user_name);
         if (student == null) {
             return null;
         }
 
         //得到课程列表
-        Course[] courses = sr.findCourses(student.getId());
+        Course[] courses = userService.getStudentCourses(student.getId());
 
         return getJsonModel(courses);
     }
@@ -113,14 +109,13 @@ public class CourseController {
     @RequestMapping(value = "/teacher_courses/{user_name}", method = RequestMethod.GET)
     public Course_json[] teacher_courses(@PathVariable String user_name) {
 
-        Teacher teacher = tr.findByName(user_name);
+        Teacher teacher = userService.findTeacherByName(user_name);
         if (teacher == null) {
             return null;
         }
 
-        System.out.println(teacher.getId());
         //得到数据库的课程列表
-        Course[] courses = tr.findCourses(teacher.getId());
+        Course[] courses = userService.getTeacherCourses(teacher.getId());
 
         return getJsonModel(courses);
     }

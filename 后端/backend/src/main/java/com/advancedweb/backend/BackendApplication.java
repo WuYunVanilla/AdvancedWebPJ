@@ -12,7 +12,6 @@ import javax.servlet.MultipartConfigElement;
 @SpringBootApplication
 public class BackendApplication extends SpringBootServletInitializer {
 
-
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(BackendApplication.class);

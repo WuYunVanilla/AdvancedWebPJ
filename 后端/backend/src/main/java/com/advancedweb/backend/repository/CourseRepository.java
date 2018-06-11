@@ -11,7 +11,6 @@ public interface CourseRepository extends Neo4jRepository<Course, Long>{
     @Query("MATCH (n:Course) WHERE n.course_id = ({course_id}) RETURN n")
     Course findByCourseId(@Param("course_id") String course_id);
 
-
     @Query("start course = node({id}) match (course)-[:OWN]->(mindmaps) return mindmaps")
     Mindmap[] findMindmaps(@Param("id") long id);
 
