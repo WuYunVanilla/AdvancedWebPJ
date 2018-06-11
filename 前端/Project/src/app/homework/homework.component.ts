@@ -28,9 +28,6 @@ export class HomeworkComponent implements OnInit, OnChanges {
     multiple: MultipleQuestion = new MultipleQuestion();
     short: ShortQuestion = new ShortQuestion();
 
-    link_addresses: string[];
-    link_address: string;
-
     @Input() course_id: string; // 与上层组件中course绑定
     @Input() mind_id: string; // 与上层组件中选中的mindMap绑定
     @Input() node_id: string;
@@ -43,44 +40,12 @@ export class HomeworkComponent implements OnInit, OnChanges {
     ngOnInit() {
         // 加载所有的选择题和简答题
         this.updateHomework();
-        this.getLinkAddrs();
     }
 
     ngOnChanges() {
         this.updateHomework();
-        this.getLinkAddrs();
     }
 
-
-    getLinkAddrs() {
-      this.nodeService.getLinkResourses(
-        this.course_id,
-        this.mind_id,
-        this.node_id).subscribe(
-        value => this.setLinkAddrs(value));
-    }
-
-    setLinkAddrs(value) {
-      this.link_addresses = value;
-    }
-
-    uploadLink() {
-      this.nodeService.upload_link(
-        this.course_id,
-        this.mind_id,
-        this.node_id,
-        this.link_address).subscribe(
-        value => this.checkLink(value['success']));
-    }
-
-    checkLink(value) {
-      if (value) {
-        alert('上传成功！');
-        this.getLinkAddrs();
-      } else {
-        alert('上传失败！');
-      }
-    }
 
     updateHomework() {
         // 获取所有的选择题

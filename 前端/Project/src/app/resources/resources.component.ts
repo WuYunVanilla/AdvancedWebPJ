@@ -26,7 +26,8 @@ export class ResourcesComponent implements OnInit, OnChanges {
 
 
     material_names: string[] = [];
-    links: string[] = [];
+    link_addresses: string[];
+    link_address: string;
 
 
     public hasBaseDropZoneOver = false;
@@ -46,12 +47,15 @@ export class ResourcesComponent implements OnInit, OnChanges {
         console.log('course_id=' + this.course_id);
         console.log('mind_id=' + this.mind_id);
         console.log('node_id=' + this.node_id);
+
+        this.getLinkAddrs();
     }
 
     ngOnChanges() {
         this.uploader.options.url = this.baseUrl + this.course_id + '/' + this.mind_id + '/' + this.node_id;
 
         this.updateResources();
+        this.getLinkAddrs();
     }
 
 
@@ -84,19 +88,42 @@ export class ResourcesComponent implements OnInit, OnChanges {
         });
     }
 
-    download() {
-        this.nodeService.downloadResource(
-            this.course_id, this.mind_id, this.node_id, 'bull.png').subscribe(r => {
-            console.log(r);
-        });
+    download(file_name: string) {
+      this.nodeService.requestBlob(
+        this.course_id, this.mind_id, this.node_id, 'bull.png').subscribe(r => {
 
-
-        // const blob = new Blob([data], {type: 'application/json'});
-        // const objectUrl = URL.createObjectURL(blob);
-        // // window.open(objectUrl);
+        this.nodeService.downFile(r, file_name, 'application/json');
+      });
+    }
+    
+    getLinkAddrs() {
+      this.nodeService.getLinkResourses(
+        this.course_id,
+        this.mind_id,
+        this.node_id).subscribe(
+        value => this.setLinkAddrs(value));
     }
 
+    setLinkAddrs(value) {
+      this.link_addresses = value;
+    }
 
+    uploadLink() {
+      this.nodeService.upload_link(
+        this.course_id,
+        this.mind_id,
+        this.node_id,
+        this.link_address).subscribe(
+        value => this.checkLink(value['success']));
+    }
 
-
+    checkLink(value) {
+      if (value) {
+        alert('上传成功！');
+        this.getLinkAddrs();
+        this.link_address = '';
+      } else {
+        alert('上传失败！');
+      }
+    }
 }

@@ -1,31 +1,3 @@
-<div class="uploadLink">
-  <form>
-    <div class="formItem">
-      <label>输入链接：</label>
-      <input size="60" type="text" required name="link" [(ngModel)]="link_address" #link="ngModel" style="margin-right: 20px;">
-      <button class="btn btn-outline-dark" (click)="uploadLink()" [disabled]="(!link.valid)">上传</button>
-    </div>
-  </form>
-</div>
-
-<div class="links">
-  <ol>
-    <li *ngFor="let link of link_addresses"><a href="{{link}}">{{link}}</a></li>
-  </ol>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- 发布选择题 -->
 <div id="release_multiple" class="buttonDiv">
   <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#releaseMultiple">发布选择题</button>
