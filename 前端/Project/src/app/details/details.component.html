@@ -20,11 +20,17 @@
         </ng-template>
     </ngb-tab>
     <ngb-tab title="作业" id="tab-homework" *ngIf="selected_node_id!=''">
+
         <ng-template ngbTabContent>
 
-          <app-homework></app-homework>
+          <app-homework [course_id]="course_id"
+                        [mind_id]="currentMind"
+                        [node_id]="selected_node_id">
+
+          </app-homework>
         </ng-template>
     </ngb-tab>
+
     <ngb-tab title="课件" id="tab-ppt" *ngIf="selected_node_id!=''">
         <ng-template ngbTabContent>
             <app-courseware [course_id]="course_id"
