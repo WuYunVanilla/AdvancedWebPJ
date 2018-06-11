@@ -48,14 +48,13 @@ export class ResourcesComponent implements OnInit, OnChanges {
         console.log('mind_id=' + this.mind_id);
         console.log('node_id=' + this.node_id);
 
-        this.getLinkAddrs();
     }
 
     ngOnChanges() {
         this.uploader.options.url = this.baseUrl + this.course_id + '/' + this.mind_id + '/' + this.node_id;
 
-        this.updateResources();
-        this.getLinkAddrs();
+        this.updateMaterials();
+        this.updateLinks();
     }
 
 
@@ -78,52 +77,52 @@ export class ResourcesComponent implements OnInit, OnChanges {
     successItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
         console.log('上传成功，response为' + response);
 
-        this.updateResources();
+        this.updateMaterials();
     }
 
-    updateResources() {
-        this.nodeService.getResourses(this.course_id, this.mind_id, this.node_id).subscribe(r => {
+    updateMaterials() {
+        this.nodeService.getMaterials(this.course_id, this.mind_id, this.node_id).subscribe(r => {
             this.material_names = r;
             console.log(r);
         });
     }
 
     download(file_name: string) {
-      this.nodeService.requestBlob(
-        this.course_id, this.mind_id, this.node_id, 'bull.png').subscribe(r => {
+        this.nodeService.requestMaterialBlob(
+            this.course_id, this.mind_id, this.node_id, file_name).subscribe(r => {
 
-        this.nodeService.downFile(r, file_name, 'application/json');
-      });
+            this.nodeService.downFile(r, file_name);
+        });
     }
 
-    getLinkAddrs() {
-      this.nodeService.getLinkResourses(
-        this.course_id,
-        this.mind_id,
-        this.node_id).subscribe(
-        value => this.setLinkAddrs(value));
+    updateLinks() {
+        this.nodeService.getLinks(
+            this.course_id,
+            this.mind_id,
+            this.node_id).subscribe(
+            value => this.setLinkAddrs(value));
     }
 
     setLinkAddrs(value) {
-      this.link_addresses = value;
+        this.link_addresses = value;
     }
 
     uploadLink() {
-      this.nodeService.upload_link(
-        this.course_id,
-        this.mind_id,
-        this.node_id,
-        this.link_address).subscribe(
-        value => this.checkLink(value['success']));
+        this.nodeService.upload_link(
+            this.course_id,
+            this.mind_id,
+            this.node_id,
+            this.link_address).subscribe(
+            value => this.checkLink(value['success']));
     }
 
     checkLink(value) {
-      if (value) {
-        alert('上传成功！');
-        this.getLinkAddrs();
-        this.link_address = '';
-      } else {
-        alert('上传失败！');
-      }
+        if (value) {
+            alert('上传成功！');
+            this.updateLinks();
+            this.link_address = '';
+        } else {
+            alert('上传失败！');
+        }
     }
 }

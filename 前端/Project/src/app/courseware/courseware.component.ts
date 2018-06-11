@@ -1,15 +1,16 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit } from '@angular/core';
 import {FileItem, FileUploader} from 'ng2-file-upload';
 import {ParsedResponseHeaders} from 'ng2-file-upload/file-upload/file-uploader.class';
+import {NodeService} from '../node.service';
 
 @Component({
     selector: 'app-courseware',
     templateUrl: './courseware.component.html',
     styleUrls: ['./courseware.component.css']
 })
-export class CoursewareComponent implements OnInit {
+export class CoursewareComponent implements OnInit, OnChanges {
 
-    baseUrl = 'http://10.222.129.245:8081/upload_courseware/';
+    baseUrl = '';
 
     @Input() course_id: string; // 与上层组件中course绑定
     @Input() mind_id: string; // 与上层组件中选中的mindMap绑定
@@ -19,29 +20,31 @@ export class CoursewareComponent implements OnInit {
         url: '',
         method: 'POST',
         isHTML5: true,
-        itemAlias: 'material'
+        itemAlias: 'courseware'
     });
 
-
-
-    courseware_names: string[] = ['1.pdf', '2.pdf'];
-
+    courseware_names: string[] = [];
 
     public hasBaseDropZoneOver = false;
 
 
-    constructor() { }
+    constructor(private nodeService: NodeService) {
+        const ip = window.sessionStorage.getItem('ip');
+        this.baseUrl = 'http://' + ip + ':8081/upload_courseware/';
+    }
 
     ngOnInit() {
 
+        this.uploader.onSuccessItem = this.successItem.bind(this);
         this.uploader.onAfterAddingFile = this.afterAddingFile;
         this.uploader.onBuildItemForm = this.buildItemForm;
-        this.uploader.onSuccessItem = this.successItem;
+
     }
 
     ngOnChanges() {
         this.uploader.options.url = this.baseUrl + this.course_id + '/' + this.mind_id + '/' + this.node_id;
 
+        this.updateCoursewares();
     }
 
 
@@ -62,7 +65,23 @@ export class CoursewareComponent implements OnInit {
     }
 
     successItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
-        console.log('上传成功，response为' + response);
+
+        this.updateCoursewares();
     }
+
+    updateCoursewares() {
+        this.nodeService.getCoursewares(this.course_id, this.mind_id, this.node_id).subscribe(r => {
+            this.courseware_names = r;
+        });
+    }
+
+    download(file_name: string) {
+        this.nodeService.requestCoursewareBlob(
+            this.course_id, this.mind_id, this.node_id, file_name).subscribe(r => {
+
+            this.nodeService.downFile(r, file_name);
+        });
+    }
+
 
 }

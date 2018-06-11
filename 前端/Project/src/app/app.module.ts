@@ -35,6 +35,8 @@ import { CoursewareComponent } from './courseware/courseware.component';
 import { StuMainComponent } from './stu-main/stu-main.component';
 import { StuDetailsComponent } from './stu-details/stu-details.component';
 import { StuMindmapComponent } from './stu-mindmap/stu-mindmap.component';
+import { StuResourcesComponent } from './stu-resources/stu-resources.component';
+import { StuCoursewareComponent } from './stu-courseware/stu-courseware.component';
 
 @NgModule({
     declarations: [
@@ -57,7 +59,9 @@ import { StuMindmapComponent } from './stu-mindmap/stu-mindmap.component';
         CoursewareComponent,
         StuMainComponent,
         StuDetailsComponent,
-        StuMindmapComponent
+        StuMindmapComponent,
+        StuResourcesComponent,
+        StuCoursewareComponent
     ],
     imports: [
         BrowserModule,

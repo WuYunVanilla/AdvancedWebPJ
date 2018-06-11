@@ -1,0 +1,39 @@
+.buttonDiv {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.my-drop-zone {
+    text-align: center;
+    border: dotted 3px lightgray;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+.nv-file-over { border: dotted 3px green; } /* Default class applied to drop zones on over */
+
+
+.upload_bottom {
+    margin-top: 20px;
+}
+
+#progressBar {
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+#container {
+    margin-top: 20px;
+}
+
+.upload_buttons {
+    margin-top: 20px;
+    /*padding-top: 20px;*/
+}
+
+.upload_buttons button {
+    margin-right: 10px;
+}
+
+.upload_card {
+    margin-bottom: 20px;
+}

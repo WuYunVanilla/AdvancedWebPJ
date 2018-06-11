@@ -69,13 +69,6 @@
                                         [disabled]="item.isReady || item.isUploading || item.isSuccess">
                                     上传
                                 </button>
-                                <button style="margin-right: 5px;"
-                                        type="button"
-                                        class="btn btn-warning btn-sm"
-                                        (click)="item.cancel()"
-                                        [disabled]="!item.isUploading">
-                                    取消
-                                </button>
                                 <button type="button"
                                         class="btn btn-danger btn-sm"
                                         (click)="item.remove()">
@@ -143,11 +136,10 @@
 
     <ngb-panel title="文件资源">
         <ng-template ngbPanelContent>
-            <button (click)="download()"></button>
 
             <ol>
                 <li *ngFor="let material of material_names">
-                    <span><b>{{material}}</b></span>
+                    <a href="javascript:void(0)" (click)="download(material)"><b>{{material}}</b></a>
                     <hr>
                 </li>
             </ol>

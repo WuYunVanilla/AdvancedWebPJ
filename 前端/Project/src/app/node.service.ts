@@ -60,12 +60,18 @@ export class NodeService {
     }
 
     // 获取资源列表
-    getResourses(course_id: string, mind_id: string, node_id: string): Observable<string[]> {
+    getMaterials(course_id: string, mind_id: string, node_id: string): Observable<string[]> {
         this.tempUrl = this.baseUrl + 'materials/' + course_id + '/' + mind_id + '/' + node_id;
         return this.http.get<string[]>(this.tempUrl);
     }
 
-    getLinkResourses(course_id: string, mind_id: string, node_id: string): Observable<string[]> {
+    // 获取资源列表
+    getCoursewares(course_id: string, mind_id: string, node_id: string): Observable<string[]> {
+        this.tempUrl = this.baseUrl + 'coursewares/' + course_id + '/' + mind_id + '/' + node_id;
+        return this.http.get<string[]>(this.tempUrl);
+    }
+
+    getLinks(course_id: string, mind_id: string, node_id: string): Observable<string[]> {
         this.tempUrl = this.baseUrl + 'links/' + course_id + '/' + mind_id + '/' + node_id;
         return this.http.get<string[]>(this.tempUrl);
     }
@@ -76,24 +82,32 @@ export class NodeService {
         return this.http.post<boolean>(this.tempUrl, target, httpOptions);
     }
 
-    // Blob请求
-    requestBlob(course_id: string, mind_id: string, node_id: string, material_name: string): Observable<any> {
-      this.tempUrl = this.baseUrl + 'download_material/' + course_id + '/' + mind_id + '/' + node_id;
-      const data = {'material_name': material_name};
+    requestMaterialBlob(course_id: string, mind_id: string, node_id: string, material_name: string): Observable<any> {
+        this.tempUrl = this.baseUrl + 'download_material/' + course_id + '/' + mind_id + '/' + node_id;
+        const data = {'material_name': material_name};
 
-      return this.http.request('post', this.tempUrl, { body: data, observe: 'response', responseType: 'blob'});
+        return this.http.request('post', this.tempUrl, { body: data, observe: 'response', responseType: 'blob'});
+    }
+
+    // Blob请求
+    requestCoursewareBlob(course_id: string, mind_id: string, node_id: string, material_name: string): Observable<any> {
+        this.tempUrl = this.baseUrl + 'download_courseware/' + course_id + '/' + mind_id + '/' + node_id;
+        const data = {'courseware_name': material_name};
+
+        return this.http.request('post', this.tempUrl, { body: data, observe: 'response', responseType: 'blob'});
     }
 
     // Blob文件转换下载
-    downFile(result, fileName, fileType?) {
-      const data = result.body;
-      const blob = new Blob([data], { type: fileType || data.type });
-      const objectUrl = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.setAttribute('style', 'display:none');
-      a.setAttribute('href', objectUrl);
-      a.setAttribute('download', fileName);
-      a.click();
-      URL.revokeObjectURL(objectUrl);
+    downFile(result, fileName) {
+
+        const data = result.body;
+        const blob = new Blob([data], { type: data.type });
+        const objectUrl = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.setAttribute('style', 'display:none');
+        a.setAttribute('href', objectUrl);
+        a.setAttribute('download', fileName);
+        a.click();
+        URL.revokeObjectURL(objectUrl);
     }
 }

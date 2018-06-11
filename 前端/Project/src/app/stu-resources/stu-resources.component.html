@@ -1,0 +1,25 @@
+<div style="height: 20px;"></div>
+<ngb-accordion>
+    <ngb-panel title="链接资源">
+        <ng-template ngbPanelContent>
+            <div class="links">
+                <ol>
+                    <li *ngFor="let link of link_addresses"><a href="{{link}}">{{link}}</a></li>
+                </ol>
+            </div>
+        </ng-template>
+    </ngb-panel>
+
+    <ngb-panel title="文件资源">
+        <ng-template ngbPanelContent>
+
+            <ol>
+                <li *ngFor="let material of material_names">
+                    <a href="javascript:void(0)" (click)="download(material)"><b>{{material}}</b></a>
+                    <hr>
+                </li>
+            </ol>
+        </ng-template>
+    </ngb-panel>
+
+</ngb-accordion>

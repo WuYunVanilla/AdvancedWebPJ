@@ -71,13 +71,6 @@ export class HomeworkComponent implements OnInit, OnChanges {
         this.shortQuestion = value;
     }
 
-    // releaseMultiple() {
-    //   this.modalService.open(ReleaseMultipleComponent);
-    // }
-    // releaseShort() {
-    //   this.modalService.open(ReleaseShortComponent);
-    // }
-
     releaseMultiple () {
         // 发布选择题
         this.nodeService.releaseMutiple(

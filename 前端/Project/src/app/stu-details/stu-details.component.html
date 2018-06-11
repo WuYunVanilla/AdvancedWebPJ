@@ -1,46 +1,49 @@
 <ngb-tabset [destroyOnHide]="false" class="table-secondary">
-  <ngb-tab title="思维导图">
-    <ng-template ngbTabContent>
+    <ngb-tab title="思维导图">
+        <ng-template ngbTabContent>
 
-      <div ngbDropdown class="d-inline-block mr-2" style="margin-top: 10px;">
-        <button class="btn btn-outline-secondary" ngbDropdownToggle>思维导图列表</button>
-        <div ngbDropdownMenu>
-          <button *ngFor="let mind of mindList" class="dropdown-item" (click)="currentMind=mind;">{{mind}}</button>
+            <div ngbDropdown class="d-inline-block mr-2" style="margin-top: 10px;">
+                <button class="btn btn-outline-secondary" ngbDropdownToggle>思维导图列表</button>
+                <div ngbDropdownMenu>
+                    <button *ngFor="let mind of mindList" class="dropdown-item" (click)="currentMind=mind;">{{mind}}</button>
 
-        </div>
-      </div>
+                </div>
+            </div>
 
-      <app-stu-mindmap [mindId]="currentMind" [courseId]="course_id" (click)="checkTabStatus()" #jsmind></app-stu-mindmap>
+            <app-stu-mindmap [mindId]="currentMind" [courseId]="course_id" (click)="checkTabStatus()" #jsmind></app-stu-mindmap>
 
 
-    </ng-template>
-  </ngb-tab>
-  <ngb-tab title="作业" id="tab-homework" *ngIf="selected_node_id!=''">
-    <ng-template ngbTabContent>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab title="作业" id="tab-homework" *ngIf="selected_node_id!=''">
+        <ng-template ngbTabContent>
 
-      <app-stu-homework></app-stu-homework>
-    </ng-template>
-  </ngb-tab>
-  <ngb-tab title="课件" id="tab-ppt" *ngIf="selected_node_id!=''">
-    <ng-template ngbTabContent>
-      <app-courseware [course_id]="course_id"
-                      [mind_id]="currentMind"
-                      [node_id]="selected_node_id">
+            <app-stu-homework [course_id]="course_id"
+                              [mind_id]="currentMind"
+                              [node_id]="selected_node_id">
 
-      </app-courseware>
-      <p>
-        此处为{{selected_node_id}}的课件组件
-      </p>
-    </ng-template>
-  </ngb-tab>
-  <ngb-tab title="资源" id="tab-resource"  *ngIf="selected_node_id!=''">
-    <ng-template ngbTabContent>
+            </app-stu-homework>
 
-      <!--<app-resources [course_id]="course_id"-->
-                     <!--[mind_id]="currentMind"-->
-                     <!--[node_id]="selected_node_id">-->
-      <!--</app-resources>-->
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab title="课件" id="tab-ppt" *ngIf="selected_node_id!=''">
+        <ng-template ngbTabContent>
+            <app-stu-courseware [course_id]="course_id"
+                                [mind_id]="currentMind"
+                                [node_id]="selected_node_id">
 
-    </ng-template>
-  </ngb-tab>
+            </app-stu-courseware>
+
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab title="资源" id="tab-resource"  *ngIf="selected_node_id!=''">
+        <ng-template ngbTabContent>
+
+            <app-stu-resources [course_id]="course_id"
+                               [mind_id]="currentMind"
+                               [node_id]="selected_node_id">
+            </app-stu-resources>
+
+        </ng-template>
+    </ngb-tab>
 </ngb-tabset>

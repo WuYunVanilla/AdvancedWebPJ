@@ -101,6 +101,7 @@ export class StuMindmapComponent implements OnInit {
             if (!this.mindMap) {
                 console.log('初始化mindMap!');
                 this.mindMap = jsMind.show(options, this.mind);
+                this.mindMap.disable_edit();
             } else {
                 console.log('使用已有的mindMap!');
                 console.log(this.mind);

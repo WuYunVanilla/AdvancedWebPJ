@@ -1,0 +1,16 @@
+<div style="height: 20px;"></div>
+<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+
+  <ngb-panel title="课件资源">
+    <ng-template ngbPanelContent>
+
+      <ol>
+        <li *ngFor="let courseware of courseware_names">
+          <a href="javascript:void(0)" (click)="download(courseware)"><b>{{ courseware }}</b></a>
+          <hr>
+        </li>
+      </ol>
+    </ng-template>
+  </ngb-panel>
+
+</ngb-accordion>

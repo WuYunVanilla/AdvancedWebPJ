@@ -1,56 +1,57 @@
+<div style="height: 20px;"></div>
 <div id="homework">
-  <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
-    <ngb-panel title="选择题">
-      <ng-template ngbPanelContent>
-        <ol>
-          <li *ngFor="let stuMultiple of stuMultiples" class="multiple">
-            <form>
-              <div class="title, item"><b>{{stuMultiple.title}}</b></div>
-              <div class="options, item">
-                <div>
-                  <span>A. </span><span class="optionA"> {{stuMultiple.optionA}}</span>
-                </div>
-                <div>
-                  <span>B. </span><span class="optionB"> {{stuMultiple.optionB}}</span>
-                </div>
-                <div>
-                  <span>C. </span><span class="optionC"> {{stuMultiple.optionC}}</span>
-                </div>
-                <div>
-                  <span>D. </span><span class="optionD"> {{stuMultiple.optionD}}</span>
-                </div>
-              </div>
-              <div class="item">
-                <label>选择答案：</label>
-                <input type="radio" required name="answer" value="A" [(ngModel)]="stuMultiple.answer" #answer="ngModel"> A
-                <input type="radio" required name="answer" value="B" [(ngModel)]="stuMultiple.answer" #answer="ngModel"> B
-                <input type="radio" required name="answer" value="C" [(ngModel)]="stuMultiple.answer" #answer="ngModel"> C
-                <input type="radio" required name="answer" value="D" [(ngModel)]="stuMultiple.answer" #answer="ngModel"> D
-              </div>
-              <button class="btn-outline-dark" (click)="submitMultiple(stuMultiple)" [disabled]="(!answer.valid)">提交回答</button>
-            </form>
-            <hr>
-          </li>
-        </ol>
-      </ng-template>
-    </ngb-panel>
+    <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+        <ngb-panel title="选择题">
+            <ng-template ngbPanelContent>
+                <ol>
+                    <li *ngFor="let stuMultiple of stuMultiples" class="multiple">
+                        <form>
+                            <div class="title, item"><b>{{stuMultiple.title}}</b></div>
+                            <div class="options, item">
+                                <div>
+                                    <span>A. </span><span class="optionA"> {{stuMultiple.optionA}}</span>
+                                </div>
+                                <div>
+                                    <span>B. </span><span class="optionB"> {{stuMultiple.optionB}}</span>
+                                </div>
+                                <div>
+                                    <span>C. </span><span class="optionC"> {{stuMultiple.optionC}}</span>
+                                </div>
+                                <div>
+                                    <span>D. </span><span class="optionD"> {{stuMultiple.optionD}}</span>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <label>选择答案：</label>
+                                <input type="radio" required name="answer" value="A" [(ngModel)]="stuMultiple.answer" #answer="ngModel"> A
+                                <input type="radio" required name="answer" value="B" [(ngModel)]="stuMultiple.answer" #answer="ngModel"> B
+                                <input type="radio" required name="answer" value="C" [(ngModel)]="stuMultiple.answer" #answer="ngModel"> C
+                                <input type="radio" required name="answer" value="D" [(ngModel)]="stuMultiple.answer" #answer="ngModel"> D
+                            </div>
+                            <button class="btn-outline-dark" (click)="submitMultiple(stuMultiple)" [disabled]="(!answer.valid)">提交回答</button>
+                        </form>
+                        <hr>
+                    </li>
+                </ol>
+            </ng-template>
+        </ngb-panel>
 
-    <ngb-panel title="简答题">
-      <ng-template ngbPanelContent>
-        <ol>
-          <form>
-            <li *ngFor="let stuShort of stuShorts" class="short">
-              <div class="title, item"><b>{{stuShort.title}}</b></div>
-              <div>输入回答：</div>
-              <textarea cols="100" rows="4"></textarea>
-              <div>
-                <button class="btn-outline-dark" (click)="submitShort(stuShort)">提交回答</button>
-              </div>
-              <hr>
-            </li>
-          </form>
-        </ol>
-      </ng-template>
-    </ngb-panel>
-  </ngb-accordion>
+        <ngb-panel title="简答题">
+            <ng-template ngbPanelContent>
+                <ol>
+                    <form>
+                        <li *ngFor="let stuShort of stuShorts" class="short">
+                            <div class="title, item"><b>{{stuShort.title}}</b></div>
+                            <div>输入回答：</div>
+                            <textarea cols="100" rows="4"></textarea>
+                            <div>
+                                <button class="btn-outline-dark" (click)="submitShort(stuShort)">提交回答</button>
+                            </div>
+                            <hr>
+                        </li>
+                    </form>
+                </ol>
+            </ng-template>
+        </ngb-panel>
+    </ngb-accordion>
 </div>
