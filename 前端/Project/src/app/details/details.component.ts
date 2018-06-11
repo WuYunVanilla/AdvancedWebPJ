@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { MindmapComponent } from '../mindmap/mindmap.component';
-import {MindmapService} from '../mindmap.service';
+import { MindmapService } from '../mindmap.service';
+import {HomeworkComponent} from '../homework/homework.component';
 
 
 
@@ -21,6 +22,9 @@ export class DetailsComponent implements OnInit {
 
     @ViewChild(MindmapComponent)
     private mindComponent: MindmapComponent;
+
+    @ViewChild(HomeworkComponent)
+    private homeworkComponent: HomeworkComponent;
 
     constructor(private mindService: MindmapService) { }
 
@@ -48,7 +52,6 @@ export class DetailsComponent implements OnInit {
         this.mindComponent.update_selected_knowledge_id();
         this.selected_node_id = this.mindComponent.selected_node_id;
     }
-
 
     createMind() {
         // 参考jsmind.js里面的方法确定新的思维导图的id
