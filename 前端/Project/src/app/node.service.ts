@@ -19,8 +19,7 @@ export class NodeService {
 
     constructor(
         private http: HttpClient) {
-        const ip = window.sessionStorage.getItem('ip');
-        this.baseUrl = 'http://' + ip + ':8081/';
+        this.baseUrl = window.sessionStorage.getItem('url');
     }
 
     // 教师获取选择题列表

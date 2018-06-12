@@ -18,12 +18,12 @@ export class UserService {
     constructor(
         private http: HttpClient
     ) {
-        const ip = window.sessionStorage.getItem('ip');
+        const url = window.sessionStorage.getItem('url');
 
-        this.loginUrl = 'http://' + ip + ':8081/login';
-        this.sendCodeUrl = 'http://' + ip + ':8081/register';
-        this.registerUrl = 'http://' + ip + ':8081/transfer';
-        this.modifyPwdUrl = 'http://' + ip + ':8081/modify_password';
+        this.loginUrl = url + 'login';
+        this.sendCodeUrl = url + 'register';
+        this.registerUrl = url + 'transfer';
+        this.modifyPwdUrl = url + 'modify_password';
     }
 
     login(user: User): Observable<boolean> {
