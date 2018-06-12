@@ -13,7 +13,7 @@ export class IndexComponent implements OnInit {
 
     ngOnInit() {
         // window.sessionStorage.setItem('ip', '10.222.129.245');
-        window.sessionStorage.setItem('ip', '192.168.1.124');
+        window.sessionStorage.setItem('url', 'http://54.201.190.180:8080/mindmap/');
     }
     openLogin() {
         this.modalService.open(LoginComponent);

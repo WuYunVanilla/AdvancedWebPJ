@@ -29,8 +29,7 @@ export class CoursewareComponent implements OnInit, OnChanges {
 
 
     constructor(private nodeService: NodeService) {
-        const ip = window.sessionStorage.getItem('ip');
-        this.baseUrl = 'http://' + ip + ':8081/upload_courseware/';
+        this.baseUrl = window.sessionStorage.getItem('url') + 'upload_courseware/';
     }
 
     ngOnInit() {

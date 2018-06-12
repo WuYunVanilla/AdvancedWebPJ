@@ -16,8 +16,7 @@ export class CourseService {
     constructor(
         private http: HttpClient) {
 
-        const ip = window.sessionStorage.getItem('ip');
-        this.baseUrl = 'http://' + ip + ':8081/';
+        this.baseUrl = window.sessionStorage.getItem('url');
     }
 
     getCourses(user_name: string, identity: string): Observable<Course[]> {
