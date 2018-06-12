@@ -78,18 +78,19 @@ public class MindmapController {
             return success;
         }
 
+        // 需要判断该mindmap是否已经存在
+        // 若存在，则做修改，否则新建
         boolean if_exist = false;
         Mindmap tempMindmap = mindmapService.findByMindmapId(mindmap_id);
         if (tempMindmap != null)
             if_exist = true;
 
-        // 需要判断该mindmap是否已经存在
-        // 若存在，则做修改，否则新建
-
         Node root_node = gson.fromJson(json_string, Node.class);
+
         //向每个node添加course_mindmap属性
+        //并且对于已存在的node 将所有和次node有关系的节点都全都链接到新节点上
         root_node.setCourse_mindmap(course_id + " " + mindmap_id);
-        root_node = setCourseMindmapForNode(root_node);
+        root_node = recurseForNode(root_node);
 
         //存下node_root，其余node会自动生成
         nodeService.save(root_node);
@@ -111,7 +112,6 @@ public class MindmapController {
             Node tempRootNode = mindmapService.findRootNode(tempMindmap.getId());
             deleteChildren(tempRootNode);
             nodeService.delete(tempRootNode);
-
             mindmapService.delete(tempMindmap);
         }
 
@@ -120,7 +120,7 @@ public class MindmapController {
     }
 
     //recursion 递归
-    private Node setCourseMindmapForNode(Node node_root) {
+    private Node recurseForNode(Node node_root) {
         if (node_root.getChildren() != null) {
             for (Node child : node_root.getChildren()) {
 
@@ -188,7 +188,7 @@ public class MindmapController {
                     }
 
                 }
-                child = setCourseMindmapForNode(child);
+                child = recurseForNode(child);
             }
         }
         return node_root;
