@@ -10,6 +10,9 @@ import {NodeService} from '../node.service';
 })
 export class ResourcesComponent implements OnInit, OnChanges {
 
+    isCollapsed_file = false;
+    isCollapsed_link = false;
+
     baseUrl = '';
 
     @Input() course_id: string; // 与上层组件中course绑定
