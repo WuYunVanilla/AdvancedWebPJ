@@ -34,8 +34,7 @@ export class ResourcesComponent implements OnInit, OnChanges {
 
 
     constructor(private nodeService: NodeService) {
-        const ip = window.sessionStorage.getItem('ip');
-        this.baseUrl = 'http://' + ip + ':8081/upload_material/';
+        this.baseUrl = window.sessionStorage.getItem('url') + 'upload_material/';
     }
 
     ngOnInit() {

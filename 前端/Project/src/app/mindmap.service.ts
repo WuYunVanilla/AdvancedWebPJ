@@ -16,8 +16,8 @@ export class MindmapService {
 
     constructor(
         private http: HttpClient) {
-        const ip = window.sessionStorage.getItem('ip');
-        this.baseUrl = 'http://' + ip + ':8081/';
+
+        this.baseUrl = window.sessionStorage.getItem('url');
     }
 
     getMindList(course_id: string): Observable<any> {
