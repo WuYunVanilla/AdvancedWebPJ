@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from '../user.service';
 import {User} from '../user';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
       window.sessionStorage.setItem('user_name', this.user.user_name);
       window.sessionStorage.setItem('identity', this.user.identity);
       window.sessionStorage.setItem('user_pwd', this.user.user_pwd);
-      window.location.href = 'http://localhost:4200/courses';
+      window.location.href = 'http://' + environment.id + ':' + environment.port + '/courses';
     } else {
       window.alert('登录失败!');
     }

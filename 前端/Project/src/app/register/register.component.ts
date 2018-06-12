@@ -4,6 +4,7 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from '../user.service';
 import {User} from '../user';
 import {RegisterUser} from '../register-user';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-register',
@@ -54,7 +55,7 @@ export class RegisterComponent implements OnInit {
       window.sessionStorage.setItem('identity', this.user.identity);
       window.sessionStorage.setItem('user_pwd', this.user.user_pwd);
       window.alert('注册成功!');
-      window.location.href = 'http://localhost:4200/courses';
+      window.location.href = 'http://' + environment.id + ':' + environment.port + '/courses';
     } else {
       window.alert('注册失败!');
     }

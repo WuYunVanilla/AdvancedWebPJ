@@ -8,6 +8,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {StuAddCourseComponent} from '../stu-add-course/stu-add-course.component';
 import {ModifyPasswordComponent} from '../modify-password/modify-password.component';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-courses',
@@ -49,9 +50,9 @@ export class CoursesComponent implements OnInit {
   enterCourse(course_id: string) {
     window.sessionStorage.setItem('course_id', course_id);
     if (window.sessionStorage.getItem('identity') === 'teacher') {
-      window.location.href = 'http://localhost:4200/main';
+      window.location.href = 'http://' + environment.id + ':' + environment.port + '/main';
     } else if (window.sessionStorage.getItem('identity') === 'student') {
-      window.location.href = 'http://localhost:4200/stu-main';
+      window.location.href = 'http://' + environment.id + ':' + environment.port + '/stu-main';
     }
   }
 
@@ -62,6 +63,6 @@ export class CoursesComponent implements OnInit {
   // 登出，清除sessionStorage
   loginOut(): void {
     window.sessionStorage.clear();
-    window.location.href = 'http://localhost:4200/';
+    window.location.href = 'http://' + environment.id + ':' + environment.port + '/';
   }
 }
