@@ -10,6 +10,8 @@ import {NodeService} from '../node.service';
 })
 export class CoursewareComponent implements OnInit, OnChanges {
 
+    isCollapsed = false;
+
     baseUrl = '';
 
     @Input() course_id: string; // 与上层组件中course绑定
