@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://13.67.78.54:8080/mindmap/'
+  apiUrl: 'http://54.201.190.180:8080/mindmap/'
 };
