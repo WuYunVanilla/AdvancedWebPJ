@@ -24,15 +24,18 @@ export class ModifyPasswordComponent implements OnInit {
   closeWindow() {
     this.activeModal.close('Close click');
   }
+
+  // 提交修改密码请求
   onSubmit() {
+    // 原密码不正确
     if (this.storedPwd !== this.inputPwd) {
       window.alert('原密码错误！');
       return;
     }
     this.userService.modifyPassword(this.user)
       .subscribe((value => this.checkSuccess(value['success'])));
-    // this.checkSuccess(true);
   }
+
   checkSuccess(value) {
     if (value) {
       window.sessionStorage.setItem('user_pwd', this.user.user_pwd);

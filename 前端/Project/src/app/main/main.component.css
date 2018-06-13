@@ -28,3 +28,26 @@
     /*width: calc(100vw - 200px);*/
 
 }
+
+
+.loginOut {
+  margin-left: 20px;
+  width: 80px;
+  height: 30px;
+  font-size: 10px;
+  border-color: black;
+}
+
+.top {
+  margin-top: 20px;
+  float: right;
+}
+
+.row {
+  clear: both;
+}
+
+.loginOut:hover {
+  background-color: black;
+  color: white;
+}

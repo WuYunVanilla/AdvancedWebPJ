@@ -29,13 +29,9 @@ export class StuDetailsComponent implements OnInit {
 
 
         this.mindService.getMindList(this.course_id).subscribe(mindList => {
-            console.log(mindList);
             this.mindList = mindList['mindmap_id_list'];
             if (this.mindList.length > 0) {
                 this.currentMind = this.mindList[0];
-                console.log('调用了updateMindMap()');
-                console.log(this.currentMind);
-
             }
 
         });

@@ -16,18 +16,13 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
 import { FormsModule } from '@angular/forms';
-import { HttpRequestService } from './http-request.service';
 
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './user.service';
 import { CourseService } from './course.service';
-import { AddCourseComponent } from './add-course/add-course.component';
 import { HomeworkComponent } from './homework/homework.component';
 import { MindmapService } from './mindmap.service';
 import { NodeService } from './node.service';
-import { ReleaseMultipleComponent } from './release-multiple/release-multiple.component';
-import { ReleaseShortComponent } from './release-short/release-short.component';
-import { StuAddCourseComponent } from './stu-add-course/stu-add-course.component';
 import { ModifyPasswordComponent } from './modify-password/modify-password.component';
 import { ResourcesComponent } from './resources/resources.component';
 import { StuHomeworkComponent } from './stu-homework/stu-homework.component';
@@ -37,6 +32,8 @@ import { StuDetailsComponent } from './stu-details/stu-details.component';
 import { StuMindmapComponent } from './stu-mindmap/stu-mindmap.component';
 import { StuResourcesComponent } from './stu-resources/stu-resources.component';
 import { StuCoursewareComponent } from './stu-courseware/stu-courseware.component';
+import { StuCoursesComponent } from './stu-courses/stu-courses.component';
+import { RouteguardService } from './routeguard.service';
 
 @NgModule({
     declarations: [
@@ -48,11 +45,7 @@ import { StuCoursewareComponent } from './stu-courseware/stu-courseware.componen
         LoginComponent,
         RegisterComponent,
         DetailsComponent,
-        AddCourseComponent,
         HomeworkComponent,
-        ReleaseMultipleComponent,
-        ReleaseShortComponent,
-        StuAddCourseComponent,
         ModifyPasswordComponent,
         ResourcesComponent,
         StuHomeworkComponent,
@@ -61,7 +54,8 @@ import { StuCoursewareComponent } from './stu-courseware/stu-courseware.componen
         StuDetailsComponent,
         StuMindmapComponent,
         StuResourcesComponent,
-        StuCoursewareComponent
+        StuCoursewareComponent,
+        StuCoursesComponent
     ],
     imports: [
         BrowserModule,
@@ -73,20 +67,16 @@ import { StuCoursewareComponent } from './stu-courseware/stu-courseware.componen
         FileUploadModule
     ],
     providers: [
-        HttpRequestService,
         UserService,
         CourseService,
         MindmapService,
-        NodeService
+        NodeService,
+        RouteguardService
     ],
     bootstrap: [AppComponent],
     entryComponents: [
         LoginComponent,
         RegisterComponent,
-        AddCourseComponent,
-        StuAddCourseComponent,
-        ReleaseMultipleComponent,
-        ReleaseShortComponent,
         ModifyPasswordComponent
     ]
 })

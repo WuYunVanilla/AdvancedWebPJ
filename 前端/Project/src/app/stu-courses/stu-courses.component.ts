@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import {CourseService} from '../course.service';
-import {Course} from '../course';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
+import {CourseService} from '../course.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ModifyPasswordComponent} from '../modify-password/modify-password.component';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Course} from '../course';
 import '../../assets/bootstrap/js/bootstrap.js';
 
 @Component({
-  selector: 'app-courses',
-  templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.css']
+  selector: 'app-stu-courses',
+  templateUrl: './stu-courses.component.html',
+  styleUrls: ['./stu-courses.component.css']
 })
-export class CoursesComponent implements OnInit {
+export class StuCoursesComponent implements OnInit {
   user_name: string;
   courses: Course[];
-  course: Course = new Course;
+  allCourse: Course[];
 
   constructor(
     private modalService: NgbModal,
@@ -28,9 +28,10 @@ export class CoursesComponent implements OnInit {
   ngOnInit() {
     this.user_name = window.sessionStorage.getItem('user_name');
     this.getCourses();
+    this.getAllCourse();
   }
 
-  // 获取课程列表
+  // 获取学生选课列表
   getCourses() {
     this.courseService.getCourses(window.sessionStorage.getItem('user_name'), window.sessionStorage.getItem('identity')).subscribe(
       value => this.setCourses(value));
@@ -40,10 +41,20 @@ export class CoursesComponent implements OnInit {
     this.courses = value;
   }
 
-  // 进入课程对应的教师思维导图页
+  // 获取所有课程列表
+  getAllCourse() {
+    this.courseService.searchCourse()
+      .subscribe((value => this.setAllCourse(value)));
+  }
+
+  setAllCourse(value) {
+    this.allCourse = value;
+  }
+
+  // 进入课程对应的学生思维导图页
   enterCourse(course_id: string) {
     window.sessionStorage.setItem('course_id', course_id);
-    this.router.navigate(['main']);
+    this.router.navigate(['stu-main']);
   }
 
   // 修改密码
@@ -57,22 +68,20 @@ export class CoursesComponent implements OnInit {
     this.router.navigate(['']);
   }
 
-  // 教师添加课程
-  onSubmit() {
-    this.courseService.addCourse(this.course, window.sessionStorage.getItem('user_name'))
+  // 提交选课
+  onSubmit(course: Course) {
+    this.courseService.stuAddCourse(window.sessionStorage.getItem('user_name'), course)
       .subscribe((value => this.checkSuccess(value['success'])));
   }
 
-  // 检查是否添加成功
+  // 检查选课结果
   checkSuccess(value) {
     if (value) {
       window.alert('添加成功!');
-      // 更新课程列表
       this.getCourses();
-      // 清空新增课程信息
-      this.course = new Course();
     } else {
-      window.alert('课程Id已存在!');
+      window.alert('添加失败!');
     }
   }
+
 }

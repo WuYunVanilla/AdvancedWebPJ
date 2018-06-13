@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import {LoginComponent} from '../login/login.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-index',
@@ -9,16 +10,33 @@ import { RegisterComponent } from '../register/register.component';
     styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
-    constructor(private modalService: NgbModal) { }
+    isLogin: boolean;
+
+    constructor(private modalService: NgbModal, private router: Router) { }
 
     ngOnInit() {
-        // window.sessionStorage.setItem('ip', '10.222.129.245');
         window.sessionStorage.setItem('url', 'http://54.201.190.180:8080/mindmap/');
+        if (window.sessionStorage.getItem('isLogin') === 'isLogin') {
+          this.isLogin = true;
+        } else {
+          this.isLogin = false;
+        }
     }
+    // 打开登录组件
     openLogin() {
         this.modalService.open(LoginComponent);
     }
+    // 打开注册组件
     openRegister() {
         this.modalService.open(RegisterComponent);
+    }
+
+    // 如果已经登录那么主页不显示登录、注册组件
+    enterCourse() {
+      if (window.sessionStorage.getItem('identity') === 'teacher') {
+        this.router.navigate(['courses']);
+      } else if (window.sessionStorage.getItem('identity') === 'student') {
+        this.router.navigate(['stu-courses']);
+      }
     }
 }

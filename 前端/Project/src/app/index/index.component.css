@@ -26,6 +26,14 @@ a:hover {
   font-size: 18px;
 }
 
+#enterCourse button {
+  width: 120px;
+  height: 50px;
+  border-color: lightgray;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
 .buttonDiv {
   margin: auto;
   width: 50%;

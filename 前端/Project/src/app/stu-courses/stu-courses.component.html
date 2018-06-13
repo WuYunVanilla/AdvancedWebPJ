@@ -8,6 +8,7 @@
   <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#add">添加课程</button>
 </div>
 
+
 <!-- 模态框 -->
 <div class="modal fade" id="add">
   <div class="modal-dialog">
@@ -20,23 +21,19 @@
 
       <!-- 模态框主体 -->
       <div class="modal-body">
-        <form>
-          <div class="formItem">
-            <label>课程id：</label>
-            <input type="text" required name="courseID" [(ngModel)]="course.course_id" #courseID="ngModel">
-          </div>
-
-          <div class="formItem" >
-            <label>课程名称：</label>
-            <input type="text" required name="courseName" [(ngModel)]="course.course_name" #courseName="ngModel">
-          </div>
-        </form>
+        <ol>
+          <li *ngFor="let course of allCourse">
+            <div class="item">课程名称: <b>{{course.course_name}}</b></div>
+            <div class="item">课程代码：{{course.course_id}}</div>
+            <div class="item">选课人数：{{course.course_number}}</div>
+            <div><button (click)="onSubmit(course)" class="btn-outline-dark">选课</button></div>
+            <hr>
+          </li>
+        </ol>
       </div>
 
       <!-- 模态框底部 -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="onSubmit()"
-                [disabled]="(!courseID.valid) || (!courseName.valid)">确认</button>
         <button type="button" class="btn btn-outline-dark" data-dismiss="modal">取消</button>
       </div>
     </div>
@@ -51,7 +48,4 @@
     <button class="buttonWithoutBorder" (click)="enterCourse(course.course_id)">进入课程</button>
   </div>
 </div>
-
-
-
 

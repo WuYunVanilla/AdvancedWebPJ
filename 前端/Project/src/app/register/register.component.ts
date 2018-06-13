@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { UserService } from '../user.service';
-import {User} from '../user';
 import {RegisterUser} from '../register-user';
-import {environment} from '../../environments/environment';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +15,7 @@ export class RegisterComponent implements OnInit {
   confirmedPsd: string;
   isChecking = false;
 
-  constructor(public activeModal: NgbActiveModal, private userService: UserService) { }
+  constructor(public activeModal: NgbActiveModal, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -54,8 +53,15 @@ export class RegisterComponent implements OnInit {
       window.sessionStorage.setItem('user_name', this.user.user_name);
       window.sessionStorage.setItem('identity', this.user.identity);
       window.sessionStorage.setItem('user_pwd', this.user.user_pwd);
+      window.sessionStorage.setItem('isLogin', 'isLogin');
       window.alert('注册成功!');
-      window.location.href = 'http://' + environment.id + ':' + environment.port + '/courses';
+      this.closeWindow();
+      // 根据用户身份跳转到对应的课程页
+      if (this.user.identity === 'teacher') {
+        this.router.navigate(['courses']);
+      } else if (this.user.identity === 'student') {
+        this.router.navigate(['stu-courses']);
+      }
     } else {
       window.alert('注册失败!');
     }

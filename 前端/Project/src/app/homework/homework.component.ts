@@ -1,18 +1,8 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {AddCourseComponent} from '../add-course/add-course.component';
-import {Course} from '../course';
-import {CourseService} from '../course.service';
-import {ActivatedRoute} from '@angular/router';
-import {Location} from '@angular/common';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {MultipleQuestion} from '../multiple-question';
 import {ShortQuestion} from '../short-question';
-import {MindmapService} from '../mindmap.service';
 import {NodeService} from '../node.service';
-import {LoginComponent} from '../login/login.component';
-import {RegisterComponent} from '../register/register.component';
-import {ReleaseMultipleComponent} from '../release-multiple/release-multiple.component';
-import {ReleaseShortComponent} from '../release-short/release-short.component';
 
 import '../../assets/bootstrap/js/bootstrap.js';
 

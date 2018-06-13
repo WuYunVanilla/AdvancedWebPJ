@@ -90,21 +90,15 @@ export class StuMindmapComponent implements OnInit {
 
     // 显示新的mindMap
     updateMindMap() {
-        console.log(this.mind_id);
-        console.log('调用了getMind()');
         this.mindService.getMind(this.course_id, this.mind_id).subscribe(mindStr => {
 
-            console.log(mindStr);
             // const mindJson = jsMind.util.json.string2json(mindStr);
             this.mind.data = mindStr;
 
             if (!this.mindMap) {
-                console.log('初始化mindMap!');
                 this.mindMap = jsMind.show(options, this.mind);
                 this.mindMap.disable_edit();
             } else {
-                console.log('使用已有的mindMap!');
-                console.log(this.mind);
                 this.mindMap.show(this.mind);
             }
 

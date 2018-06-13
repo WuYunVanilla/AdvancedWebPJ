@@ -6,12 +6,16 @@
   <p>思维导图·个性化·主动学习·讨论式教学</p>
 </div>
 
-<div id="login" class="buttonDiv">
+<div *ngIf="!isLogin" id="login" class="buttonDiv">
   <button type="button" class="btn btn-outline-dark" (click)="openLogin()">登录</button>
 </div>
 
-<div id="register" class="buttonDiv">
+<div *ngIf="!isLogin" id="register" class="buttonDiv">
   <button type="button" class="btn btn-outline-dark" (click)="openRegister()">注册</button>
+</div>
+
+<div *ngIf="isLogin" id="enterCourse" class="buttonDiv">
+  <button type="button" class="btn btn-outline-dark" (click)="enterCourse()">进入课程页</button>
 </div>
 
 <div id="footer">

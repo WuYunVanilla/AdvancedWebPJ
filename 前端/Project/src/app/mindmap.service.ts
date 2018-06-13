@@ -26,7 +26,6 @@ export class MindmapService {
     }
 
     getMind(course_id: string, mind_id: string): Observable<any> {
-        console.log('in getMind: mind_id=' + mind_id);
         this.tempUrl = this.baseUrl + 'mindmap/' + course_id + '/' + mind_id;
         return this.http.get<any>(this.tempUrl);
     }
