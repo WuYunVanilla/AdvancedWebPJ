@@ -3,8 +3,6 @@ package com.advancedweb.backend.service;
 import com.advancedweb.backend.model.Course;
 import com.advancedweb.backend.model.Mindmap;
 import com.advancedweb.backend.repository.CourseRepository;
-import com.advancedweb.backend.repository.StudentRepository;
-import com.advancedweb.backend.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

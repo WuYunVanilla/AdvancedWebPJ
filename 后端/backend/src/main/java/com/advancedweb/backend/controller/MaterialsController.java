@@ -22,12 +22,6 @@ import java.io.*;
 @CrossOrigin
 public class MaterialsController {
     @Autowired
-    private NodeRepository nr;
-    @Autowired
-    private MaterialRepository mr;
-    @Autowired
-    private LinkRepository lr;
-    @Autowired
     private NodeService nodeService;
     @Autowired
     private NodeChildService nodeChildService;

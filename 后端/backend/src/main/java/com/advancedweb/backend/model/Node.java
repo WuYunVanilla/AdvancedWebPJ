@@ -1,6 +1,5 @@
 package com.advancedweb.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.neo4j.ogm.annotation.*;
 
 import java.util.HashSet;

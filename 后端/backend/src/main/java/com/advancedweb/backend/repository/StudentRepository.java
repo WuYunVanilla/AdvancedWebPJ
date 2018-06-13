@@ -9,13 +9,8 @@ import org.springframework.stereotype.Component;
 @Component
 public interface StudentRepository extends Neo4jRepository<Student, Long> {
 
-
     @Query("MATCH (n:Student) WHERE n.name = ({name}) RETURN n")
     Student findByName(@Param("name") String name);
-//    @Query("MATCH (n:Student) WHERE n.name = ({name}) " +
-//            "MATCH (m:Course) WHERE m.course_id = ({course_id})" +
-//            "CREATE (n)-[:STUDY_IN]->(m)")
-//    void saveStudyIn(@Param("name") String name, @Param("course_id") String course_id);
 
 
     @Query("start student = node({student_id}) match (student)-[:STUDY_IN]->(courses) return courses")
