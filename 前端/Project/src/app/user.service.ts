@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {jsonpCallbackContext} from '@angular/common/http/src/module';
 import {RegisterUser} from './register-user';
+import {environment} from '../environments/environment';
 
 const httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -18,7 +19,7 @@ export class UserService {
     constructor(
         private http: HttpClient
     ) {
-        const url = window.sessionStorage.getItem('url');
+        const url = environment.apiUrl;
 
         this.loginUrl = url + 'login';
         this.sendCodeUrl = url + 'register';

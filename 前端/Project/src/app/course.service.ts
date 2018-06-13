@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from './user';
 import {Observable} from 'rxjs';
 import {UserService} from './user.service';
+import {environment} from '../environments/environment';
 
 const httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -16,7 +17,7 @@ export class CourseService {
     constructor(
         private http: HttpClient) {
 
-        this.baseUrl = window.sessionStorage.getItem('url');
+        this.baseUrl = environment.apiUrl;
     }
 
     getCourses(user_name: string, identity: string): Observable<Course[]> {

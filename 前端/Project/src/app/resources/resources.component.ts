@@ -2,6 +2,7 @@ import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {FileItem, FileUploader} from 'ng2-file-upload';
 import {ParsedResponseHeaders} from 'ng2-file-upload/file-upload/file-uploader.class';
 import {NodeService} from '../node.service';
+import {environment} from '../../environments/environment';
 
 @Component({
     selector: 'app-resources',
@@ -37,7 +38,7 @@ export class ResourcesComponent implements OnInit, OnChanges {
 
 
     constructor(private nodeService: NodeService) {
-        this.baseUrl = window.sessionStorage.getItem('url') + 'upload_material/';
+        this.baseUrl = environment.apiUrl + 'upload_material/';
     }
 
     ngOnInit() {

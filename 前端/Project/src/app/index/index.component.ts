@@ -15,7 +15,6 @@ export class IndexComponent implements OnInit {
     constructor(private modalService: NgbModal, private router: Router) { }
 
     ngOnInit() {
-        window.sessionStorage.setItem('url', 'http://54.201.190.180:8080/mindmap/');
         if (window.sessionStorage.getItem('isLogin') === 'isLogin') {
           this.isLogin = true;
         } else {

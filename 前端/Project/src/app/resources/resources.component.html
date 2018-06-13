@@ -1,9 +1,9 @@
 <p class="upload_buttons">
-    <button type="button" class="btn btn-outline-primary" (click)="isCollapsed_file = !isCollapsed_file"
+    <button type="button" class="btn btn-outline-primary" (click)="isCollapsed_file = !isCollapsed_file; isCollapsed_link = false;"
             [attr.aria-expanded]="!isCollapsed_file" aria-controls="collapseExample">
         上传文件
     </button>
-    <button type="button" class="btn btn-outline-primary" (click)="isCollapsed_link = !isCollapsed_link"
+    <button type="button" class="btn btn-outline-primary" (click)="isCollapsed_link = !isCollapsed_link; isCollapsed_file = false;"
             [attr.aria-expanded]="!isCollapsed_link" aria-controls="collapseExample">
         上传链接
     </button>

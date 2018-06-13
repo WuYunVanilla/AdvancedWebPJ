@@ -5,8 +5,7 @@
 
 export const environment = {
   production: false,
-    id: '192.168.31.37',
-    port: '4200'
+  apiUrl: 'http://13.67.78.54:8080/mindmap/'
 };
 
 /*

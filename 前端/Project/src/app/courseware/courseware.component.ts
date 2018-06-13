@@ -2,6 +2,7 @@ import {Component, Input, OnChanges, OnInit } from '@angular/core';
 import {FileItem, FileUploader} from 'ng2-file-upload';
 import {ParsedResponseHeaders} from 'ng2-file-upload/file-upload/file-uploader.class';
 import {NodeService} from '../node.service';
+import {environment} from '../../environments/environment';
 
 @Component({
     selector: 'app-courseware',
@@ -31,7 +32,7 @@ export class CoursewareComponent implements OnInit, OnChanges {
 
 
     constructor(private nodeService: NodeService) {
-        this.baseUrl = window.sessionStorage.getItem('url') + 'upload_courseware/';
+        this.baseUrl = environment.apiUrl + 'upload_courseware/';
     }
 
     ngOnInit() {

@@ -7,6 +7,7 @@ import {MultipleQuestion} from './multiple-question';
 import {ShortQuestion} from './short-question';
 import {StuMultiple} from './stu-multiple';
 import {StuShort} from './stu-short';
+import {environment} from '../environments/environment';
 
 const httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -19,7 +20,7 @@ export class NodeService {
 
     constructor(
         private http: HttpClient) {
-        this.baseUrl = window.sessionStorage.getItem('url');
+        this.baseUrl = environment.apiUrl;
     }
 
     // 教师获取选择题列表
