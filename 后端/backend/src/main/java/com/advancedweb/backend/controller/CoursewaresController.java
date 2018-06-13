@@ -89,7 +89,7 @@ public class CoursewaresController {
                                       @PathVariable String node_id, @RequestBody CoursewareName courseware,
                                       HttpServletRequest request, HttpServletResponse response) {
 
-        final String filePath = "G:/MindMapFileStorage/" + course_id + "/" + mindmap_id + "/" + node_id + "/courseware/";
+        final String filePath = "/home/ubuntu/MindMapFileStorage/" + course_id + "/" + mindmap_id + "/" + node_id + "/courseware/";
 
         String courseware_name = courseware.getCourseware_name();
         String fileUrl = filePath + courseware_name;
