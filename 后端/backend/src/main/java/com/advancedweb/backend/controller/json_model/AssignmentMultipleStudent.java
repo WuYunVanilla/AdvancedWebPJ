@@ -1,7 +1,5 @@
 package com.advancedweb.backend.controller.json_model;
 
-//lj前端 偏偏要后端生成东西
-
 public class AssignmentMultipleStudent {
     private String title;
     private String optionA;

@@ -5,9 +5,6 @@ import com.advancedweb.backend.controller.json_model.Success;
 import com.advancedweb.backend.model.Course;
 import com.advancedweb.backend.model.Student;
 import com.advancedweb.backend.model.Teacher;
-import com.advancedweb.backend.repository.CourseRepository;
-import com.advancedweb.backend.repository.StudentRepository;
-import com.advancedweb.backend.repository.TeacherRepository;
 import com.advancedweb.backend.service.CourseService;
 import com.advancedweb.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,17 +37,32 @@ public class CourseController {
             return s;
         }
 
-        //course的选课人数加1
-        int number_before  =  Integer.parseInt(course.getCourse_number());
-        course.setCourse_number((number_before+1)+"");
-        courseService.saveCourse(course);
+        //...首先判断这个学生是否已经选了这门课
 
-        Course course_in_db = courseService.findByCourseId(course_id);
-        //再创建course和student的关系
-        student.studyIn(course_in_db);
-        userService.saveStudent(student);
+        Boolean ifChosen =false;
+        Course[] studentCourses = userService.getStudentCourses(student.getId());
+        for (Course studentCourse: studentCourses){
+            if(studentCourse.getCourse_id().equals(course_id)){
+                ifChosen=true;
+                break;
+            }
+        }
 
-        s.setSuccess(true);
+        //学生还未选这门课
+        if (!ifChosen) {
+            //course的选课人数加1
+            int number_before = Integer.parseInt(course.getCourse_number());
+            course.setCourse_number((number_before + 1) + "");
+            courseService.saveCourse(course);
+
+            Course course_in_db = courseService.findByCourseId(course_id);
+            //再创建course和student的关系
+            student.studyIn(course_in_db);
+            userService.saveStudent(student);
+
+            s.setSuccess(true);
+        }
+
         return s;
     }
 

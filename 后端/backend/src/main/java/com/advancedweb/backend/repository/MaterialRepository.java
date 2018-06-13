@@ -8,8 +8,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface MaterialRepository extends Neo4jRepository<Material, Long> {
-//    @Query("MATCH (n:Material) WHERE n.material_name = ({material_name}) RETURN n")
-//    Material findByMaterialName(@Param("material_name") String material_name);
 
     @Query("MATCH (n:Material) WHERE n.store_address = ({store_address}) RETURN n")
     Material findByStoreAddress(@Param("store_address") String store_address);

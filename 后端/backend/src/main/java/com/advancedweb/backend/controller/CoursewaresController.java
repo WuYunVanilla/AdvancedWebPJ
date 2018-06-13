@@ -4,8 +4,6 @@ import com.advancedweb.backend.controller.json_model.CoursewareName;
 import com.advancedweb.backend.controller.json_model.Success;
 import com.advancedweb.backend.model.Courseware;
 import com.advancedweb.backend.model.Node;
-import com.advancedweb.backend.repository.CoursewareRepository;
-import com.advancedweb.backend.repository.NodeRepository;
 import com.advancedweb.backend.service.NodeChildService;
 import com.advancedweb.backend.service.NodeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +42,7 @@ public class CoursewaresController {
     public Success upload_courseware(@PathVariable String course_id, @PathVariable String mindmap_id,
                                      @PathVariable String node_id, @RequestParam(value = "courseware") MultipartFile file) {
 
-        final String filePath = "G:/MindMapFileStorage/" + course_id + "/" + mindmap_id + "/" + node_id + "/courseware/";
+        final String filePath = "/home/ubuntu/MindMapFileStorage/" + course_id + "/" + mindmap_id + "/" + node_id + "/courseware/";
         Success s = new Success();
         s.setSuccess(false);
 

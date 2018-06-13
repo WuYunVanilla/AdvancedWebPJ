@@ -22,12 +22,6 @@ import java.io.*;
 @CrossOrigin
 public class MaterialsController {
     @Autowired
-    private NodeRepository nr;
-    @Autowired
-    private MaterialRepository mr;
-    @Autowired
-    private LinkRepository lr;
-    @Autowired
     private NodeService nodeService;
     @Autowired
     private NodeChildService nodeChildService;
@@ -54,7 +48,7 @@ public class MaterialsController {
                                    @PathVariable String node_id,
                                    @RequestParam(value = "material") MultipartFile file) {
 
-        final String filePath = "G:/MindMapFileStorage/" + course_id + "/" + mindmap_id + "/" + node_id + "/" + "/material/";
+        final String filePath = "/home/ubuntu/MindMapFileStorage/" + course_id + "/" + mindmap_id + "/" + node_id + "/courseware/";
         Success s = new Success();
         s.setSuccess(false);
 
