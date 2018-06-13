@@ -4,8 +4,6 @@ import com.advancedweb.backend.controller.json_model.CoursewareName;
 import com.advancedweb.backend.controller.json_model.Success;
 import com.advancedweb.backend.model.Courseware;
 import com.advancedweb.backend.model.Node;
-import com.advancedweb.backend.repository.CoursewareRepository;
-import com.advancedweb.backend.repository.NodeRepository;
 import com.advancedweb.backend.service.NodeChildService;
 import com.advancedweb.backend.service.NodeService;
 import org.springframework.beans.factory.annotation.Autowired;

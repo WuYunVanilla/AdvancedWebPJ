@@ -12,7 +12,7 @@ import java.util.List;
 public interface AssignmentShortRepository extends Neo4jRepository<AssignmentShort, Long> {
 
     @Query("MATCH (n:Assignment_short) WHERE n.short_id = ({short_id}) RETURN n")
-    public List<AssignmentShort> findByShortId(@Param("short_id") String short_id);
+    List<AssignmentShort> findByShortId(@Param("short_id") String short_id);
 
     @Query("start n = node({id}) " +
             "MATCH (:Node)-[r:HAS_ASSIGNMENT_SHORT]->(n) DELETE r")

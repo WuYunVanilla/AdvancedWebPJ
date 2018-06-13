@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public interface AssignmentMultipleRepository extends Neo4jRepository<AssignmentMultiple, Long> {
     @Query("MATCH (n:Assignment_multiple) WHERE n.multi_id = ({multi_id}) RETURN n")
-    public List<AssignmentMultiple> findByMultiId( @Param("multi_id") String multi_id);
+    List<AssignmentMultiple> findByMultiId( @Param("multi_id") String multi_id);
 
     @Query("start  n = node({id}) " +
             "MATCH (:Node)-[r:HAS_ASSIGNMENT_MULTI]->(n) DELETE r")

@@ -2,11 +2,8 @@ package com.advancedweb.backend.model;
 
 import org.neo4j.ogm.annotation.*;
 
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @NodeEntity(label = "Teacher")
 public class Teacher {

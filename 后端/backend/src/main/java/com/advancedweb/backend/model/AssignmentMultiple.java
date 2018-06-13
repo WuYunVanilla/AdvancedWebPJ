@@ -2,9 +2,6 @@ package com.advancedweb.backend.model;
 
 import org.neo4j.ogm.annotation.*;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @NodeEntity(label = "Assignment_multiple")
 public class AssignmentMultiple {
     @Id
