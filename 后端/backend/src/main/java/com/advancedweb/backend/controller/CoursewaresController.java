@@ -44,7 +44,7 @@ public class CoursewaresController {
     public Success upload_courseware(@PathVariable String course_id, @PathVariable String mindmap_id,
                                      @PathVariable String node_id, @RequestParam(value = "courseware") MultipartFile file) {
 
-        final String filePath = "G:/MindMapFileStorage/" + course_id + "/" + mindmap_id + "/" + node_id + "/courseware/";
+        final String filePath = "/home/ubuntu/MindMapFileStorage/" + course_id + "/" + mindmap_id + "/" + node_id + "/courseware/";
         Success s = new Success();
         s.setSuccess(false);
 
