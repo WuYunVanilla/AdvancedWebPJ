@@ -1,3 +1,13 @@
+<div class="alert alert-success" [hidden]="!success">
+  <button type="button" class="close" (click)="changeSuccess()">&times;</button>
+  <strong>发布成功!</strong>
+</div>
+
+<div class="alert alert-danger" [hidden]="!fail">
+  <button type="button" class="close" (click)="changeFail()">&times;</button>
+  <strong>发布失败!</strong>
+</div>
+
 <!-- 发布选择题 -->
 <div id="release_multiple" class="buttonDiv">
   <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#releaseMultiple">发布选择题</button>
@@ -54,7 +64,7 @@
       <!-- 模态框底部 -->
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="releaseMultiple()"
-                [disabled]="(!mtitle.valid) || (!optionA.valid) || (!optionB.valid)|| (!optionC.valid) || (!optionD.valid) || (!mcorrect_answer.valid)">确认</button>
+                [disabled]="(!mtitle.valid) || (!optionA.valid) || (!optionB.valid)|| (!optionC.valid) || (!optionD.valid) || (!mcorrect_answer.valid)" data-dismiss="modal">确认</button>
         <button type="button" class="btn btn-outline-dark" data-dismiss="modal">关闭</button>
       </div>
 
@@ -97,7 +107,7 @@
       <!-- 模态框底部 -->
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="releaseShort()"
-                [disabled]="(!stitle.valid) || (!scorrect_answer.valid)">确认</button>
+                [disabled]="(!stitle.valid) || (!scorrect_answer.valid)" data-dismiss="modal">确认</button>
         <button type="button" class="btn btn-outline-dark" data-dismiss="modal">关闭</button>
       </div>
     </div>
@@ -106,8 +116,8 @@
 
 <!-- 展示作业(选择题&简答题) -->
 <div id="homework">
-<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
-  <ngb-panel title="选择题">
+<ngb-accordion #acc="ngbAccordion" activeIds="static-1, static-2">
+  <ngb-panel title="选择题" id="static-1">
     <ng-template ngbPanelContent>
       <ol>
         <li *ngFor="let multiple of multipleQuestion" class="multiple">
@@ -143,7 +153,7 @@
   </ngb-panel>
 
 
-  <ngb-panel title="简答题">
+  <ngb-panel title="简答题" id="static-2">
     <ng-template ngbPanelContent>
       <ol>
         <li *ngFor="let short of shortQuestion" class="short">

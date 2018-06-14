@@ -12,3 +12,16 @@
   clear: both;
 }
 
+label {
+  width: 100px;
+  text-align: right;
+}
+
+#character {
+  float: right;
+}
+
+.sendCode {
+  border: none;
+  margin-left: 10px;
+}

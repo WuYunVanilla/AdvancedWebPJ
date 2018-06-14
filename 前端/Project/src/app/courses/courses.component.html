@@ -1,11 +1,18 @@
-<div id="modifyPwd">
-  <span>欢迎你，{{user_name}}</span>
-  <button type="button" class="btn btn-outline-dark, modify" (click)="modifyPwd()">修改密码</button>
-  <button type="button" class="btn btn-outline-dark, loginOut" (click)="loginOut()">登出</button>
+<app-header></app-header>
+
+<div class="alert alert-success" [hidden]="!success">
+  <button type="button" class="close" (click)="changeSuccess()">&times;</button>
+  <strong>添加成功!</strong>
 </div>
 
+<div class="alert alert-danger" [hidden]="!fail">
+  <button type="button" class="close" (click)="changeFail()">&times;</button>
+  <strong>课程ID已存在!</strong>
+</div>
+
+
 <div id="addCourse" class="buttonDiv">
-  <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#add">添加课程</button>
+  <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#add" (click)="clearAlert()">添加课程</button>
 </div>
 
 <!-- 模态框 -->
@@ -36,7 +43,7 @@
       <!-- 模态框底部 -->
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="onSubmit()"
-                [disabled]="(!courseID.valid) || (!courseName.valid)">确认</button>
+                [disabled]="(!courseID.valid) || (!courseName.valid)" data-dismiss="modal">确认</button>
         <button type="button" class="btn btn-outline-dark" data-dismiss="modal">取消</button>
       </div>
     </div>
@@ -48,7 +55,7 @@
   <div *ngFor="let course of courses" class="course">
     <div class="courseName">{{course.course_id}}: <b>{{course.course_name}}</b></div>
     <div class="studentNumber">课程人数：{{course.course_number}}</div>
-    <button class="buttonWithoutBorder" (click)="enterCourse(course.course_id)">进入课程</button>
+    <button type="button" class="btn btn-light" (click)="enterCourse(course.course_id)">进入课程</button>
   </div>
 </div>
 

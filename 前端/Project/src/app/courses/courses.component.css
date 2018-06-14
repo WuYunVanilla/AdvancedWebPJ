@@ -6,17 +6,17 @@ a:hover {
   color: #006699;
 }
 
-button {
-  width: 120px;
-  height: 50px;
-  border-color: lightgray;
-  border-radius: 5px;
-  font-size: 18px;
-}
+/*button {*/
+  /*width: 120px;*/
+  /*height: 50px;*/
+  /*border-color: lightgray;*/
+  /*border-radius: 5px;*/
+  /*font-size: 18px;*/
+/*}*/
 
-div {
-  margin-top: 20px;
-}
+/*div {*/
+  /*margin-top: 20px;*/
+/*}*/
 
 .buttonDiv {
   margin-left: 50px;
@@ -64,7 +64,8 @@ div {
   border-radius: 5px;
   text-align: center;
   margin:10px;
-  /*padding:10px;*/
+  margin-top: 20px;
+  padding:15px;
 }
 
 .courseName {
@@ -72,6 +73,11 @@ div {
   font-size: larger;
   padding: 5px;
   color: white;
+  margin-bottom: 20px;
+}
+
+.studentNumber {
+  margin: 10px;
 }
 
 #courses {
@@ -89,4 +95,15 @@ div {
 #addCourse {
   clear: both;
   float: left;
+  margin-top: 20px;
 }
+
+label {
+  width: 100px;
+  text-align: right;
+}
+
+.formItem {
+  margin: 10px;
+}
+

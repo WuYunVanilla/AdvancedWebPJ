@@ -13,9 +13,11 @@ import '../../assets/bootstrap/js/bootstrap.js';
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent implements OnInit {
-  user_name: string;
   courses: Course[];
   course: Course = new Course;
+
+  success = false;
+  fail = false;
 
   constructor(
     private modalService: NgbModal,
@@ -26,7 +28,6 @@ export class CoursesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.user_name = window.sessionStorage.getItem('user_name');
     this.getCourses();
   }
 
@@ -46,17 +47,6 @@ export class CoursesComponent implements OnInit {
     this.router.navigate(['main']);
   }
 
-  // 修改密码
-  modifyPwd(): void {
-    this.modalService.open(ModifyPasswordComponent);
-  }
-
-  // 登出，清除sessionStorage
-  loginOut(): void {
-    window.sessionStorage.clear();
-    this.router.navigate(['']);
-  }
-
   // 教师添加课程
   onSubmit() {
     this.courseService.addCourse(this.course, window.sessionStorage.getItem('user_name'))
@@ -66,13 +56,26 @@ export class CoursesComponent implements OnInit {
   // 检查是否添加成功
   checkSuccess(value) {
     if (value) {
-      window.alert('添加成功!');
+      this.success = true;
       // 更新课程列表
       this.getCourses();
       // 清空新增课程信息
       this.course = new Course();
     } else {
-      window.alert('课程Id已存在!');
+      this.fail = true;
     }
+  }
+
+  changeSuccess() {
+    this.success = false;
+  }
+
+  changeFail() {
+    this.fail = false;
+  }
+
+  clearAlert() {
+    this.success = false;
+    this.fail = false;
   }
 }
