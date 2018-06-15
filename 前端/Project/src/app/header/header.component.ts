@@ -9,11 +9,13 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  user_name: string;
 
   constructor(private modalService: NgbModal,
               private router: Router) { }
 
   ngOnInit() {
+    this.user_name = window.sessionStorage.getItem('user_name');
   }
 
   // 修改密码

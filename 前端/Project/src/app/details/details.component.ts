@@ -36,13 +36,9 @@ export class DetailsComponent implements OnInit {
 
 
         this.mindService.getMindList(this.course_id).subscribe(mindList => {
-            console.log(mindList);
             this.mindList = mindList['mindmap_id_list'];
             if (this.mindList.length > 0) {
                 this.currentMind = this.mindList[0];
-                console.log('调用了updateMindMap()');
-                console.log(this.currentMind);
-
             }
 
         });
@@ -61,18 +57,13 @@ export class DetailsComponent implements OnInit {
 
         this.mindService.createMind(this.course_id, new_mind_id, this.mindComponent.init_str).subscribe(r => {
             if (r['success']) {
-                console.log('思维导图创建成功!');
 
                 this.mindList.push(new_mind_id);
                 this.currentMind = new_mind_id;
 
                 // 调用子组件的更新方法来更新视图
-                console.log('调用了updateMindMap() in detail line 65');
                 // this.mindComponent.updateMindMap();
-            } else {
-                console.error('思维导图创建失败!');
             }
-
         });
 
 

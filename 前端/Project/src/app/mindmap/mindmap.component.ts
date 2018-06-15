@@ -30,6 +30,9 @@ export class MindmapComponent implements OnInit {
     //     'data': {}
     // };
 
+    success = false;
+    fail = false;
+
     course_id = ''; // 与上层组件中course绑定
     @Input()
     set courseId(course_id: string) {
@@ -82,7 +85,6 @@ export class MindmapComponent implements OnInit {
     remove(): void {
         const selected_id = this.mindMap.get_selected_node();
         if (!selected_id) {
-            console.log('please select a node first.');
             return;
         }
         this.mindMap.remove_node(selected_id);
@@ -90,9 +92,7 @@ export class MindmapComponent implements OnInit {
 
     add_child() {
         const selected_node = this.mindMap.get_selected_node(); // as parent of new node
-        // alert(selected_node);
         if (!selected_node) {
-            console.log('please select a node first.');
             return;
         }
         const nodeid = jsMind.util.uuid.newid();
@@ -104,7 +104,6 @@ export class MindmapComponent implements OnInit {
         const selected_node = this.mindMap.get_selected_node(); // as parent of new node
 
         if (!selected_node) {
-            console.log('please select a node first.');
             return;
         }
         const nodeid = jsMind.util.uuid.newid();
@@ -155,20 +154,14 @@ export class MindmapComponent implements OnInit {
 
     // 显示新的mindMap
     updateMindMap() {
-        console.log(this.mind_id);
-        console.log('调用了getMind()');
         this.mindService.getMind(this.course_id, this.mind_id).subscribe(mindStr => {
 
-            console.log(mindStr);
             // const mindJson = jsMind.util.json.string2json(mindStr);
             this.mind.data = mindStr;
 
             if (!this.mindMap) {
-                console.log('初始化mindMap!');
                 this.mindMap = jsMind.show(options, this.mind);
             } else {
-                console.log('使用已有的mindMap!');
-                console.log(this.mind);
                 this.mindMap.show(this.mind);
             }
 
@@ -183,12 +176,24 @@ export class MindmapComponent implements OnInit {
 
         const str = jsMind.util.json.json2string(mindJson.data); // 最终要传输的字符串
 
-        console.log(str);
+        this.success = false;
+        this.fail = false;
 
         this.mindService.saveMind(this.course_id, this.mind_id, str).subscribe(r => {
-            console.log(r);
-            console.log('保存结果' + r['success']);
+            if (r['success']) {
+              this.success = true;
+            } else {
+              this.fail = true;
+            }
         });
+    }
+
+    changeSuccess() {
+      this.success = false;
+    }
+
+    changeFail() {
+      this.fail = false;
     }
 
 }
