@@ -10,9 +10,9 @@ public class Mindmap {
     @Id
     @GeneratedValue
     private Long id;
-    @Property(name = "mindmap_id")
+
+    private String mindmap_name;
     private String mindmap_id;
-    @Property(name = "json_string")
     private String json_string;
 
     @Relationship(type = "HAS_ROOT")
@@ -35,6 +35,14 @@ public class Mindmap {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getMindmap_name() {
+        return mindmap_name;
+    }
+
+    public void setMindmap_name(String mindmap_name) {
+        this.mindmap_name = mindmap_name;
     }
 
     public String getMindmap_id() {

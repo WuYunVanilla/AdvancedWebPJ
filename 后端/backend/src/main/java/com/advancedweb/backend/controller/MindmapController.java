@@ -65,7 +65,7 @@ public class MindmapController {
     }
 
     @RequestMapping(value = "/save_mindmap/{course_id}/{mindmap_id}", method = RequestMethod.POST)
-    public Success save_mindmap(@PathVariable String course_id, @PathVariable String mindmap_id, @RequestBody String json_string) {
+    public Success save_mindmap(@PathVariable String course_id, @PathVariable String mindmap_id,@RequestBody String json_string) {
         this.course_id = course_id;
         this.mindmap_id = mindmap_id;
 
