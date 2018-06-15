@@ -1,6 +1,7 @@
 package com.advancedweb.backend.controller;
 
-import com.advancedweb.backend.controller.json_model.MindmapIdList;
+import com.advancedweb.backend.controller.json_model.MindmapIdName;
+import com.advancedweb.backend.controller.json_model.Mindmap_json;
 import com.advancedweb.backend.controller.json_model.Success;
 import com.advancedweb.backend.model.*;
 import com.advancedweb.backend.service.*;
@@ -48,20 +49,22 @@ public class MindmapController {
     }
 
     @RequestMapping(value = "/mindmap_id_list/{course_id}", method = RequestMethod.GET)
-    public MindmapIdList mindmap_id_list(@PathVariable String course_id) {
+    public MindmapIdName[] mindmap_id_list(@PathVariable String course_id) {
         //先找到course
         Course course = courseService.findByCourseId(course_id);
 
         //找OWN关系
         Mindmap[] mindmaps = courseService.findMindmaps(course.getId());
-        String[] mindmaps_id = new String[mindmaps.length];
+
+        MindmapIdName[] mindmapList = new MindmapIdName[mindmaps.length];
+
         for (int i = 0; i < mindmaps.length; i++){
-            mindmaps_id[i] = mindmaps[i].getMindmap_id();
+            mindmapList[i] =new MindmapIdName();
+            mindmapList[i].setId(mindmaps[i].getMindmap_id());
+            mindmapList[i].setName(mindmaps[i].getMindmap_name());
         }
 
-        MindmapIdList mindmapIdList= new MindmapIdList();
-        mindmapIdList.setMindmap_id_list(mindmaps_id);
-        return mindmapIdList;
+        return mindmapList;
     }
 
     @RequestMapping(value = "/save_mindmap/{course_id}/{mindmap_id}", method = RequestMethod.POST)
@@ -85,7 +88,11 @@ public class MindmapController {
         if (tempMindmap != null)
             if_exist = true;
 
-        Node root_node = gson.fromJson(json_string, Node.class);
+        Mindmap_json mindmap_json = gson.fromJson(json_string, Mindmap_json.class);
+
+        String mindmap_name = mindmap_json.getMeta().getName();
+
+        Node  root_node = mindmap_json.getData();
 
         //向每个node添加course_mindmap属性
         //并且对于已存在的node 将所有和次node有关系的节点都全都链接到新节点上
@@ -99,6 +106,7 @@ public class MindmapController {
         Mindmap mindmap = new Mindmap();
         mindmap.setJson_string(json_string);
         mindmap.setMindmap_id(mindmap_id);
+        mindmap.setMindmap_name(mindmap_name);
 
         //保存两者关系
         mindmap.setRootNode(root_node);
@@ -149,7 +157,7 @@ public class MindmapController {
 
                     if (coursewares.length > 0) {
                         for (Courseware c : coursewares) {
-                            String coursewareName = c.getCoursewareName();
+                            String coursewareName = c.getCourseware_name();
                             nodeChildService.deleteCoursewareFather(coursewareName);
                             nodeChildService.createCoursewareFather(coursewareName, course_mindmap, nodeId);
                         }

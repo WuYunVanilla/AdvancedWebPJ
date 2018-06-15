@@ -7,10 +7,8 @@ public class Courseware {
     @Id
     @GeneratedValue
     private Long id;
-    @Property(name = "courseware_name")
-    private String coursewareName;
-    @Property(name = "store_address")
-    private String storeAddress;
+    private String courseware_name;
+    private String store_address;
 
     public Long getId() {
         return id;
@@ -20,19 +18,19 @@ public class Courseware {
         this.id = id;
     }
 
-    public String getCoursewareName() {
-        return coursewareName;
+    public String getCourseware_name() {
+        return courseware_name;
     }
 
-    public void setCoursewareName(String coursewareName) {
-        this.coursewareName = coursewareName;
+    public void setCourseware_name(String courseware_name) {
+        this.courseware_name = courseware_name;
     }
 
-    public String getStoreAddress() {
-        return storeAddress;
+    public String getStore_address() {
+        return store_address;
     }
 
-    public void setStoreAddress(String storeAddress) {
-        this.storeAddress = storeAddress;
+    public void setStore_address(String store_address) {
+        this.store_address = store_address;
     }
 }

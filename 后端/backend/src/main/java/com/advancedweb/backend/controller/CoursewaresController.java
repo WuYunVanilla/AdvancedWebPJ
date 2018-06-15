@@ -32,7 +32,7 @@ public class CoursewaresController {
         String[] ans = new String[coursewares.length];
 
         for (int i = 0; i < coursewares.length; i++){
-            ans[i] = coursewares[i].getCoursewareName();
+            ans[i] = coursewares[i].getCourseware_name();
         }
 
         return ans;
@@ -72,8 +72,8 @@ public class CoursewaresController {
 
             //新建Courseware
             Courseware courseware = new Courseware();
-            courseware.setCoursewareName(fileName);
-            courseware.setStoreAddress(filePath + fileName);
+            courseware.setCourseware_name(fileName);
+            courseware.setStore_address(filePath + fileName);
             nodeChildService.saveCourseware(courseware);
 
             //建立关系
