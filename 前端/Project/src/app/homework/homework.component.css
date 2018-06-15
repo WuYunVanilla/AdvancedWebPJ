@@ -1,8 +1,8 @@
 .buttonDiv {
   float: left;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-right: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .item {
@@ -34,3 +34,13 @@ li {
 .modal-footer {
   clear: both;
 }
+
+label {
+  width: 100px;
+  text-align: right;
+}
+
+.alert {
+  margin-top: 10px;
+}
+

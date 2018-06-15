@@ -34,6 +34,7 @@ import { StuResourcesComponent } from './stu-resources/stu-resources.component';
 import { StuCoursewareComponent } from './stu-courseware/stu-courseware.component';
 import { StuCoursesComponent } from './stu-courses/stu-courses.component';
 import { RouteguardService } from './routeguard.service';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
     declarations: [
@@ -55,7 +56,8 @@ import { RouteguardService } from './routeguard.service';
         StuMindmapComponent,
         StuResourcesComponent,
         StuCoursewareComponent,
-        StuCoursesComponent
+        StuCoursesComponent,
+        HeaderComponent
     ],
     imports: [
         BrowserModule,

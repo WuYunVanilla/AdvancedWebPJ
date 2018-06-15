@@ -5,7 +5,7 @@
     </button>
     <button type="button" class="btn btn-outline-primary" (click)="isCollapsed_link = !isCollapsed_link; isCollapsed_file = false;"
             [attr.aria-expanded]="!isCollapsed_link" aria-controls="collapseExample">
-        上传链接
+        输入链接
     </button>
 </p>
 <div class="upload_card" [ngbCollapse]="!isCollapsed_file">
@@ -113,7 +113,7 @@
               <div class="formItem">
                 <label>输入链接：</label>
                 <input size="60" type="text" required name="link" [(ngModel)]="link_address" #link="ngModel" style="margin-right: 20px;">
-                <button class="btn btn-outline-dark" (click)="uploadLink()" [disabled]="(!link.valid)">上传</button>
+                <button class="btn-sm btn-light " (click)="uploadLink()" [disabled]="(!link.valid)">发布</button>
               </div>
             </form>
           </div>
@@ -123,8 +123,8 @@
 
 
 
-<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
-    <ngb-panel title="链接资源">
+<ngb-accordion #acc="ngbAccordion" activeIds="static-1, static-2">
+    <ngb-panel id="static-1" title="链接资源">
         <ng-template ngbPanelContent>
           <div class="links">
             <ol>
@@ -134,7 +134,7 @@
         </ng-template>
     </ngb-panel>
 
-    <ngb-panel title="文件资源">
+    <ngb-panel id="static-2" title="文件资源">
         <ng-template ngbPanelContent>
 
             <ol>

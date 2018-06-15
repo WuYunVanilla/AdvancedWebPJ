@@ -18,6 +18,9 @@ export class HomeworkComponent implements OnInit, OnChanges {
     multiple: MultipleQuestion = new MultipleQuestion();
     short: ShortQuestion = new ShortQuestion();
 
+    success = false;
+    fail = false;
+
     @Input() course_id: string; // 与上层组件中course绑定
     @Input() mind_id: string; // 与上层组件中选中的mindMap绑定
     @Input() node_id: string;
@@ -83,23 +86,32 @@ export class HomeworkComponent implements OnInit, OnChanges {
 
     checkMultiple(value) {
         if (value) {
-            window.alert('发布成功!');
+            this.success = true;
             // 如果发布成功则重新加载作业（以获取最新添加的作业）
             this.updateHomework();
             // 如果发布成功则新建一个选择题（清除缓存）
             this.multiple = new MultipleQuestion();
         } else {
-            window.alert('发布失败!');
+            this.fail = true;
         }
     }
 
     checkShort(value) {
         if (value) {
-            window.alert('发布成功!');
+            this.success = true;
             this.updateHomework();
             this.short = new ShortQuestion();
         } else {
-            window.alert('发布失败!');
+            this.fail = true;
         }
+    }
+
+
+    changeSuccess() {
+      this.success = false;
+    }
+
+    changeFail() {
+      this.fail = false;
     }
 }

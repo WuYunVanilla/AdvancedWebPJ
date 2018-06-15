@@ -15,6 +15,8 @@ export class RegisterComponent implements OnInit {
   confirmedPsd: string;
   isChecking = false;
 
+  next = false;
+
   constructor(public activeModal: NgbActiveModal, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
@@ -22,6 +24,16 @@ export class RegisterComponent implements OnInit {
 
   closeWindow() {
     this.activeModal.close('Close click');
+  }
+
+  // 验证码界面
+  goToNext() {
+    this.next = true;
+  }
+
+  // 填写用户名、密码界面
+  goBack() {
+    this.next = false;
   }
 
   // 发送验证码

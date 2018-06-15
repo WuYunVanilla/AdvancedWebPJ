@@ -121,11 +121,9 @@ export class ResourcesComponent implements OnInit, OnChanges {
 
     checkLink(value) {
         if (value) {
-            alert('上传成功！');
             this.updateLinks();
             this.link_address = '';
         } else {
-            alert('上传失败！');
         }
     }
 }

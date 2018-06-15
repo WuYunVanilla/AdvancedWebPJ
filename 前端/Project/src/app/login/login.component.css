@@ -15,3 +15,8 @@
 #character {
   float: right;
 }
+
+label {
+  width: 100px;
+  text-align: right;
+}

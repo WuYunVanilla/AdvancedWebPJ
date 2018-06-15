@@ -17,6 +17,9 @@ export class StuCoursesComponent implements OnInit {
   courses: Course[];
   allCourse: Course[];
 
+  success = false;
+  fail = false;
+
   constructor(
     private modalService: NgbModal,
     private route: ActivatedRoute,
@@ -57,17 +60,6 @@ export class StuCoursesComponent implements OnInit {
     this.router.navigate(['stu-main']);
   }
 
-  // 修改密码
-  modifyPwd(): void {
-    this.modalService.open(ModifyPasswordComponent);
-  }
-
-  // 登出，清除sessionStorage
-  loginOut(): void {
-    window.sessionStorage.clear();
-    this.router.navigate(['']);
-  }
-
   // 提交选课
   onSubmit(course: Course) {
     this.courseService.stuAddCourse(window.sessionStorage.getItem('user_name'), course)
@@ -77,11 +69,24 @@ export class StuCoursesComponent implements OnInit {
   // 检查选课结果
   checkSuccess(value) {
     if (value) {
-      window.alert('添加成功!');
+      this.success = true;
       this.getCourses();
     } else {
-      window.alert('添加失败!');
+      this.fail = true;
     }
+  }
+
+  changeSuccess() {
+    this.success = false;
+  }
+
+  changeFail() {
+    this.fail = false;
+  }
+
+  clearAlert() {
+    this.success = false;
+    this.fail = false;
   }
 
 }
