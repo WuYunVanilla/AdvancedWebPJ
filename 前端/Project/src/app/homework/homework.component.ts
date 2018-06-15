@@ -114,4 +114,9 @@ export class HomeworkComponent implements OnInit, OnChanges {
     changeFail() {
       this.fail = false;
     }
+
+    clearAlert() {
+      this.success = false;
+      this.fail = false;
+    }
 }

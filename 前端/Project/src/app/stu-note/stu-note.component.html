@@ -1,0 +1,64 @@
+<p class="upload_buttons">
+  <button type="button" class="btn btn-outline-dark" (click)="isCollapsed_file = !isCollapsed_file; isCollapsed_link = false;"
+          [attr.aria-expanded]="!isCollapsed_file" aria-controls="collapseExample">
+    发布笔记
+  </button>
+</p>
+
+<div class="upload_card" [ngbCollapse]="!isCollapsed_file">
+  <div class="card">
+    <div class="card-body">
+      <div class="uploadLink">
+        <form>
+          <div class="formItem">
+            <label>笔记类型：</label>
+            <input type="radio" required name="access" value="public" [(ngModel)]="note.access" #access="ngModel"> 公有
+            <input type="radio" required name="access" value="private" [(ngModel)]="note.access" #access="ngModel"> 私有
+          </div>
+          <div class="formItem">
+            <label>输入标题：</label>
+            <input size="80" type="text" required name="title" [(ngModel)]="note.title" #title="ngModel">
+          </div>
+          <div class="formItem">
+            <label>输入内容：</label>
+            <textarea rows="10" cols="150" required name="content" [(ngModel)]="note.content" #content="ngModel"></textarea>
+          </div>
+          <div class="formItem">
+            <button class="btn btn-outline-dark " [disabled]="(!access.valid) || (!title.valid) || (!content.valid)" (click)="addNote()">发布</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ngb-accordion #acc="ngbAccordion" activeIds="static-1, static-2, static-3">
+  <ngb-panel id="static-1" title="我的公有笔记">
+    <ng-template ngbPanelContent>
+      <div class="links">
+        <ol>
+          <li *ngFor="let publicNote of publicNotes">{{publicNote.content}}</li>
+        </ol>
+      </div>
+    </ng-template>
+  </ngb-panel>
+
+  <ngb-panel id="static-2" title="我的私有笔记">
+    <ng-template ngbPanelContent>
+
+      <ol>
+        <li *ngFor="let privateNote of privateNotes">{{privateNote.content}}</li>
+      </ol>
+    </ng-template>
+  </ngb-panel>
+
+  <ngb-panel id="static-3" title="同学的公有笔记">
+    <ng-template ngbPanelContent>
+
+      <ol>
+        <li *ngFor="let otherNote of otherNotes">{{otherNote.content}}</li>
+      </ol>
+    </ng-template>
+  </ngb-panel>
+
+</ngb-accordion>

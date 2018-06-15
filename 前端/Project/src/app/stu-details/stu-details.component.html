@@ -46,4 +46,14 @@
 
         </ng-template>
     </ngb-tab>
+    <ngb-tab title="笔记" id="tab-note"  *ngIf="selected_node_id!=''">
+      <ng-template ngbTabContent>
+
+        <app-stu-note [course_id]="course_id"
+                           [mind_id]="currentMind"
+                           [node_id]="selected_node_id">
+        </app-stu-note>
+
+      </ng-template>
+    </ngb-tab>
 </ngb-tabset>
