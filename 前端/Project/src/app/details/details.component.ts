@@ -54,14 +54,8 @@ export class DetailsComponent implements OnInit {
         this.course_id = window.sessionStorage.getItem('course_id');
 
         this.selected_node_id = '';
-        this.currentMind = null;
-
 
         this.mindService.getMindList(this.course_id).subscribe(list => {
-            // this.mindList = mindList['mindmap_id_list'];
-
-            console.log('Hhhhh');
-            console.log(list);
 
             this.mindList = Array.from(list);
             if (this.mindList.length > 0) {

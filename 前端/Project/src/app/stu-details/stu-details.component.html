@@ -5,12 +5,15 @@
             <div ngbDropdown class="d-inline-block mr-2" style="margin-top: 10px;">
                 <button class="btn btn-outline-secondary" ngbDropdownToggle>思维导图列表</button>
                 <div ngbDropdownMenu>
-                    <button *ngFor="let mind of mindList" class="dropdown-item" (click)="currentMind=mind;">{{mind}}</button>
+                    <button *ngFor="let mind of mindList" class="dropdown-item" (click)="currentMind=mind;">{{mind.name}}</button>
 
                 </div>
             </div>
 
-            <app-stu-mindmap [mindId]="currentMind" [courseId]="course_id" (click)="checkTabStatus()" #jsmind></app-stu-mindmap>
+            <app-stu-mindmap *ngIf="currentMind"
+                             [mindId]="currentMind.id"
+                             [courseId]="course_id"
+                             (click)="checkTabStatus()" #jsmind></app-stu-mindmap>
 
 
         </ng-template>
@@ -19,7 +22,7 @@
         <ng-template ngbTabContent>
 
             <app-stu-homework [course_id]="course_id"
-                              [mind_id]="currentMind"
+                              [mind_id]="currentMind.id"
                               [node_id]="selected_node_id">
 
             </app-stu-homework>
@@ -29,7 +32,7 @@
     <ngb-tab title="课件" id="tab-ppt" *ngIf="selected_node_id!=''">
         <ng-template ngbTabContent>
             <app-stu-courseware [course_id]="course_id"
-                                [mind_id]="currentMind"
+                                [mind_id]="currentMind.id"
                                 [node_id]="selected_node_id">
 
             </app-stu-courseware>
@@ -40,7 +43,7 @@
         <ng-template ngbTabContent>
 
             <app-stu-resources [course_id]="course_id"
-                               [mind_id]="currentMind"
+                               [mind_id]="currentMind.id"
                                [node_id]="selected_node_id">
             </app-stu-resources>
 
@@ -50,7 +53,7 @@
       <ng-template ngbTabContent>
 
         <app-stu-note [course_id]="course_id"
-                           [mind_id]="currentMind"
+                           [mind_id]="currentMind.id"
                            [node_id]="selected_node_id">
         </app-stu-note>
 

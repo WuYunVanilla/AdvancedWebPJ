@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MindmapService} from '../mindmap.service';
 import {StuMindmapComponent} from '../stu-mindmap/stu-mindmap.component';
+import {Mind} from '../mind';
 
 @Component({
     selector: 'app-stu-details',
@@ -11,8 +12,8 @@ export class StuDetailsComponent implements OnInit {
 
     course_id: string;
 
-    mindList: string[];
-    currentMind: string; // 当前思维导图的id
+    mindList: Mind[] = [];
+    currentMind: Mind = null; // 当前思维导图的id
 
     selected_node_id: string;
 
@@ -25,11 +26,10 @@ export class StuDetailsComponent implements OnInit {
         this.course_id = window.sessionStorage.getItem('course_id');
 
         this.selected_node_id = '';
-        this.currentMind = '';
 
+        this.mindService.getMindList(this.course_id).subscribe(list => {
 
-        this.mindService.getMindList(this.course_id).subscribe(mindList => {
-            this.mindList = mindList['mindmap_id_list'];
+            this.mindList = Array.from(list);
             if (this.mindList.length > 0) {
                 this.currentMind = this.mindList[0];
             }

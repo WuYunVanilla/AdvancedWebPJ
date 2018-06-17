@@ -37,7 +37,12 @@
                 <button class="btn btn-outline-secondary" (click)="open(content)">创建思维导图</button>
             </div>
 
-            <app-mindmap *ngIf="currentMind" [mindId]="currentMind.id" [courseId]="course_id" (click)="checkTabStatus()" #jsmind></app-mindmap>
+            <app-mindmap *ngIf="currentMind"
+                         [mindId]="currentMind.id"
+                         [courseId]="course_id"
+                         (click)="checkTabStatus()" #jsmind>
+
+            </app-mindmap>
 
 
         </ng-template>
