@@ -36,6 +36,23 @@ public class Node {
     @Relationship(type = "HAS_ASSIGNMENT_SHORT")
     private Set<AssignmentShort> assignmentShorts;
 
+    @Relationship(type = "HAS_NOTE")
+    private Set<Note> notes;
+
+    public Set<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(Set<Note> notes) {
+        this.notes = notes;
+    }
+
+    public void saveNote(Note note) {
+        if (notes == null) {
+            notes = new HashSet<>();
+        }
+        notes.add(note);
+    }
 
 
     public Set<Material> getMaterials() {

@@ -62,4 +62,5 @@ public class UserService {
         return teacherRepository.findCourses(id);
     }
 
+    public Note[] getStudentNotes(long id){return studentRepository.findNotes(id);}
 }

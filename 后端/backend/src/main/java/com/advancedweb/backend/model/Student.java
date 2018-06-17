@@ -16,7 +16,6 @@ public class Student {
     @Relationship(type = "STUDY_IN")
     private Set<Course> courses;
 
-
     public Set<Course> getCourses() {
         return courses;
     }
@@ -27,6 +26,25 @@ public class Student {
         }
         courses.add(course);
     }
+
+    @Relationship(type = "WRITE")
+    private Set<Note> notes;
+
+
+    public Set<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(Set<Note> notes) {
+        this.notes = notes;
+    }
+    public void write(Note note) {
+        if (notes == null) {
+            notes = new HashSet<>();
+        }
+        notes.add(note);
+    }
+
 
     public String getName() {
         return name;

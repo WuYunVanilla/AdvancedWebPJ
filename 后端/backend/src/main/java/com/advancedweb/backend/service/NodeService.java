@@ -41,4 +41,12 @@ public class NodeService {
     public void save(Node node) {
         nodeRepository.save(node);
     }
+
+    public Node[] findChildren(long id ){
+        return nodeRepository.findChildren(id);
+    }
+
+    public Note[] getNotes(long id){
+        return nodeRepository.findNotes(id);
+    }
 }

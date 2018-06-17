@@ -25,4 +25,10 @@ public interface NodeRepository extends Neo4jRepository<Node, Long> {
 
     @Query("start node = node({id}) match (node)-[:HAS_ASSIGNMENT_SHORT]->(ass_short) return ass_short")
     AssignmentShort[] findAssignmentShort(@Param("id") long id);
+
+    @Query("start node = node({id}) match (node)-[:HAS_CHILD]->(children) return children")
+    Node[] findChildren(@Param("id") long id);
+
+    @Query("start node = node({id}) match (node)-[:HAS_NOTE]->(notes) return notes")
+    Note[] findNotes(@Param("id") long id);
 }

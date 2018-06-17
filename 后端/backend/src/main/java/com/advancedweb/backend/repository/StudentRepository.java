@@ -15,5 +15,8 @@ public interface StudentRepository extends Neo4jRepository<Student, Long> {
 
     @Query("start student = node({student_id}) match (student)-[:STUDY_IN]->(courses) return courses")
     Course[] findCourses(@Param("student_id") long student_id);
+
+    @Query("start student = node({student_id}) match (student)-[:WRITE]->(notes) return notes")
+    Note[] findNotes(@Param("student_id")long student_id);
 }
 
