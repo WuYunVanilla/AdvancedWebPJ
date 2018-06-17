@@ -56,11 +56,11 @@
   <strong>保存失败!</strong>
 </div>
 
-<!--<p style="margin-top: 10px;">-->
-    <!--<ngb-alert *ngIf="selected_node_id==''" [dismissible]="true">-->
-        <!--要操作节点或者查看对应的文件，请先选择对应的节点！-->
-    <!--</ngb-alert>-->
-<!--</p>-->
-
+<div id="accuracy" *ngIf="true">
+    <div class="row" *ngFor="let info of nodes_info">
+        <div class="col-1" style="width: 100px;">{{info['node_topic']}}</div>
+        <ngb-rating class="col-11" [(rate)]="info['accuracy']" [readonly]="true"></ngb-rating>
+    </div>
+</div>
 
 <div id="jsmind_container" style="width: 100%; margin-top: 10px;"></div>

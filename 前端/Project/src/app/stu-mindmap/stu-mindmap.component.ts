@@ -93,7 +93,7 @@ export class StuMindmapComponent implements OnInit {
         this.mindService.getMind(this.course_id, this.mind_id).subscribe(mindStr => {
 
             // const mindJson = jsMind.util.json.string2json(mindStr);
-            this.mind.data = mindStr;
+            this.mind = mindStr;
 
             if (!this.mindMap) {
                 this.mindMap = jsMind.show(options, this.mind);
