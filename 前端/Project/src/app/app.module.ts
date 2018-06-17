@@ -36,7 +36,6 @@ import { StuCoursesComponent } from './stu-courses/stu-courses.component';
 import { RouteguardService } from './routeguard.service';
 import { HeaderComponent } from './header/header.component';
 import { StuNoteComponent } from './stu-note/stu-note.component';
-import { CreateMindmapComponent } from './create-mindmap/create-mindmap.component';
 
 @NgModule({
     declarations: [
@@ -60,8 +59,7 @@ import { CreateMindmapComponent } from './create-mindmap/create-mindmap.componen
         StuCoursewareComponent,
         StuCoursesComponent,
         HeaderComponent,
-        StuNoteComponent,
-        CreateMindmapComponent
+        StuNoteComponent
     ],
     imports: [
         BrowserModule,
@@ -83,8 +81,7 @@ import { CreateMindmapComponent } from './create-mindmap/create-mindmap.componen
     entryComponents: [
         LoginComponent,
         RegisterComponent,
-        ModifyPasswordComponent,
-        CreateMindmapComponent
+        ModifyPasswordComponent
     ]
 })
 export class AppModule { }
