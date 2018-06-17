@@ -61,6 +61,8 @@ public class NoteController {
         Student thisStudent = userService.findStudentByName(user_name);
         Node thisNode = nodeService.findByNodeId(course_id+" "+mindmap_id,node_id);
 
+        if (thisNode==null)
+            return null;
         Note[] stu_notes= userService.getStudentNotes(thisStudent.getId());
 
         Note[] node_notes= nodeService.getNotes(thisNode.getLong_id());
@@ -87,7 +89,8 @@ public class NoteController {
         //获得学生 和 node
         Student thisStudent = userService.findStudentByName(user_name);
         Node thisNode = nodeService.findByNodeId(course_id+" "+mindmap_id,node_id);
-
+        if (thisNode==null)
+            return null;
         Note[] stu_notes= userService.getStudentNotes(thisStudent.getId());
 
         Note[] node_notes= nodeService.getNotes(thisNode.getLong_id());
@@ -115,7 +118,8 @@ public class NoteController {
         //获得学生 和 node
         Student thisStudent = userService.findStudentByName(user_name);
         Node thisNode = nodeService.findByNodeId(course_id+" "+mindmap_id,node_id);
-
+        if (thisNode==null)
+            return null;
         Note[] stu_notes= userService.getStudentNotes(thisStudent.getId());
 
         Note[] node_notes= nodeService.getNotes(thisNode.getLong_id());

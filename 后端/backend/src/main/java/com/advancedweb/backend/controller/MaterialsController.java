@@ -29,6 +29,8 @@ public class MaterialsController {
 
         //找到node
         Node result_node = nodeService.findByNodeId(course_id + " " + mindmap_id, node_id);
+        if(result_node==null)
+            return null;
         Material[] materials = nodeService.findMaterials(result_node.getLong_id());
 
         String[] ans = new String[materials.length];
@@ -142,6 +144,8 @@ public class MaterialsController {
 
         //找到node
         Node result_node = nodeService.findByNodeId(course_id + " " + mindmap_id, node_id);
+        if(result_node==null)
+            return null;
         Link[] links = nodeService.findLinks(result_node.getLong_id());
 
         String[] ans = new String[links.length];

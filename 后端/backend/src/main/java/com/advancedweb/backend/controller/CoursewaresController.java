@@ -27,6 +27,8 @@ public class CoursewaresController {
                                         @PathVariable String node_id) {
         //找到node
         Node result_node = nodeService.findByNodeId(course_id + " " + mindmap_id, node_id);
+        if (result_node==null)
+            return null;
         Courseware[] coursewares = nodeService.findCoursewares(result_node.getLong_id());
 
         String[] ans = new String[coursewares.length];
