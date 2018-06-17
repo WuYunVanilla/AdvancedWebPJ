@@ -36,6 +36,12 @@
     <div class="col text-right">
 
         <div class="d-inline-block mr-2">
+            <button class="btn btn-outline-secondary" (click)="isCollapsed = !isCollapsed;">
+                显示正确率
+            </button>
+        </div>
+
+        <div class="d-inline-block mr-2">
             <button class="btn btn-outline-secondary" (click)="save()">保存</button>
         </div>
 
@@ -56,11 +62,30 @@
   <strong>保存失败!</strong>
 </div>
 
-<div id="accuracy" *ngIf="true">
-    <div class="row" *ngFor="let info of nodes_info">
-        <div class="col-1" style="width: 100px;">{{info['node_topic']}}</div>
-        <ngb-rating class="col-11" [(rate)]="info['accuracy']" [readonly]="true"></ngb-rating>
+<div [ngbCollapse]="!isCollapsed" style="margin-top: 10px;">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-2">
+                    <div>节点名称</div>
+                </div>
+                <div class="col-4">正确率</div>
+
+                <div class="col-6">详情</div>
+            </div>
+            <div class="row" *ngFor="let info of nodes_info">
+                <div class="col-2">
+                    <div>{{info['node_topic']}}</div>
+                </div>
+
+                <ngb-rating class="col-4" [rate]="10*info['correct_number']/info['number']" [readonly]="true"></ngb-rating>
+                <div class="col-6">{{ info['correct_number'] +  '/' +  info['number'] }}</div>
+            </div>
+        </div>
     </div>
 </div>
+
+
+
 
 <div id="jsmind_container" style="width: 100%; margin-top: 10px;"></div>
