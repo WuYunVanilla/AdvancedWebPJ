@@ -114,25 +114,25 @@ export class NodeService {
 
     // 获取我的公有笔记
     getPublicNotes(user_name: string, course_id: string, mind_id: string, node_id: string): Observable<Note[]> {
-      this.tempUrl = this.baseUrl + 'publicnote/' + user_name + '/' + course_id + '/' + mind_id + '/' + node_id;
+      this.tempUrl = this.baseUrl + 'public_note/' + user_name + '/' + course_id + '/' + mind_id + '/' + node_id;
       return this.http.get<Note[]>(this.tempUrl);
     }
 
     // 获取我的私有笔记
     getPrivateNotes(user_name: string, course_id: string, mind_id: string, node_id: string): Observable<Note[]> {
-      this.tempUrl = this.baseUrl + 'privatenote/' + user_name + '/' + course_id + '/' + mind_id + '/' + node_id;
+      this.tempUrl = this.baseUrl + 'private_note/' + user_name + '/' + course_id + '/' + mind_id + '/' + node_id;
       return this.http.get<Note[]>(this.tempUrl);
     }
 
     // 获取其他人的公有笔记
     getOtherNotes(user_name: string, course_id: string, mind_id: string, node_id: string): Observable<Note[]> {
-      this.tempUrl = this.baseUrl + 'searchnote/' + user_name + '/' + course_id + '/' + mind_id + '/' + node_id;
+      this.tempUrl = this.baseUrl + 'search_note/' + user_name + '/' + course_id + '/' + mind_id + '/' + node_id;
       return this.http.get<Note[]>(this.tempUrl);
     }
 
     // 发布笔记
     addNote(user_name: string, course_id: string, mind_id: string, node_id: string, note: Note): Observable<boolean> {
-      this.tempUrl = this.baseUrl + 'addnote/' + user_name + '/' + course_id + '/' + mind_id + '/' + node_id;
+      this.tempUrl = this.baseUrl + 'add_note/' + user_name + '/' + course_id + '/' + mind_id + '/' + node_id;
       return this.http.post<boolean>(this.tempUrl, note, httpOptions);
     }
 }

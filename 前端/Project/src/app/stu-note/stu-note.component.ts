@@ -12,6 +12,16 @@ export class StuNoteComponent implements OnInit {
   isCollapsed_file = false;
   isCollapsed_link = false;
 
+  success = false;
+  fail = false;
+
+  publicText: string;
+  privateText: string;
+  otherText: string;
+
+  showPublicText = false;
+  showPrivateText = false;
+  showOtherText = false;
 
   @Input() course_id: string; // 与上层组件中course绑定
   @Input() mind_id: string; // 与上层组件中选中的mindMap绑定
@@ -79,6 +89,8 @@ export class StuNoteComponent implements OnInit {
   }
 
   addNote() {
+    this.success = false;
+    this.fail = false;
     this.note.note_id = jsMind.util.uuid.newid();
     this.nodeService.addNote(
       window.sessionStorage.getItem('user_name'),
@@ -94,8 +106,44 @@ export class StuNoteComponent implements OnInit {
       this.getPublicNotes();
       this.getPrivateNotes();
       this.note = new Note();
+      this.success = true;
     } else {
-      alert('发布失败！');
+      this.fail = true;
     }
+  }
+
+  changeSuccess() {
+    this.success = false;
+  }
+
+  changeFail() {
+    this.fail = false;
+  }
+
+  displayPublicText(content: string) {
+    this.publicText = content;
+    this.showPublicText = true;
+  }
+
+  hidePublicText() {
+    this.showPublicText = false;
+  }
+
+  displayPrivateText(content: string) {
+    this.privateText = content;
+    this.showPrivateText = true;
+  }
+
+  hidePrivateText() {
+    this.showPrivateText = false;
+  }
+
+  displayOtherText(content: string) {
+    this.otherText = content;
+    this.showOtherText = true;
+  }
+
+  hideOtherText() {
+    this.showOtherText = false;
   }
 }
