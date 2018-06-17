@@ -60,7 +60,7 @@ public class MainController {
         boolean if_exist = (userService.findUser(name) || userService.findTemp(name));
         if (!if_exist) {
             Long curTime = System.currentTimeMillis();
-            int hash = curTime.hashCode() % 100000000 + 100000000;
+            int hash = curTime.hashCode() % 10000000 + 10000000;
             String code = hash + "";
 
             user.setCode(code);

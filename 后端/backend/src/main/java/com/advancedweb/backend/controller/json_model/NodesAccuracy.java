@@ -5,6 +5,8 @@ public class NodesAccuracy {
     private String number;
     private String correct_number;
 
+    private String accuracy;
+
     public String getNode_topic() {
         return node_topic;
     }
@@ -27,6 +29,14 @@ public class NodesAccuracy {
 
     public void setCorrect_number(String correct_number) {
         this.correct_number = correct_number;
+    }
+
+    public String getAccuracy() {
+        return accuracy;
+    }
+
+    public void setAccuracy(String accuracy) {
+        this.accuracy = accuracy;
     }
 }
 

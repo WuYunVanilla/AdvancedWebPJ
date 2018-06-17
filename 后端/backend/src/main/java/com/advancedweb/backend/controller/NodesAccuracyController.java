@@ -62,6 +62,11 @@ public class NodesAccuracyController {
             nodesAccuracy.setNode_topic(thisNode.getTopic());
             nodesAccuracy.setNumber(number + "");
             nodesAccuracy.setCorrect_number(correctNumber + "");
+
+            float acc = 0;
+            if (number != 0)
+                acc = correctNumber % number;
+            nodesAccuracy.setAccuracy(acc+"");
             nodesAccuracyList.add(nodesAccuracy);
 
             for (Node child : nodeService.findChildren(thisNode.getLong_id())) {
