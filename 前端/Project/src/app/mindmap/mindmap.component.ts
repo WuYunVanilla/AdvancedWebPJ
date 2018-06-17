@@ -19,16 +19,7 @@ const init_data = {'id': 'root', 'topic': '* 根节点 *', 'expanded': true};
 })
 export class MindmapComponent implements OnInit {
 
-    // current_mind = {
-    //     'meta': {
-    //         'name': 'jsMind-demo-tree',
-    //         'author': 'hizzgdev@163.com',
-    //         'version': '0.2'
-    //     },
-    //     'format': 'node_tree',
-    //     /* 数据内容 */
-    //     'data': {}
-    // };
+    nodes_info = [];
 
     success = false;
     fail = false;
@@ -45,7 +36,7 @@ export class MindmapComponent implements OnInit {
         window.sessionStorage.setItem('mindmap_id', mind_id);
 
         this.mind_id = mind_id;
-        if (this.mind_id !== '') {
+        if (this.mind_id) {
             this.updateMindMap();
         }
 
@@ -53,8 +44,8 @@ export class MindmapComponent implements OnInit {
 
     mind = {
         'meta' : {
-            'name': 'Advanced-Web-PJ-jsMind-root',
-            'author': 'nhua15@fudan.edu.cn',
+            'name': '',
+            'author': 'user',
             'version': '0.2'
         },
         /* 数据格式声明 */
@@ -156,8 +147,9 @@ export class MindmapComponent implements OnInit {
     updateMindMap() {
         this.mindService.getMind(this.course_id, this.mind_id).subscribe(mindStr => {
 
-            // const mindJson = jsMind.util.json.string2json(mindStr);
-            this.mind.data = mindStr;
+
+            // this.mind.data = mindStr;
+            this.mind = mindStr;
 
             if (!this.mindMap) {
                 this.mindMap = jsMind.show(options, this.mind);
@@ -167,14 +159,19 @@ export class MindmapComponent implements OnInit {
 
         });
 
-
+        this.mindService.getAccuracy(this.course_id, this.mind_id).subscribe(list => {
+            this.nodes_info = list;
+            console.log('emmmmm');
+            console.log(list);
+        });
 
     }
 
     save() {
         const mindJson = this.mindMap.get_data(); // 格式同 const mind
 
-        const str = jsMind.util.json.json2string(mindJson.data); // 最终要传输的字符串
+        // const str = jsMind.util.json.json2string(mindJson.data); // 最终要传输的字符串
+        const str = jsMind.util.json.json2string(mindJson); // 最终要传输的字符串
 
         this.success = false;
         this.fail = false;

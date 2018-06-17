@@ -2,19 +2,42 @@
     <ngb-tab title="思维导图">
         <ng-template ngbTabContent>
 
+
+            <ng-template #content let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title">创建思维导图</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="newMindName">新思维导图名称</label>
+                            <div class="input-group">
+                                <input name="newMindName" [(ngModel)]="new_mind_name" id="newMindName" class="form-control" placeholder="新名称不可与已有的名称重复">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" (click)="createMind();">创建</button>
+                </div>
+            </ng-template>
+
             <div ngbDropdown class="d-inline-block mr-2" style="margin-top: 10px;">
                 <button class="btn btn-outline-secondary" ngbDropdownToggle>思维导图列表</button>
                 <div ngbDropdownMenu>
-                    <button *ngFor="let mind of mindList" class="dropdown-item" (click)="currentMind=mind;">{{mind}}</button>
+                    <button *ngFor="let mind of mindList" class="dropdown-item" (click)="currentMind=mind;"> {{mind.name}} </button>
 
                 </div>
             </div>
 
             <div class="d-inline-block mr-2">
-                <button class="btn btn-outline-secondary" (click)="createMind()">创建思维导图</button>
+                <button class="btn btn-outline-secondary" (click)="open(content)">创建思维导图</button>
             </div>
 
-            <app-mindmap [mindId]="currentMind" [courseId]="course_id" (click)="checkTabStatus()" #jsmind></app-mindmap>
+            <app-mindmap *ngIf="currentMind" [mindId]="currentMind.id" [courseId]="course_id" (click)="checkTabStatus()" #jsmind></app-mindmap>
 
 
         </ng-template>
@@ -24,7 +47,7 @@
         <ng-template ngbTabContent>
 
           <app-homework [course_id]="course_id"
-                        [mind_id]="currentMind"
+                        [mind_id]="currentMind.id"
                         [node_id]="selected_node_id">
 
           </app-homework>
@@ -34,7 +57,7 @@
     <ngb-tab title="课件" id="tab-ppt" *ngIf="selected_node_id!=''">
         <ng-template ngbTabContent>
             <app-courseware [course_id]="course_id"
-                            [mind_id]="currentMind"
+                            [mind_id]="currentMind.id"
                             [node_id]="selected_node_id">
 
             </app-courseware>
@@ -45,7 +68,7 @@
         <ng-template ngbTabContent>
 
             <app-resources [course_id]="course_id"
-                           [mind_id]="currentMind"
+                           [mind_id]="currentMind.id"
                            [node_id]="selected_node_id">
             </app-resources>
 
