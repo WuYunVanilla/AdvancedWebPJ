@@ -101,8 +101,6 @@ export class DetailsComponent implements OnInit {
             jsMind.util.json.json2string(this.newMindJson)
         ).subscribe(r => {
             if (r['success']) {
-                const s = this.new_mind_name;
-                console.log(s);
                 const new_mind = {'id': new_mind_id, 'name': this.new_mind_name};
 
                 this.mindList.push(new_mind);
@@ -112,7 +110,6 @@ export class DetailsComponent implements OnInit {
 
                 this.modalRef.close('创建成功');
 
-                console.log(this.mindList);
 
             }
         });

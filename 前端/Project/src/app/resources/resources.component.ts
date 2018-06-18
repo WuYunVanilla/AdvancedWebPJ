@@ -46,11 +46,6 @@ export class ResourcesComponent implements OnInit, OnChanges {
         this.uploader.onSuccessItem = this.successItem.bind(this);
         this.uploader.onAfterAddingFile = this.afterAddingFile;
         this.uploader.onBuildItemForm = this.buildItemForm;
-        // this.uploader.onSuccessItem = this.successItem;
-        console.log('course_id=' + this.course_id);
-        console.log('mind_id=' + this.mind_id);
-        console.log('node_id=' + this.node_id);
-
     }
 
     ngOnChanges() {
@@ -67,26 +62,21 @@ export class ResourcesComponent implements OnInit, OnChanges {
 
     afterAddingFile(fileItem: FileItem): any {
         fileItem.withCredentials = false;
-        console.log(fileItem);
     }
 
     buildItemForm(fileItem: FileItem, form: any): any {
         if (!!fileItem['realFileName']) {
-            console.log(form);
             form.append('fileName', fileItem['realFileName']);
         }
     }
 
     successItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any {
-        console.log('上传成功，response为' + response);
-
         this.updateMaterials();
     }
 
     updateMaterials() {
         this.nodeService.getMaterials(this.course_id, this.mind_id, this.node_id).subscribe(r => {
             this.material_names = r;
-            console.log(r);
         });
     }
 

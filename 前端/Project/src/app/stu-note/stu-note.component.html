@@ -5,6 +5,16 @@
   </button>
 </p>
 
+<div class="alert alert-success" [hidden]="!success">
+  <button type="button" class="close" (click)="changeSuccess()">&times;</button>
+  <strong>添加成功!</strong>
+</div>
+
+<div class="alert alert-danger" [hidden]="!fail">
+  <button type="button" class="close" (click)="changeFail()">&times;</button>
+  <strong>添加失败!</strong>
+</div>
+
 <div class="upload_card" [ngbCollapse]="!isCollapsed_file">
   <div class="card">
     <div class="card-body">
@@ -35,29 +45,58 @@
 <ngb-accordion #acc="ngbAccordion" activeIds="static-1, static-2, static-3">
   <ngb-panel id="static-1" title="我的公有笔记">
     <ng-template ngbPanelContent>
-      <div class="links">
-        <ol>
-          <li *ngFor="let publicNote of publicNotes">{{publicNote.content}}</li>
+      <div>
+        <ol [hidden]="showPublicText" style="margin-left: -20px">
+          <li *ngFor="let publicNote of publicNotes" class="liItem">
+            <div style="margin-bottom: 10px">
+              <div><a href="javascript:void(0)" (click)="displayPublicText(publicNote.content)">{{publicNote.title}}</a></div>
+              <hr>
+            </div>
+          </li>
         </ol>
+        <div [hidden]="!showPublicText">
+          <div style="margin-bottom: 10px">{{publicText}}</div>
+          <button type="button" class="btn-sm btn-light" (click)="hidePublicText()">返回笔记列表</button>
+        </div>
       </div>
     </ng-template>
   </ngb-panel>
 
   <ngb-panel id="static-2" title="我的私有笔记">
     <ng-template ngbPanelContent>
-
-      <ol>
-        <li *ngFor="let privateNote of privateNotes">{{privateNote.content}}</li>
-      </ol>
+      <div>
+        <ol [hidden]="showPrivateText" style="margin-left: -20px">
+          <li *ngFor="let privateNote of privateNotes" class="liItem">
+            <div style="margin-bottom: 10px">
+              <div><a href="javascript:void(0)" (click)="displayPrivateText(privateNote.content)">{{privateNote.title}}</a></div>
+              <hr>
+            </div>
+          </li>
+        </ol>
+        <div [hidden]="!showPrivateText">
+          <div style="margin-bottom: 10px">{{privateText}}</div>
+          <button type="button" class="btn-sm btn-light" (click)="hidePrivateText()">返回笔记列表</button>
+        </div>
+      </div>
     </ng-template>
   </ngb-panel>
 
   <ngb-panel id="static-3" title="同学的公有笔记">
     <ng-template ngbPanelContent>
-
-      <ol>
-        <li *ngFor="let otherNote of otherNotes">{{otherNote.content}}</li>
-      </ol>
+      <div>
+        <ol [hidden]="showOtherText" style="margin-left: -20px">
+          <li *ngFor="let otherNote of otherNotes" class="liItem">
+            <div style="margin-bottom: 10px">
+              <div><a href="javascript:void(0)" (click)="displayOtherText(otherNote.content)">{{otherNote.title}}</a></div>
+              <hr>
+            </div>
+          </li>
+        </ol>
+        <div [hidden]="!showOtherText">
+          <div style="margin-bottom: 10px">{{otherText}}</div>
+          <button type="button" class="btn-sm btn-light" (click)="hideOtherText()">返回笔记列表</button>
+        </div>
+      </div>
     </ng-template>
   </ngb-panel>
 

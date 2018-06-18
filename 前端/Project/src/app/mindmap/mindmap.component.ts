@@ -161,8 +161,6 @@ export class MindmapComponent implements OnInit {
 
         this.mindService.getAccuracy(this.course_id, this.mind_id).subscribe(list => {
             this.nodes_info = list;
-            console.log('emmmmm');
-            console.log(list);
         });
 
     }
