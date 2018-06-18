@@ -19,6 +19,8 @@ const init_data = {'id': 'root', 'topic': '* 根节点 *', 'expanded': true};
 })
 export class MindmapComponent implements OnInit {
 
+    isCollapsed = false;
+
     nodes_info = [];
 
     success = false;
