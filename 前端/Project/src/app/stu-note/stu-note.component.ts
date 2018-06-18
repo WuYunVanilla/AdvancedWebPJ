@@ -8,7 +8,7 @@ import * as jsMind from '../../assets/jsmind/jsmind';
   templateUrl: './stu-note.component.html',
   styleUrls: ['./stu-note.component.css']
 })
-export class StuNoteComponent implements OnInit {
+export class StuNoteComponent implements OnInit, OnChanges {
   isCollapsed_file = false;
   isCollapsed_link = false;
 
@@ -41,6 +41,12 @@ export class StuNoteComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getPublicNotes();
+    this.getPrivateNotes();
+    this.getOtherNotes();
+  }
+
+  ngOnChanges() {
     this.getPublicNotes();
     this.getPrivateNotes();
     this.getOtherNotes();
