@@ -56,12 +56,10 @@ export class CoursewareComponent implements OnInit, OnChanges {
 
     afterAddingFile(fileItem: FileItem): any {
         fileItem.withCredentials = false;
-        console.log(fileItem);
     }
 
     buildItemForm(fileItem: FileItem, form: any): any {
         if (!!fileItem['realFileName']) {
-            console.log(form);
             form.append('fileName', fileItem['realFileName']);
         }
     }
