@@ -65,7 +65,7 @@ public class NodesAccuracyController {
 
             float acc = 0;
             if (number != 0)
-                acc = correctNumber % number;
+                acc = correctNumber/ number;
             nodesAccuracy.setAccuracy(acc+"");
             nodesAccuracyList.add(nodesAccuracy);
 
