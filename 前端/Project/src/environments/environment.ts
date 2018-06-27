@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://52.83.208.199:8899/mindmap/'
+  apiUrl: 'http://52.83.171.185:8899/mindmap/'
 };
 
 /*
